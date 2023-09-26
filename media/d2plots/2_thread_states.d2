@@ -1,0 +1,34 @@
+direction: right
+
+create: |md 
+# Create thread
+|
+
+NEW {
+    a:|md Created but not started|
+}
+RUNNABLE {
+    a:|md Running or able to be run|
+}
+BLOCKED {
+    a:|md Waiting to enter synchronized block|
+}
+TIMED_WAITING {
+    a:|md Waiting a specified time|
+}
+WAITING {
+    a:|md Waiting indefinitely to be notified|
+}
+TERMINATED {
+    a:|md Task complete|
+}
+
+create -> NEW
+NEW -> RUNNABLE: start()
+RUNNABLE -> BLOCKED: Resource requested
+BLOCKED -> RUNNABLE: Resource granted
+RUNNABLE -> WAITING: wait()
+WAITING -> RUNNABLE: notify()
+RUNNABLE -> TIMED_WAITING: sleep()
+TIMED_WAITING -> RUNNABLE: Time elapsed
+RUNNABLE -> TERMINATED: run() completes

@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Concurrency</title>
+
+	<!-- system required: -->
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<!-- actual stylesheet -->
+	<link rel="stylesheet" href="dist/theme/blood.css">
+	<link rel="stylesheet" href="dist/theme/test.css">
+
+	<!-- my custom styles  -->
+	<link rel="stylesheet" href="my-style-adjustments.css">
+
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<em><small>Unlocking the Zoo: A Safari Through Java Concurrency</small></em>
+				<h1 class="r-fit-text">Concurrency workshop</h2>
+					<p style="text-align: right;">Piotr Zajac</p>
+			</section>
+			<section data-background="media/introducing-threads.png">
+				<h2 class="r-fit-text custom-title">Introducing Threads</h2>
+			</section>
+			<section>
+				<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
+
+			</section>
+			<section>
+				<h3>What is a terminal ?</h3>
+				<img src="./media/terminal.png" class="r-stretch" />
+				<ul class="fragment" data-fragment-index="1">
+					<li>Terminal emulator</li>
+					<li>Shell (i.e. script interpreter)</li>
+					<li>Optional framework</li>
+				</ul>
+			</section>
+			<section>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Linux</th>
+							<th>macOS</th>
+							<th>Windows</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<span style="font-weight:bold">Terminal Emulator</span>
+							</td>
+							<td>kitty</td>
+							<td>
+								<span class="fragment highlight-red" data-fragment-index="2">iTerm2</span>
+							</td>
+							<td>ConEmu</td><!-- Console, Terminal, -->
+						</tr>
+						<tr>
+							<td>
+								<span style="font-weight:bold">Interpreter</span>
+							</td>
+							<td colspan="2">bash,
+								<span class="fragment highlight-red" data-fragment-index="2">zsh</span>, fish
+							</td>
+							<td>
+								CMD<span class="fragment fade-in" data-fragment-index="1">*</span>, PowerShell<span
+									class="fragment fade-in" data-fragment-index="1">*</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="font-weight:bold">Framework</span></p>
+							</td>
+							<td colspan="2">
+								<span class="fragment highlight-red" data-fragment-index="2">Oh My Zsh</span>
+							</td>
+							<td>
+								PSFramework<span class="fragment fade-in" data-fragment-index="1">*</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p style="text-align:right;font-size: smaller;" class="fragment fade-in" data-fragment-index="1">*use
+					WSL instead</p>
+			</section>
+
+			<section>
+				<img src="./media/elementary-school.png" class="r-stretch" />
+				<h1>BASICS</h1>
+			</section>
+
+
+			<section>
+				<section>
+					<h3>Unix text processing tools</h3>
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><b>echo</b></td>
+								<td>print text</td>
+							</tr>
+							<tr>
+								<td><b>cat</b></td>
+								<td>print and concatenate files</td>
+							</tr>
+							<tr>
+								<td><b>nl</b></td>
+								<td>number lines</td>
+							</tr>
+							<tr>
+								<td><b>wc</b></td>
+								<td>count lines, words, or characters</td>
+							</tr>
+							<tr>
+								<td><b>head</b></td>
+								<td>display file first part</td>
+							</tr>
+							<tr>
+								<td><b>tail</b></td>
+								<td>display file last part</td>
+							</tr>
+							<tr>
+								<td><b>grep</b></td>
+								<td>find patterns with RegEx</td>
+							</tr>
+							<tr>
+								<td><b>sed</b></td>
+								<td><b>s</b><span style="font-size:80%;">earched and r</span><b>e</b><span
+										style="font-size:80%;">place</span><b>d</b></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+
+			<section>
+				<h3>a bit of plumbing</h3>
+				<img src="./media/linux-pipes.png" class="r-stretch" />
+
+				<span class="fragment">
+					Pipe <code style="background-color: rgb(6, 52, 52); font-weight: bold;">
+						|</code> redirects the output from one program as input to another program
+				</span>
+
+			</section>
+
+			<section>
+				<h3>Other Redirections</h3>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><b>&gt;</b></td>
+							<td>Save output (STDOUT) to a file.</td>
+						</tr>
+						<tr>
+							<td><b>&gt;&gt;</b></td>
+							<td>Append output (STDOUT) to a file.</td>
+						</tr>
+						<tr>
+							<td><b>&lt;</b></td>
+							<td>Read input (STDIN) from a file.</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<span class="fragment">
+					<p style="font-size: 80%;">Some tools can access clipboard through STDIN and STDOUT!</p>
+					<p style="font-size: 70%;">(macOS: pbcopy / pbpaste)</p>
+				</span>
+			</section>
+
+			<section>
+				<h3>Modern alternatives</h3>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>grep</td>
+							<td>➡️</td>
+							<td>rg (ripgrep)</td>
+						</tr>
+						<tr>
+							<td>sed</td>
+							<td>➡️</td>
+							<td>sd</td>
+						</tr>
+						<tr>
+							<td>find</td>
+							<td>➡️</td>
+							<td>fd</td>
+						</tr>
+						<tr>
+							<td colspan="3">and many more...</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+
+			<section>
+				<img src="./media/xp-turn.gif" class="r-stretch" />
+				<h1>LEARN</h1>
+			</section>
+
+			<section>
+				<h2>Just use
+					<code style="background-color: rgb(6, 52, 52);">
+					man</code>
+					?
+				</h2>
+				<img src="./media/not-sure.png" width="25%" />
+			</section>
+
+			<section>
+				<h2><code style="background-color: rgb(6, 52, 52);">
+					tldr</code>
+					for the rescue!
+				</h2>
+			</section>
+
+			<section>
+				<img src="./media/map.png" class="r-stretch" />
+				<h1>NAVIGATE</h1>
+			</section>
+
+			<section>
+				<h3>First choice</h2>
+					<ul>
+						<li><b>tree</b></li>
+						<li><b>Zsh-z</b>
+							<span style="font-size: 70%;">(Oh My Zsh plugin)</span>
+						</li>
+					</ul>
+					<p style="font-size:80%" class="fragment">But there are plenty more!</p>
+			</section>
+			<section>
+				<h3>Meet the <code style="background-color: rgb(6, 52, 52);">fzf</code></h3>
+				<p style="font-size:60%;">A command-line fuzzy finder of everything</p>
+
+				<ul style="font-size: 50%;">
+					<li>files</li>
+					<li>stdin</li>
+					<li>params</li>
+					<li>history</li>
+				</ul>
+			</section>
+
+			<section>
+				<img src="./media/spell.webp" class="r-stretch" />
+				<h1>PREPARE</•h1>
+			</section>
+
+			<section>
+				<h3>the tools </h3>
+				<p style="text-align: left;">• alias (Unix wide):</p>
+				<pre><code style="word-wrap: break-word;">alias gca='git commit -a  --amend --no-edit'</code></pre>
+				<span class="fragment">
+					<p style="text-align: left;">• function (Zsh exclusive)</p>
+					<pre><code style="word-wrap: break-word;">function goto(){
+	DESTINATION=$(fd -t d | fzf)
+	if [ "$DESTINATION" = "" ]; then
+		echo "Empty destination" || exit 2
+	else
+		cd "./$DESTINATION"
+	fi
+}</code></pre>
+				</span>
+
+				<span class="fragment">
+					<p style="text-align: left;">• <code style="background-color: rgb(6, 52, 52);">xargs</code></p>
+				</span>
+			</section>
+			<section>
+				<h3>Spell examples</h3>
+				<ul>
+					<li>shortcuts of unhandy names</li>
+					<li>git
+					</li>
+					<ul>
+						<li>checkout to remote</li>
+						<li>make backup of current branch</li>
+						<li>open GitHub with current repo PR’s</li>
+						<li>show commits in any order</li>
+					</ul>
+					</li>
+					<li>Open folder as project in IntelliJ</li>
+				</ul>
+			</section>
+
+			<section>
+				<img src="./media/chest.png" class="r-stretch" />
+				<h1>PRESERVE</h1>
+			</section>
+
+			<section>
+				<h3>dotfiles repository</h3>
+				<ul>
+					<li>store carefully crafted configuration in a repo</li>
+					<li>keep list of all used packages (tools)</li>
+					<li>prepare initialization script</li>
+				</ul>
+			</section>
+
+			<section>
+				<img src="./media/pokemon-symbol.png" class="r-stretch" />
+				<h1>FIGHT</h1>
+			</section>
+
+			<section>
+				<h2>Data processing</h2>
+				<p>is just easier with CLI tools...</p>
+				<ul>
+					<li>viewing</li>
+					<li>searching</li>
+					<li>extracting</li>
+					<li>modifying</li>
+					<li>converting</li>
+				</ul>
+				<p style="font-size: 60%;">json, yml, csv are going to be with us for a long time</p>
+			</section>
+
+			<section>
+				<h4>Data processing tool selection</h4>
+
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><b>jq</b></td>
+							<td>json processor</td>
+						</tr>
+						<tr>
+							<td><b>yq</b></td>
+							<td>yaml processor</td>
+						</tr>
+						<tr>
+							<td><b>gron</b></td>
+							<td>makes json discrete</td>
+						</tr>
+						<tr>
+							<td><b>yj</b></td>
+							<td>yaml ↔️ json</td>
+						</tr>
+						<tr>
+							<td><b>miller</b></td>
+							<td>json ↔️ csv... and much, much more</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<img src="./media/island.png" class="r-stretch" />
+				<h1>EXPLORE</h1>
+			</section>
+
+			<section>
+				<h3>other cool tools</h3>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Show calendar</td>
+							<td><b>cal</b></td>
+						</tr>
+						<tr>
+							<td>Use translator</td>
+							<td><b>translate-shell</b></td>
+						</tr>
+						<tr>
+							<td>Save copied images to file</td>
+							<td><b>pngpaste</b></td>
+						</tr>
+						<tr>
+							<td>View images</td>
+							<td><b>imgcat</b></td>
+						</tr>
+						<tr>
+							<td>Edit pdfs</td>
+							<td><b>qpdf</b></td>
+						</tr>
+						<tr>
+							<td>Send files locally by QR</td>
+							<td><b>qrcp</b></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h3>Link selection</h3>
+				<ul>
+					<li><a href="https://github.com/PtrZjc/dotfiles/">My GitHub dotfile repo</a></li>
+					<li><a href="https://proszowski.dev/posts/awesome-cli/">In depth blog post about CLI awesomness</a>
+					</li>
+					<li><a href="https://ryanstutorials.net/linuxtutorial/commandline.php">Nice linux tutorial for
+							beginners</a></li>
+					<li><a href="https://github.com/agarrharr/awesome-cli-apps">Awesome CLI tools</a></li>
+					<li><a href="https://github.com/toolleeo/cli-apps">Even more awesome CLI tools</a></li>
+					<li><a href="https://github.com/ibraheemdev/modern-unix">Unix tools modern alternatives</a></li>
+				</ul>
+			</section>
+
+			<section>
+				<section>
+					<img src="./media/questions.png" class="r-stretch" />
+				</section>
+				<section>
+					<h3>Bonus</h3>
+					<p>
+						Use grepper browser extension
+					</p>
+				</section>
+			</section>
+
+			<section>
+				<h3>Slides</h3>
+				<img src="./media/slides-qr.jpg" class="r-stretch" />
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+			margin: 0.15,
+			minScale: 0.2,
+			maxScale: 2.0
+		});
+	</script>
+</body>
+
+</html>

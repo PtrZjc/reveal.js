@@ -1,4 +1,29 @@
 .reveal table td {
-	vertical-align: middle;
-  }
-  
+  vertical-align: middle;
+}
+
+.custom-title {
+  color: rgb(238, 13, 13);
+}
+
+.slide-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh; /* 100% of the viewport height */
+}
+.small-text-content {
+  font-size: 0.6em;
+  text-align: left;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 50%;
+  overflow-y: auto;
+  font-size: 0.8em;
+}
+
+.no-margin-bottom img {
+  margin-top: -1em;
+  margin-bottom: -0.5em;
+}
