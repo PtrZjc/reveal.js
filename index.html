@@ -19,8 +19,7 @@
 	<link rel="stylesheet" href="dist/theme/test.css">
 
 	<!-- my custom styles  -->
-	<link rel="stylesheet" href="my-style-adjustments.css">
-	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
 
 </head>
 
@@ -35,77 +34,70 @@
 			<section data-background="media/introducing-threads.png">
 				<h2 class="r-fit-text custom-title">Introducing Threads</h2>
 			</section>
+			<!-- Terminology -->
+			<section>
+				<div style="margin-top: -5rem;" class="text-2xl">
+					<img src="media/d2plots/1_process_model.svg">
+					<div class="relative">
+						<div class="flex -m-5 absolute fragment fade-out">
+							<div class="w-1/2">
+								<p><strong>Thread</strong></p>
+								<ul>
+									<li>Smallest unit of execution</li>
+								</ul>
+								<p><strong>Process</strong></p>
+								<ul>
+									<li>Group of associated threads</li>
+									<li>Execute in shared environment</li>
+								</ul>
+
+							</div>
+							<div class="w-1/2">
+								<p><strong>Task</strong></p>
+								<ul>
+									<li>Single unit of work performed by a thread</li>
+									<li>Often implemented as lambda expressions</li>
+								</ul>
+							</div>
+						</div>
+						<div class="flex -m-5 absolute fragment fade-in">
+							<div class="w-1/2">
+								<p><strong>Shared Environment</strong></p>
+								<ul>
+									<li>Threads in same process share memory space</li>
+									<li>Direct communication between threads</li>
+								</ul>
+								<p><strong>Static Variables</strong></p>
+								<ul>
+									<li>Useful for complex, multithreaded tasks</li>
+									<li>Immediate update visibility across threads within the process</li>
+								</ul>
+							</div>
+							<div class="w-1/2">
+								<p><strong>Shared Memory</strong></p>
+								<ul>
+									<li>Includes static variables, instance and local variables</li>
+									<li>Enables direct communication between threads</li>
+								</ul>
+								<p><strong>Task Schedulers</strong></p>
+								<ul>
+									<li>Manages thread execution across available CPUs</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 			<section>
 				<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
 
 			</section>
-
-			<!-- Terminology -->
-			<section>
-				<div class="no-margin-bottom">
-				<img src="media/d2plots/1_process_model.svg" alt="Process Model">
-				<!-- <div class="slide-container">
-					<div class="small-text-content">
-						<p><strong>Thread</strong></p>
-						<ul>
-							<li>Smallest unit of execution</li>
-							<li>Scheduled by the operating system</li>
-						</ul>
-						<p><strong>Process</strong></p>
-						<ul>
-							<li>Group of associated threads</li>
-							<li>Execute in shared environment</li>
-						</ul>
-					</div>
-					<div class="small-text-content">
-						<p><strong>Static Variables</strong></p>
-						<ul>
-							<li>Useful for complex, multithreaded tasks</li>
-							<li>Shared among all instances of a class</li>
-							<li>Immediate update visibility across threads within the process</li>
-						</ul>
-					</div>
-				</div> -->
-			</div>
-				<div class="slide-container">
-					<div class="small-text-content">
-
-						<p><strong>Shared Environment</strong></p>
-						<ul>
-							<li>Threads in same process share memory space</li>
-							<li>Direct communication between threads</li>
-						</ul>
-						<p><strong>Task Schedulers</strong></p>
-						<ul>
-							<li>Manages thread execution across available CPUs</li>
-						</ul>
-					</div>
-					<div class="small-text-content">
-
-						<p><strong>Shared Memory</strong></p>
-						<ul>
-							<li>Includes static variables, instance and local variables</li>
-							<li>Enables direct communication between threads</li>
-						</ul>
-						<p><strong>Static Variables</strong></p>
-						<ul>
-							<li>Useful for complex, multithreaded tasks</li>
-							<li>Immediate update visibility across threads within the process</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-
 			<!-- Understanding Thread Concurrency -->
 			<section>
-				<h2>Understanding Thread Concurrency</h2>
-				<ul>
-					<li><strong>Concurrency</strong></li>
-					<ul>
-						<li>Execution of multiple threads and processes simultaneously</li>
-					</ul>
-					<!-- Add more here... -->
-				</ul>
+				<div class="relative">
+					<div class="absolute">123</div>
+					<div class="absolute">456</div>
+				</div>
 			</section>
 
 			<!-- Creating a thread -->
@@ -119,7 +111,7 @@
 					</code></pre>
 				<!-- Add more here... -->
 			</section>
-
+			
 			<!-- Thread Types -->
 			<section>
 				<h2>Thread Types</h2>
