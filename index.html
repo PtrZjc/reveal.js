@@ -16,7 +16,6 @@
 
 	<!-- actual stylesheet -->
 	<link rel="stylesheet" href="dist/theme/blood.css">
-	<link rel="stylesheet" href="dist/theme/test.css">
 
 	<!-- my custom styles  -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
@@ -31,28 +30,32 @@
 				<h1 class="r-fit-text">Concurrency workshop</h2>
 					<p style="text-align: right;">Piotr Zajac</p>
 			</section>
+			<!-- <section> -->
 			<section data-background="media/introducing-threads.png">
-				<h2 class="r-fit-text custom-title">Introducing Threads</h2>
+				<h2 class="r-fit-text">Some Terminology</h2>
 			</section>
 			<!-- Terminology -->
 			<section>
-				<div style="margin-top: -5rem;" class="text-2xl">
+				<div class="text-2xl text-left">
 					<img src="media/d2plots/1_process_model.svg">
 					<div class="relative">
-						<div class="flex -m-5 absolute fragment fade-out">
+						<div class="flex absolute fragment fade-out">
 							<div class="w-1/2">
-								<p><strong>Thread</strong></p>
+								<p><strong>Concurrency</strong></p>
 								<ul>
-									<li>Smallest unit of execution</li>
+									<li>Execution of multiple threads and processes simultaneously</li>
 								</ul>
 								<p><strong>Process</strong></p>
 								<ul>
 									<li>Group of associated threads</li>
 									<li>Execute in shared environment</li>
 								</ul>
-
 							</div>
 							<div class="w-1/2">
+								<p><strong>Thread</strong></p>
+								<ul>
+									<li>Smallest unit of execution</li>
+								</ul>
 								<p><strong>Task</strong></p>
 								<ul>
 									<li>Single unit of work performed by a thread</li>
@@ -60,7 +63,7 @@
 								</ul>
 							</div>
 						</div>
-						<div class="flex -m-5 absolute fragment fade-in">
+						<div class="flex absolute fragment fade-in">
 							<div class="w-1/2">
 								<p><strong>Shared Environment</strong></p>
 								<ul>
@@ -79,50 +82,156 @@
 									<li>Includes static variables, instance and local variables</li>
 									<li>Enables direct communication between threads</li>
 								</ul>
-								<p><strong>Task Schedulers</strong></p>
-								<ul>
-									<li>Manages thread execution across available CPUs</li>
-								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section>
-				<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
 
-			</section>
-			<!-- Understanding Thread Concurrency -->
 			<section>
-				<div class="relative">
-					<div class="absolute">123</div>
-					<div class="absolute">456</div>
+				<div class="text-2xl text-left -mt-40">
+					<div class="align-top">
+						<img src="media/round-robin-negate.png">
+					</div>
+					<div class="flex">
+						<div class="w-1/2">
+							<p><strong>Thread Scheduler</strong></p>
+							<ul>
+								<li>Determines which threads to execute</li>
+								<li>May use strategies like round-robin scheduling</li>
+							</ul>
+							<p><strong>Context Switch</strong></p>
+							<ul>
+								<li>Stores and restores thread's state for later execution</li>
+								<li>Associated with a performance cost</li>
+							</ul>
+						</div>
+						<div class="w-1/2">
+							<p><strong>Optimised Thread Scheduling</strong></p>
+							<ul>
+								<li>Goal to minimize context switches</li>
+								<li>Maintains smooth application running</li>
+							</ul>
+							<p><strong>Thread Priority</strong></p>
+							<ul>
+								<li>Numeric value associated with each thread</li>
+								<li>Used by scheduler to determine execution order</li>
+								<li>In Java, specified as integer values</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</section>
 
-			<!-- Creating a thread -->
-			<section>
-				<h2>Creating a Thread</h2>
-				<pre><code data-trim>
+
+			<section data-background="media/introducing-threads.png">
+				<h2 class="r-fit-text">Introducing Threads!</h2>
+			</section>
+			<section data-auto-animate>
+				<h6>Creating a Thread</h6>
+				<div class="text-left text-2xl">
+					<p><strong>To create a Thread in Java:</strong></p>
+					<ul>
+						<div data-id="text">
+							<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code>
+								constructor. </li>
+						</div>
+						<li>Create a class that extends <code>Thread</code> and overrides the <code>run()</code> method
+						</li>
+						<li>Use Concurrency API</li>
+					</ul>
+				</div>
+				<div class="">
+					<pre data-id="code" class="language-java"><code data-trim data-line-numbers>
 					@FunctionalInterface
 					public interface Runnable { 
-					  void run();
+					  	void run();
 					}
 					</code></pre>
-				<!-- Add more here... -->
+				</div>
 			</section>
-			
+
+			<section data-auto-animate>
+				<div class="text-2xl" data-id="text">
+					<ul>
+						<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code>
+							constructor. </li>
+					</ul>
+				</div>
+				<pre data-id="code"><code class="language-java" data-trim  data-line-numbers>
+
+						new Thread(() -> System.out.print("Hello")).start();
+						System.out.print("World");
+
+					</code></pre>
+				<div class="text-4xl">
+					<i class="fragment fade-in">Hello World or World Hello?</i>
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<pre data-id="code"><code class="language-java" data-trim  data-line-numbers>
+				Runnable countAnimals = () -> 
+					System.out.println("Counting all the animals in the zoo"); 
+				
+				Runnable printAnimalProfiles = () -> 
+					IntStream.rangeClosed(1, 3).forEach(i -> 
+						System.out.println("Printing profile of animal " + i)
+					);
+					</code></pre>
+			</section>
+			<section data-auto-animate>
+				<pre data-id="code"><code class="language-java" data-trim  data-line-numbers="8-13">
+				Runnable countAnimals = () -> 
+					System.out.println("Counting all the animals in the zoo"); 
+				Runnable printAnimalProfiles = () -> 
+					IntStream.rangeClosed(1, 3).forEach(i -> 
+						System.out.println("Printing profile of animal " + i)
+					);
+
+				System.out.println("Zoo day begins");  
+				new Thread(countAnimals).start(); 
+				new Thread(printAnimalProfiles).start(); 
+				new Thread(countAnimals).start(); 
+				System.out.println("Zoo day ends");
+					</code></pre>
+			</section>
+
 			<!-- Thread Types -->
 			<section>
-				<h2>Thread Types</h2>
-				<ul>
-					<li><strong>System Threads</strong></li>
-					<ul>
-						<li>Created by JVM</li>
-						<li>Run in background</li>
-					</ul>
-					<!-- Add more here... -->
-				</ul>
+				<h6>Thread Types</h2>
+					<div class="flex text-2xl text-left">
+						<div class="w-1/3">
+							<p><strong>System Threads</strong></p>
+							<ul>
+								<li>Created by JVM</li>
+								<li>Run in background</li>
+								<li>Example: Garbage collection</li>
+							</ul>
+						</div>
+						<div class="w-1/3">
+							<p><strong>User-Defined Threads</strong></p>
+							<ul>
+								<li>Created by developers</li>
+								<li>Specific tasks</li>
+								<li>Example: `main()` method thread</li>
+							</ul>
+						</div>
+						<div class="w-1/3">
+							<p><strong>Daemon Threads</strong></p>
+							<ul>
+								<li>JVM exits if only daemon threads are running</li>
+								<li>Example: Garbage collection</li>
+							</ul>
+						</div>
+					</div>
+			</section>
+
+			<section>
+				<div class="-mx-40 -my-10">
+					<h6>Thread States</h6>
+					<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
+				</div>
 			</section>
 
 			<!-- Managing a Thread’s Life Cycle -->
