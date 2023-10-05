@@ -70,11 +70,6 @@
 									<li>Threads in same process share memory space</li>
 									<li>Direct communication between threads</li>
 								</ul>
-								<p><strong>Static Variables</strong></p>
-								<ul>
-									<li>Useful for complex, multithreaded tasks</li>
-									<li>Immediate update visibility across threads within the process</li>
-								</ul>
 							</div>
 							<div class="w-1/2">
 								<p><strong>Shared Memory</strong></p>
@@ -123,26 +118,28 @@
 				</div>
 			</section>
 
-
 			<section data-background="media/introducing-threads.png">
 				<h2 class="r-fit-text">Introducing Threads!</h2>
 			</section>
+
 			<section data-auto-animate>
 				<h6>Creating a Thread</h6>
 				<div class="text-left text-2xl">
 					<p><strong>To create a Thread in Java:</strong></p>
 					<ul>
 						<div data-id="text">
-							<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code>
-								constructor. </li>
+							<li>Create a class that extends <code>Thread</code> and overrides the <code>run()</code> method</li>
 						</div>
-						<li>Create a class that extends <code>Thread</code> and overrides the <code>run()</code> method
+						<div>
+							<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code> constructor.
+							</li>
+						</div>
 						</li>
 						<li>Use Concurrency API</li>
 					</ul>
 				</div>
 				<div class="">
-					<pre data-id="code" class="language-java"><code data-trim data-line-numbers>
+					<pre data-id="code" class="language-java"><code data-trim>
 					@FunctionalInterface
 					public interface Runnable { 
 					  	void run();
@@ -154,23 +151,41 @@
 			<section data-auto-animate>
 				<div class="text-2xl" data-id="text">
 					<ul>
-						<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code>
-							constructor. </li>
+						<li>Create a class that extends <code>Thread</code> and overrides the <code>run()</code> method</li>
 					</ul>
 				</div>
-				<pre data-id="code"><code class="language-java" data-trim  data-line-numbers>
-
-						new Thread(() -> System.out.print("Hello")).start();
-						System.out.print("World");
-
+				<pre data-id="code"><code class="language-java" data-trim >
+					public class AnimalCounter extends Thread {
+						@Override
+						public void run() {
+							System.out.println("Counting all the animals in the zoo");
+						}
+					}
 					</code></pre>
 				<div class="text-4xl">
-					<i class="fragment fade-in">Hello World or World Hello?</i>
+					<i class="fragment fade-in">Who even does that?</i>
 				</div>
 			</section>
 
 			<section data-auto-animate>
-				<pre data-id="code"><code class="language-java" data-trim  data-line-numbers>
+				<div class="text-2xl" data-id="text">
+					<ul>
+						<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code>
+							constructor. </li>
+					</ul>
+				</div>
+				<pre data-id="code"><code class="language-java" data-trim >
+
+						new Thread(() -> System.out.print("Counting")).start();
+
+					</code></pre>
+				<div class="text-4xl">
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div data-id="text" class="text-3xl">Let's work a bit!</div>
+				<pre data-id="code"><code class="language-java" data-trim >
 				Runnable countAnimals = () -> 
 					System.out.println("Counting all the animals in the zoo"); 
 				
@@ -180,10 +195,13 @@
 					);
 					</code></pre>
 			</section>
+
 			<section data-auto-animate>
-				<pre data-id="code"><code class="language-java" data-trim  data-line-numbers="8-13">
+				<div data-id="text" class="text-3xl">Let's work a bit!</div>
+				<pre data-id="code"><code class="language-java" data-trim ="8-13">
 				Runnable countAnimals = () -> 
 					System.out.println("Counting all the animals in the zoo"); 
+					
 				Runnable printAnimalProfiles = () -> 
 					IntStream.rangeClosed(1, 3).forEach(i -> 
 						System.out.println("Printing profile of animal " + i)
@@ -195,9 +213,23 @@
 				new Thread(countAnimals).start(); 
 				System.out.println("Zoo day ends");
 					</code></pre>
+				<div class="text-3xl fragment fade-in">Overtime?</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<ul>
+						<li>Use Concurrency API</li>
+					</ul>
+					<p class="fragment fade-in italic">later!</p>
+				</div>
 			</section>
 
 			<!-- Thread Types -->
+			<section>
+				<h4>There are more Threads!</h2>
+			</section>
+
 			<section>
 				<h6>Thread Types</h2>
 					<div class="flex text-2xl text-left">
@@ -227,30 +259,152 @@
 					</div>
 			</section>
 
-			<section>
-				<div class="-mx-40 -my-10">
-					<h6>Thread States</h6>
-					<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
-				</div>
+			<section data-auto-animate>
+				<pre data-id="code"><code class="language-java" data-trim data-line-numbers>
+								public class Zookeper {
+									public static void main(String[] unused) {
+										var feedingJob = new Thread(Zookeper::feedAnimals);
+										feedingJob.start();
+										System.out.println("Zoo is closing");
+									}
+							
+									@SneakyThrows
+									private static void feedAnimals() {
+										Thread.sleep(3_000);
+										System.out.println("All animals fed!");
+									}
+								}
+								</code></pre>
+			</section>
+
+			<section data-auto-animate>
+				<pre data-id="code"><code class="language-java" data-trim data-line-numbers>
+								public class EvilZookeper {
+									public static void main(String[] unused) {
+										var feedingJob = new Thread(Zookeper::feedAnimals);
+										feedingJob.setDaemon(true);
+										feedingJob.start();
+										System.out.println("Zoo is closing");
+									}
+							
+									@SneakyThrows
+									private static void feedAnimals() {
+										Thread.sleep(3_000);
+										System.out.println("All animals fed!");
+									}
+								}
+								</code></pre>
 			</section>
 
 			<!-- Managing a Thread’s Life Cycle -->
 			<section>
-				<h2>Managing a Thread’s Life Cycle</h2>
-				<!-- Add content here... -->
+				<h3>Thread’s Life Cycle</h3>
 			</section>
 
-			<!-- Thread.join() -->
 			<section>
-				<h2>Thread.join()</h2>
-				<!-- Add content here... -->
+				<!-- <div class="flex text-2xl text-left"> -->
+				<div class="text-left">
+					<p>State <code>enum</code> in <code>java.lang.Thread</code>:</p>
+					<ul>
+						<li><code>NEW</code></li>
+						<li><code>RUNNABLE</code></li>
+						<li><code>BLOCKED</code></li>
+						<li><code>WAITING</code></li>
+						<li><code>TIMED_WAITING</code></li>
+						<li><code>TERMINATED</code></li>
+					</ul>
+				</div>
 			</section>
 
-			<!-- Polling with Sleep -->
 			<section>
-				<h2>Polling with Sleep</h2>
-				<!-- Add content here... -->
+				<div class="-mx-40 -my-10">
+					<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
+				</div>
 			</section>
+
+
+			<section>
+				<h4>Let's wait for million visitors now!</h4>
+			</section>
+
+			<section>
+				<h4>Concurrency API</h4>
+			</section>
+
+			<section>
+				ExecutorService
+				- java.util.concurrent interface for managing and scheduling the execution of tasks in a thread pool.
+			</section>
+
+			<section>
+				<div class="-mx-40 -my-10">
+					<img src="./media/d2plots/3_ExecutorService_file_cycle.svg" class="r-stretch" />
+				</div>
+			</section>
+
+			<section> 
+				<h4>Concurrency API</h4>
+			</section>
+
+			<section> 
+				<div class="text-2xl text-left">
+					<ul>
+						<li><strong>Thread Pool:</strong> A collection of pre-initialized threads, reusable for executing tasks. Improves performance by reducing the overhead of thread creation and destruction.</li>
+						<li><strong>Executor Service:</strong> An interface for managing a thread pool. Provides methods for task scheduling and lifecycle management, like graceful shutdown.</li>
+						<li><strong>Executors:</strong> Utility class in Java that provides factory methods for creating different types of Executor Services, such as single-threaded, fixed-size, and cached thread pools.</li>
+					</ul>
+					Executor Service manages a Thread Pool, and Executors make it easy to create and configure an Executor Service					
+				</div>
+			</section>
+
+		<!-- https://www.baeldung.com/thread-pool-java-and-guava -->
+
+			<section data-auto-animate>
+				<div class="text-3xl" data-id="text">Let's rewrite earlier example</div>
+				<pre><code data-id="code" class="language-java" data-trim="">
+						Runnable countAnimals = () -> {}; //omitted
+						Runnable printAnimalProfiles = () -> {}; //omitted
+
+						ExecutorService service = Executors.newSingleThreadExecutor()
+						try {
+							System.out.println("Zoo day begins");
+							service.execute(countAnimals);
+							service.execute(printAnimalProfiles);
+							service.execute(countAnimals);
+							System.out.println("Zoo day ends");
+						} finally {
+							service.shutdown();
+						}
+					</code></pre>
+				<!-- <div class="text-3xl fragment fade-in">Overtime?</div> -->
+			</section>
+
+
+			<section data-auto-animate>
+				<div class="text-3xl" data-id="text">Or use try-with-resources</div>
+				<pre><code data-id="code" class="language-java" data-trim="">
+					Runnable countAnimals = () -> {}; //omitted
+					Runnable printAnimalProfiles = () -> {}; //omitted
+
+					try (ExecutorService service = 
+											Executors.newSingleThreadExecutor()) {
+						System.out.println("Zoo day begins");
+						service.execute(countAnimals);
+						service.execute(printAnimalProfiles);
+						service.execute(countAnimals);
+						System.out.println("Zoo day ends");
+					}
+					</code></pre>
+				<!-- <div class="text-3xl fragment fade-in">Overtime?</div> -->
+			</section>
+			
+
+			<section>
+				<h2>Thread Pools</h2>
+				<div>tutaj beda rozne wersje thread pooli</div>
+			</section>
+
+
 		</div>
 	</div>
 

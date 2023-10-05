@@ -1,0 +1,51 @@
+direction: right
+Active: {
+  a: |md
+    Accepts new tasks
+
+    Executes tasks
+  |
+
+  isShutdown(): {
+    style.fill: black
+  }
+  isTerminated(): {
+    style.fill: black
+  }
+}
+
+Shutting down: {
+  a: |md
+    Reject new tasks
+
+    Executes tasks
+  |
+  isShutdown(): {
+    style.fill: white
+    style.font-color: black
+    style.stroke: black
+  }
+  isTerminated(): {
+    style.fill: black
+  }
+}
+
+Shutdown: {
+  a: |md
+    Reject new tasks
+
+    No tasks running
+  |
+  isShutdown(): {
+    style.fill: white
+    style.font-color: black
+    style.stroke: black
+  }
+  isTerminated(): {
+    style.fill: white
+    style.font-color: black
+    style.stroke: black
+  }
+}
+Active -> Shutting down: shutdown()
+Shutting down -> Shutdown: All tasks finished
