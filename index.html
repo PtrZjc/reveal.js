@@ -496,7 +496,61 @@
 				<h4>Let's sell some tickets to zoo now!</h4>
 			</section>
 
-			
+
+			<section>
+				<h3>Scheduling Tasks</h3>
+			</section>
+
+			<section>
+				<pre><code class="language-java" data-trim=""><script type="text/template">
+					ScheduledExecutorService service
+						= Executors.newSingleThreadScheduledExecutor();
+				</script></code></pre>
+				<div class="text-2xl text-left mx-20">
+					<ul class="space-y-2">
+						<li>Enables sheduling tasks</li>
+						<li>Subinterface of <strong>ExecutorService</strong> </li>
+						<li>All method return <strong>ScheduledFuture</strong> </li>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Scheduling tasks with <strong>ScheduledExecutorService</strong></div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim="" data-line-numbers="1-7|9-13|15-20"><script type="text/template">
+
+						schedule(Callable<V> callable, long delay, TimeUnit unit)
+						// Creates and executes a Callable task after the given 
+						// delay.
+						
+						schedule(Runnable command, long delay, TimeUnit unit)
+						// Creates and executes a Runnable task after the given
+						// delay.
+						
+						scheduleAtFixedRate(Runnable command, long initialDelay, 
+																long period, TimeUnit unit)
+						// Creates and executes a Runnable task after the given 
+						// initial delay, creating a new task every period value 
+						// that passes.
+						
+						scheduleWithFixedDelay(Runnable command, long initialDelay, 
+																	 long delay, TimeUnit unit)
+						// Creates and executes a Runnable task after the given 
+						// initial delay and subsequently with the given delay 
+						// between the termination of one execution and the 
+						// beginning of the next.
+						
+
+						</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+					<img src="./media/ScheduledExecutorService.jpg" class="r-stretch" />
+			</section>
+
+
+							<!-- These methods are among the most convenient in the Concurrency API, as they perform relatively complex tasks with a single line of code. -->
 			<section>
 				<h2>Thread Pools</h2>
 				<div>tutaj beda rozne wersje thread pooli</div>
