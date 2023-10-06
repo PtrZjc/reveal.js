@@ -517,7 +517,7 @@
 			<section>
 				<div class="text-3xl" data-id="text">Scheduling tasks with <strong>ScheduledExecutorService</strong></div>
 				<div>
-					<pre><code data-id="code" class="language-java" data-trim="" data-line-numbers="1-7|9-13|15-20"><script type="text/template">
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="1-7|9-13|15-20"><script type="text/template">
 
 						schedule(Callable<V> callable, long delay, TimeUnit unit)
 						// Creates and executes a Callable task after the given 
@@ -539,24 +539,220 @@
 						// initial delay and subsequently with the given delay 
 						// between the termination of one execution and the 
 						// beginning of the next.
-						
-
 						</script></code></pre>
+				</div>
+				<!-- These methods are among the most convenient in the Concurrency API, as they perform relatively complex tasks with a single line of code. -->
+
+			</section>
+
+			<section>
+				<img src="./media/ScheduledExecutorService.jpg" class="r-stretch" />
+			</section>
+
+			<section>
+				<h4>Okay, but where is concurrency?</h4>
+			</section>
+
+			<section>
+				<h3>Thread Pools</h3>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text"><strong>Executors</strong> factory methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="|5-8|10-16"><script type="text/template">
+
+						ExecutorService newSingleThreadExecutor()
+
+						ScheduledExecutorService newSingleThreadScheduledExecutor()
+						
+						ExecutorService newCachedThreadPool()
+						// Creates a thread pool that creates new threads as needed
+						// but reuses previously constructed threads when they are 
+						// available.
+						
+						ExecutorService newFixedThreadPool(int nThreads)
+						// Creates a thread pool that reuses a fixed number of 
+						// threads operating off a shared unbounded queue.
+						
+						ScheduledExecutorService newScheduledThreadPool(
+																											int nThreads)
+						// Creates a thread pool that can schedule commands to 
+						// run after a given delay or execute periodically.
+					</script></code></pre>
+				</div>
+				<!-- there is no hard limit to the number of threads it can spawn; it will keep creating new threads as long as tasks keep getting submitted and existing threads are occupied. However, unused threads will be terminated and removed from the cache if they remain idle for 60 seconds. -->
+			</section>
+
+			<section>
+				<h2>Thread safety</h2>
+			</section>
+
+			<section>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="|2|4-6|8-18"><script type="text/template">
+						public class MonkeyKeeper {
+							private static int monkeyCount;
+					
+						private static void incrementAndReport() {
+							System.out.print(++monkeyCount + " ");
+						}
+					
+						public static void main(String[] args) {
+							try (ExecutorService service =
+																 Executors.newFixedThreadPool(10)) {
+								IntStream
+									.range(0, 10)
+								  .forEach(i -> service.submit(
+																	MonkeyKeeper::incrementAndReport));
+							}
+						}
+					}
+					
+					</script></code></pre>
 				</div>
 			</section>
 
 			<section>
-					<img src="./media/ScheduledExecutorService.jpg" class="r-stretch" />
+				<div class="text-3xl" data-id="text">possible outcomes</div>
+				<div class="flex justify-center">
+					<div class="w-2/5">
+						<pre><code data-id="code" class="language-java" data-trim ><script type="text/template">
+						1 2 3 4 5 6 7 8 9 10 
+						1 8 7 3 2 6 5 4 10 9
+						1 9 8 7 3 6 6 2 4 5
+					</script></code></pre>
+					</div>
+				</div>
 			</section>
 
-
-							<!-- These methods are among the most convenient in the Concurrency API, as they perform relatively complex tasks with a single line of code. -->
 			<section>
-				<h2>Thread Pools</h2>
-				<div>tutaj beda rozne wersje thread pooli</div>
+				<div class="text-3xl" data-id="text">What happened there?</div>
+				<div class="flex justify-center">
+					<img src="./media/lack-of-synchronization.drawio.svg" class="w-4/6" />
+				</div>
+			</section>
+
+			<!-- https://www.geeksforgeeks.org/volatile-keyword-in-java/ -->
+
+			<section>
+				<div class="space-y-4">
+					<div class="text-2xl">Also... </div>
+					<div class="text-3xl">Changes made to static <code>monkeyCount</code> in one thread </div>
+					<div class="text-3xl">may not immediately be visible to another thread</div>
+					<div class="text-3xl fragment fade-in">How to ensure its visibility?</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl my-5" data-id="text"><strong>volatile</strong> keyword</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class MonkeyKeeper {
+						private volatile static int monkeyCount;
+						//...
+					}
+				</script></code></pre>
+				<div class="text-3xl fragment fade-in">This won't work...</div>
+				<!-- https://www.geeksforgeeks.org/volatile-keyword-in-java/ -->
+			</section>
+
+			<section>
+				<div class="text-3xl my-5" data-id="text"><code>volatile</code> provides:</div>
+				<div class="flex justify-center">
+					<div class="text-2xl text-left w-2/3">
+						<div class="">1. <strong>Visibility</strong>: Every read of that field is read directly from the main
+							memory.
+						</div>
+						<div class="">2. <strong>Ordering</strong>: Every write to the field will be written/flushed directly to the
+							main memory ("happens-before" relationship)</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">typical <code>volatile</code> usage</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class SharedResource {
+						private volatile boolean flag = false;
+				
+						public void turnOn() {
+								flag = true;
+						}
+				
+						public void checkStatus() {
+								if (flag) {
+										// Do something...
+								}
+						}
+					}
+				</script></code></pre>
+				<div class="text-xl">
+					<div class="fragment fade-in">One thread is calling the <code>turnOn()</code> method and another thread
+						is calling <code>checkStatus()</code>
+					</div>
+					<div class="fragment fade-in">The second thread is guaranteed to see the updated value of <code>flag</code> if
+						it checks after the first thread has called <code>turnOn()</code>.
+					</div>
 			</section>
 
 
+			<section>
+				<div class="space-y-4">
+					<div class="text-2xl">Let's come back to the monkeys</div>
+					<div class="text-4xl fragment fade-in">How to fix it?</div>
+				</div>
+			</section>
+			<section>
+				<h3>Synchronization</h3>
+			</section>
+			<section>
+				<h3>Atomic classes</h3>
+			</section>
+
+			<section>
+				<ul class="text-2xl space-y-4">
+					<li><strong>Atomic</strong> is the property of an operation to be carried out as a single unit of execution
+						without any interference from another thread</li>
+					<li>Atomic classes provide a way to perform atomic operations on a single variable without using synchronized
+						blocks.</li>
+					<li>Part of the <code>java.util.concurrent.atomic</code></li>
+				</ul>
+			</section>
+
+			<section>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class MonkeyKeeper {
+						private AtomicInteger monkeyCount = new AtomicInteger(0)
+
+						private void incrementAndReport() {
+							System.out.print(monkeyCount.incrementAndGet()+" ");
+						}
+						//...
+					}
+				</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-2xl">Other atomic classes</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					AtomicInteger counter = new AtomicInteger(0);
+
+					AtomicLong counter = new AtomicLong(0L);
+
+					AtomicBoolean flag = new AtomicBoolean(false);
+					
+					AtomicReference<String> string = new AtomicReference<>("");
+	
+				</script></code></pre>
+				<div class="fragment fade-in">
+					<div class="text-xl my-5">+ array versions:</div>
+					<pre><code class="language-java" data-trim >
+				AtomicIntegerArray, AtomicLongArray, AtomicReferenceArray
+				</code></pre>
+				</div>
+			</section>
 		</div>
 	</div>
 
