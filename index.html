@@ -933,14 +933,18 @@
 				<div class="text-2xl fragment fade-in">Atomic classes use CAS operations underneath to perform operations</div>
 			</section>
 
-
-			<!--  LONGADDER -->
 			<section>
-				<h4>Striping</h4>
-			</section>
-
-			<section>
-
+				<div class="m-4 font-bold">STRIPING</div>
+				<div class="text-2xl text-left">
+					<ul class="space-y-2">
+						<li class="fragment fade-in">Use array of states to distribute the contention to different memory locations</li>
+						<li class="fragment fade-in">JVM may allocate those states near each other in the heap, resulting in few states can reside in the same CPI cache line (64B)</li>
+						<li class="fragment fade-in">This results in <em>False Sharing</em> degrading the performance</li>
+						<li class="fragment fade-in">Solution is to add a padding between the states (to 64B)</li>
+						<li class="fragment fade-in"><code>Cell</code> is effectively a padded <code>AtomicLong</code></li>
+						<li class="fragment fade-in">Above implementation is in the abstract class <a href="https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/concurrent/atomic/Striped64.java">Striped64</a></li>
+					</ul>
+				</div>
 			</section>
 
 
