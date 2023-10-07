@@ -1,0 +1,22 @@
+
+
+
+td {
+    vertical-align: middle
+}
+
+code:not(pre > code) {
+    font-size: 1.1em;
+}
+
+
+
+.code-row td:nth-child(1),
+.code-row td:nth-child(2) {
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.center td:nth-child(3),
+.center td:nth-child(4) {
+    text-align: center !important;
+}

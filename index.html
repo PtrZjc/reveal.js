@@ -19,7 +19,7 @@
 
 	<!-- my custom styles  -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
-
+	<link rel="stylesheet" href="global.css">
 </head>
 
 <body>
@@ -1153,33 +1153,123 @@
 						<th>Description</th>
 					</tr>
 					<tr>
-						<td><div class="font-mono text-2xl">CountDownLatch</div></td>
+						<td>
+							<div class="font-mono text-2xl">CountDownLatch</div>
+						</td>
 						<td>Allows one or more threads to wait until a set of operations in other threads complete. Unlike
-							<code>CyclicBarrier</code>, it can't be reset.</td>
+							<code>CyclicBarrier</code>, it can't be reset.
+						</td>
 					</tr>
 					<tr>
-						<td><div class="font-mono text-2xl">Phaser</div></td>
-						<td>Similar to <code>CyclicBarrier</code> and <code>CountDownLatch</code> but more flexible. It allows dynamic addition and
+						<td>
+							<div class="font-mono text-2xl">Phaser</div>
+						</td>
+						<td>Similar to <code>CyclicBarrier</code> and <code>CountDownLatch</code> but more flexible. It allows
+							dynamic addition and
 							removal of threads that require synchronization.</td>
 					</tr>
 					<tr>
-						<td><div class="font-mono text-2xl">Semaphore</div></td>
+						<td>
+							<div class="font-mono text-2xl">Semaphore</div>
+						</td>
 						<td>Controls access to a shared resource by maintaining a set of permits, allowing or blocking thread access
 							based on the availability of these permits.</td>
 					</tr>
 					<tr>
-						<td><div class="font-mono text-2xl">Exchanger</div></td>
+						<td>
+							<div class="font-mono text-2xl">Exchanger</div>
+						</td>
 						<td>Allows two threads to exchange objects at a synchronization point. Useful in genetic algorithms,
 							pipeline designs, etc.</td>
 					</tr>
 					<tr>
-						<td><div class="font-mono text-2xl">ForkJoinPool RecursiveTask/RecursiveAction</div></td>
+						<td>
+							<div class="font-mono text-2xl">ForkJoinPool RecursiveTask/RecursiveAction</div>
+						</td>
 						<td>Provides a framework for parallel execution and is especially well-suited for divide-and-conquer
 							algorithms.</td>
 					</tr>
 				</table>
-
 			</section>
+
+			<section>
+				<h3>Concurrent Collections</h3>
+			</section>
+
+			<section>
+				<div class="text-2xl">What is the result?</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+						var monkeyCount = new HashMap<String, Integer>();
+						monkeyCount.put("long-nosed", 1);
+						monkeyCount.put("capuchin", 2);
+						for (String monkeyType : monkeyCount.keySet()){
+								monkeyCount.remove(monkeyType);
+						}
+					</script></code></pre>
+				<div class="text-2xl fragment fade-in red"><code>ConcurrentModificationException</code></div>
+
+					
+			</section>
+
+
+			<section>
+				<table class="text-xl">
+					<thead>
+						<tr>
+							<th>Class name</th>
+							<th>Java Collections interfaces</th>
+							<th>Sorted?</th>
+							<th>Blocking?</th>
+						</tr>
+					</thead>
+					<tbody class="code-row center">
+						<tr>
+							<td>ConcurrentHashMap</td>
+							<td>Map, ConcurrentMap</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>ConcurrentLinkedQueue</td>
+							<td>Queue</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>ConcurrentSkipListMap</td>
+							<td>Map, SortedMap, NavigableMap, ConcurrentMap, ConcurrentNavigableMap</td>
+							<td>✓</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>ConcurrentSkipListSet</td>
+							<td>Set, SortedSet, NavigableSet</td>
+							<td>✓</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>CopyOnWriteArrayList</td>
+							<td>List</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>CopyOnWriteArraySet</td>
+							<td>Set</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>LinkedBlockingQueue</td>
+							<td>Queue, BlockingQueue</td>
+							<td>✗</td>
+							<td>✓</td>
+						</tr>
+					</tbody>
+				</table>
+	
+			</section>
+
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
 			<script src="plugin/markdown/markdown.js"></script>
