@@ -705,11 +705,6 @@
 				</div>
 			</section>
 
-			<!--  SYNCHRONIZATION -->
-			<section>
-				<h3>Synchronization</h3>
-			</section>
-
 			<!--  ATOMIC CLASSES -->
 			<section>
 				<h3>Atomic classes</h3>
@@ -766,11 +761,10 @@
 				</div>
 			</section>
 
-
-	<section>
-		<div class="text-3xl" data-id="text"><strong>Common atomic methods</div>
-		<div>
-			<pre><code data-id="code" class="language-java" data-trim data-line-numbers="1-9|11-22"><script type="text/template">
+			<section>
+				<div class="text-3xl" data-id="text">Common atomic methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="1-9|11-22"><script type="text/template">
 				get()
 				// Retrieves the current value.
 
@@ -793,28 +787,112 @@
 				getAndDecrement()
 				// equivalent to value--
 			</script></code></pre>
-		</div>
-	</section>
+				</div>
+			</section>
 
-	<script src="dist/reveal.js"></script>
-	<script src="plugin/notes/notes.js"></script>
-	<script src="plugin/markdown/markdown.js"></script>
-	<script src="plugin/highlight/highlight.js"></script>
-	<script>
-		// More info about initialization & config:
-		// - https://revealjs.com/initialization/
-		// - https://revealjs.com/config/
-		Reveal.initialize({
-			hash: true,
 
-			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			<!--  SYNCHRONIZATION -->
+			<section>
+				<h3>Synchronization</h3>
+			</section>
 
-			margin: 0.15,
-			minScale: 0.2,
-			maxScale: 2.0
-		});
-	</script>
+			<section>
+				<div class="flex justify-center text-2xl text-left">
+					<ul class="space-y-2 w-5/6">
+						<li>The <em>monitor</em> (or lock) is used to synchronize an access</li>
+						<li>Each object in Java may act as a monitor and provide a <em>mutual exclusion</em></li>
+						<li>It is a property that at most one thread is executing a particular segment of code at a given time.</li>
+						<li class="fragment fade-in"><code>wait(), notify(), notifyAll()</code>: These methods, defined in Object,
+							allow threads to wait and wake up</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Common atomic methods</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class MonkeyKeeper {
+
+						private static final Object cage = new Object(); // monitor
+						private static int monkeyCount;
+
+						private void incrementAndReport() {
+							synchronized (cage) {
+								System.out.print(++monkeyCount + " ");
+							}
+						}
+						//...
+					}
+				</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on instance methods</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class LionEnclosure {
+						private synchronized void ensureSafety() {
+							// Ensure all lions are in their cages
+						}
+					}
+				</script></code></pre>
+				<div class="text-2xl">equvalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class LionEnclosure {
+						private void ensureSafety() {
+							synchronized(this) {
+								// Ensure all lions are in their cages
+							}
+						}
+					}
+				</script></code></pre>
+
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on static methods</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					Class ZooOperations {
+						private static synchronized void openGates() {
+								// Open all gates in the zoo
+						}
+					}
+				</script></code></pre>
+				<div class="text-2xl">equvalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					Class ZooOperations {
+						private static void openGates() {
+							synchronized(ZooOperations.class) {
+								// Open all gates in the zoo
+							}
+						}
+					}
+				</script></code></pre>
+
+			</section>
+
+<!-- LOCK FRAMEWORK  -->
+
+			<script src="dist/reveal.js"></script>
+			<script src="plugin/notes/notes.js"></script>
+			<script src="plugin/markdown/markdown.js"></script>
+			<script src="plugin/highlight/highlight.js"></script>
+			<script>
+				// More info about initialization & config:
+				// - https://revealjs.com/initialization/
+				// - https://revealjs.com/config/
+				Reveal.initialize({
+					hash: true,
+
+					// Learn about plugins: https://revealjs.com/plugins/
+					plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+					margin: 0.15,
+					minScale: 0.2,
+					maxScale: 2.0
+				});
+			</script>
 </body>
 
 </html>
