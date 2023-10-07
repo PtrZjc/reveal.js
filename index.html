@@ -937,12 +937,16 @@
 				<div class="m-4 font-bold">STRIPING</div>
 				<div class="text-2xl text-left">
 					<ul class="space-y-2">
-						<li class="fragment fade-in">Use array of states to distribute the contention to different memory locations</li>
-						<li class="fragment fade-in">JVM may allocate those states near each other in the heap, resulting in few states can reside in the same CPI cache line (64B)</li>
+						<li class="fragment fade-in">Use array of states to distribute the contention to different memory locations
+						</li>
+						<li class="fragment fade-in">JVM may allocate those states near each other in the heap, resulting in few
+							states can reside in the same CPI cache line (64B)</li>
 						<li class="fragment fade-in">This results in <em>False Sharing</em> degrading the performance</li>
 						<li class="fragment fade-in">Solution is to add a padding between the states (to 64B)</li>
 						<li class="fragment fade-in"><code>Cell</code> is effectively a padded <code>AtomicLong</code></li>
-						<li class="fragment fade-in">Above implementation is in the abstract class <a href="https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/concurrent/atomic/Striped64.java">Striped64</a></li>
+						<li class="fragment fade-in">Above implementation is in the abstract class <a
+								href="https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/concurrent/atomic/Striped64.java">Striped64</a>
+						</li>
 					</ul>
 				</div>
 			</section>
@@ -1030,13 +1034,152 @@
 			</section>
 
 			<!-- LOCK FRAMEWORK  -->
-
-			<!--  SYNCHRONIZATION -->
 			<section>
 				<h4>Lock framework</h4>
 			</section>
 
+			<section>
+				<div class="text-2xl text-left">
+					<ul class="space-y-2">
+						<li>The <strong>Lock</strong> interface is the answer to limited functionality to the synchronized blocks.
+						</li>
+						<li>Conceptually is similar to synchronized keyword, but with a lot more bells and whistles.</li>
+						<li>A “lock” can be obtained on any object that implements the Lock interface (vs. any Object with
+							synchronized)</li>
+						</li>
+					</ul>
+				</div>
+			</section>
 
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on instance methods</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+						Object object = new Object(); 
+						synchronized(object) {
+							// Protected code
+						}
+					</script></code></pre>
+				<div class="text-2xl">equivalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+						Lock lock = new ReentrantLock();
+						try {
+							lock.lock();
+							// Protected code
+						} finally {
+							lock.unlock();
+						}
+					</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text"><strong>Lock</strong> methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers><script type="text/template">
+						void lock()
+						// Requests lock and blocks until the lock is acquired.
+						
+						void unlock()
+						// Releases the lock.
+						
+						boolean tryLock()
+						// Requests lock and returns immediately. Returns a boolean
+						// indicating whether the lock was successfully acquired.
+						
+						boolean tryLock(long timeout, TimeUnit unit)
+						// Requests lock and blocks for the specified time or until
+						// the lock is acquired. Returns a boolean indicating 
+						// whether the lock was successfully acquired.						
+			</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers><script type="text/template">
+						Lock gateLock = new ReentrantLock();		
+						if (gateLock.tryLock()) {
+							try {
+								lock.lock();
+								System.out.println("Gate locked, safely 
+																		feeding the lions.");
+							} finally {
+								gateLock.unlock();
+							}
+						} else {
+							System.out.println("Unable to lock the gate, 
+																	switching to feeding the ducks.");
+						}				
+			</script></code></pre>
+					<div class="text-3xl fragment fade-in">Can you spot a mistake?</div>
+					<div class="m-4 text-2xl fragment fade-in italic">It is critical to release a lock the same number of times it
+						was acquired!</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6">ReentrantReadWriteLock</div>
+				<div class="text-2xl text-left fragment fade-in">
+					<ul class="space-y-2">
+						<li>It includes separate locks for reading and writing data</li>
+						<li>Useful on data structures where reads are far more common than writes</li>
+					</ul>
+				</div>
+			</section>
+
+
+			<!--  CyclicBarrier -->
+			<section>
+				<div class="text-3xl font-bold">It's time to clean up the lions cages</div>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6">CyclicBarrier</div>
+				<div class="text-2xl text-left fragment fade-in">
+					<ul class="space-y-2">
+						<li>A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier
+							point. </li>
+						<li>Useful in programs involving a fixed sized party of threads that must occasionally wait for each other.
+						</li>
+						<li>The barrier is called cyclic because it can be re-used after the waiting threads are released.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl font-bold m-6">Other synchronization aid classes</div>
+				<table class="text-xl">
+					<tr>
+						<th class="w-1/6">Class</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td><div class="font-mono text-2xl">CountDownLatch</div></td>
+						<td>Allows one or more threads to wait until a set of operations in other threads complete. Unlike
+							<code>CyclicBarrier</code>, it can't be reset.</td>
+					</tr>
+					<tr>
+						<td><div class="font-mono text-2xl">Phaser</div></td>
+						<td>Similar to <code>CyclicBarrier</code> and <code>CountDownLatch</code> but more flexible. It allows dynamic addition and
+							removal of threads that require synchronization.</td>
+					</tr>
+					<tr>
+						<td><div class="font-mono text-2xl">Semaphore</div></td>
+						<td>Controls access to a shared resource by maintaining a set of permits, allowing or blocking thread access
+							based on the availability of these permits.</td>
+					</tr>
+					<tr>
+						<td><div class="font-mono text-2xl">Exchanger</div></td>
+						<td>Allows two threads to exchange objects at a synchronization point. Useful in genetic algorithms,
+							pipeline designs, etc.</td>
+					</tr>
+					<tr>
+						<td><div class="font-mono text-2xl">ForkJoinPool RecursiveTask/RecursiveAction</div></td>
+						<td>Provides a framework for parallel execution and is especially well-suited for divide-and-conquer
+							algorithms.</td>
+					</tr>
+				</table>
+
+			</section>
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
 			<script src="plugin/markdown/markdown.js"></script>
