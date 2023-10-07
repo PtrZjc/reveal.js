@@ -594,20 +594,20 @@
 						public class MonkeyKeeper {
 							private static int monkeyCount;
 					
-						private static void incrementAndReport() {
-							System.out.print(++monkeyCount + " ");
-						}
-					
-						public static void main(String[] args) {
-							try (ExecutorService service =
-																 Executors.newFixedThreadPool(10)) {
-								IntStream
-									.range(0, 10)
-								  .forEach(i -> service.submit(
-																	MonkeyKeeper::incrementAndReport));
+							private static void incrementAndReport() {
+								System.out.print(++monkeyCount + " ");
+							}
+						
+							public static void main(String[] args) {
+								try (ExecutorService service =
+																	Executors.newFixedThreadPool(10)) {
+									IntStream
+										.range(0, 10)
+										.forEach(i -> service.submit(
+																		MonkeyKeeper::incrementAndReport));
+								}
 							}
 						}
-					}
 					
 					</script></code></pre>
 				</div>
@@ -704,12 +704,17 @@
 					<div class="text-4xl fragment fade-in">How to fix it?</div>
 				</div>
 			</section>
+
+			<!--  SYNCHRONIZATION -->
 			<section>
 				<h3>Synchronization</h3>
 			</section>
+
+			<!--  ATOMIC CLASSES -->
 			<section>
 				<h3>Atomic classes</h3>
 			</section>
+
 
 			<section>
 				<ul class="text-2xl space-y-4">
@@ -719,6 +724,13 @@
 						blocks.</li>
 					<li>Part of the <code>java.util.concurrent.atomic</code></li>
 				</ul>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Atomic operations</div>
+				<div class="flex justify-center">
+					<img src="./media/atomic-operation.drawio.svg" class="w-4/6" />
+				</div>
 			</section>
 
 			<section>
@@ -753,8 +765,36 @@
 				</code></pre>
 				</div>
 			</section>
+
+
+	<section>
+		<div class="text-3xl" data-id="text"><strong>Common atomic methods</div>
+		<div>
+			<pre><code data-id="code" class="language-java" data-trim data-line-numbers="1-9|11-22"><script type="text/template">
+				get()
+				// Retrieves the current value.
+
+				set(type newValue)
+				// Sets the given value, 
+
+				getAndSet(type newValue)
+				//  sets a new value and returns the old value
+
+				// For numeric classes only:
+				incrementAndGet()
+				// equivalent to ++value
+
+				getAndIncrement()
+				// equivalent to value++
+
+				decrementAndGet()
+				// equivalent to --value
+
+				getAndDecrement()
+				// equivalent to value--
+			</script></code></pre>
 		</div>
-	</div>
+	</section>
 
 	<script src="dist/reveal.js"></script>
 	<script src="plugin/notes/notes.js"></script>
