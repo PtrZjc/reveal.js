@@ -791,6 +791,159 @@
 			</section>
 
 
+			<!--  LONGADDER -->
+			<section>
+				<div class="text-5xl font-bold" data-id="text">AtomicLong vs LongAdder</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">LongAdder methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim><script type="text/template">
+						void add(long x) // Adds the given value.
+						
+						void decrement() // Equivalent to add(-1).
+
+						void increment() // Equivalent to add(1).
+
+						void reset() // Resets variables maintaining the sum to zero.
+						
+						long sum() // Returns the current sum.
+						
+						long sumThenReset()
+						// Equivalent in effect to sum() followed by reset().
+						
+			</script></code></pre>
+				</div>
+			</section>
+
+
+			<section>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Criteria</th>
+							<th>AtomicLong</th>
+							<th>LongAdder</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Backing up structure</td>
+							<td>
+								<div class="text-center">long</div>
+							</td>
+							<td>
+								<div class="text-center">Cell[]</div>
+							</td>
+						</tr>
+						<tr class="fragment highlight-red">
+							<td>Atomic Operations</td>
+							<td>
+								<div class="text-center">CAS</div>
+							</td>
+							<td>
+								<div class="text-center">Striping</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Memory Footprint</td>
+							<td>
+								<div class="text-center">⬇</div>
+							</td>
+							<td>
+								<div class="text-center">⬆</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Contention</td>
+							<td>
+								<div class="text-center">⬆</div>
+							</td>
+							<td>
+								<div class="text-center">⬇</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Functionalities</td>
+							<td>
+								<div class="text-center">⬆</div>
+							</td>
+							<td>
+								<div class="text-center">⬇</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Consistency</td>
+							<td>
+								<div class="text-center">Immediate</div>
+							</td>
+							<td>
+								<div class="text-center">Eventual</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6" data-id="text">Compare-and-Swap (CAS)</div>
+				<div class="text-2xl -mb-2" data-id="text">Conceptual view how it works:</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public boolean compareAndSwap(int expectedValue, int newValue) {
+						if (currentValue == expectedValue) {
+							currentValue = newValue;
+							return true;
+						}
+						return false;
+					}
+				</script></code></pre>
+			</section>
+
+			<section data-auto-animate>
+				<div class="text-2xl -m-4" data-id="text">Implementing a counter using CAS:</div>
+
+				<div class="flex justify-center">
+					<div class="w-3/4">
+						<pre><code class="language-java" data-id="code" data-trim ><script type="text/template">
+						int temp = counter;
+						int newValue = temp + 1;
+					counter = newValue;
+						</script></code></pre>
+					</div>
+				</div>
+			</section>
+
+
+			<section data-auto-animate>
+				<div class="text-2xl -m-4" data-id="text">Implementing a counter using CAS:</div>
+
+				<div class="flex justify-center">
+					<div class="w-3/4">
+						<pre><code class="language-java" data-id="code" data-trim ><script type="text/template">
+							do {
+								int temp = counter;
+								int newValue = temp + 1;
+							} while (!compareAndSwap(temp, newValue)); 
+							// Keep trying until successful
+						</script></code></pre>
+					</div>
+				</div>
+				<div class="text-2xl fragment fade-in">Atomic classes use CAS operations underneath to perform operations</div>
+			</section>
+
+
+			<!--  LONGADDER -->
+			<section>
+				<h4>Striping</h4>
+			</section>
+
+			<section>
+
+			</section>
+
+
 			<!--  SYNCHRONIZATION -->
 			<section>
 				<h3>Synchronization</h3>
@@ -837,7 +990,7 @@
 						}
 					}
 				</script></code></pre>
-				<div class="text-2xl">equvalent⭥</div>
+				<div class="text-2xl">equivalent⭥</div>
 				<pre><code class="language-java" data-trim ><script type="text/template">
 					public class LionEnclosure {
 						private void ensureSafety() {
@@ -859,7 +1012,7 @@
 						}
 					}
 				</script></code></pre>
-				<div class="text-2xl">equvalent⭥</div>
+				<div class="text-2xl">equivalent⭥</div>
 				<pre><code class="language-java" data-trim ><script type="text/template">
 					Class ZooOperations {
 						private static void openGates() {
@@ -872,7 +1025,13 @@
 
 			</section>
 
-<!-- LOCK FRAMEWORK  -->
+			<!-- LOCK FRAMEWORK  -->
+
+			<!--  SYNCHRONIZATION -->
+			<section>
+				<h4>Lock framework</h4>
+			</section>
+
 
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
