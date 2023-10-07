@@ -1202,8 +1202,8 @@
 						var monkeyCount = new HashMap<String, Integer>();
 						monkeyCount.put("long-nosed", 1);
 						monkeyCount.put("capuchin", 2);
-						for (String monkeyType : monkeyCount.keySet()){
-								monkeyCount.remove(monkeyType);
+						for (String monkey : monkeyCount.keySet()){
+								monkeyCount.remove(monkey);
 						}
 					</script></code></pre>
 				<div class="text-2xl fragment fade-in red"><code>ConcurrentModificationException</code></div>
@@ -1266,8 +1266,41 @@
 							<td>✓</td>
 						</tr>
 					</tbody>
+				</table>	
+			</section>
+
+			<section>
+				<div class="text-2xl m-4" data-id="text"><code>Collections</code> synchronized factory methods</div>
+				<table class="text-2xl">
+					<tbody>
+						<tr>
+							<td>synchronizedCollection(Collection&lt;T&gt; c)</td>
+						</tr>
+						<tr>
+							<td>synchronizedList(List&lt;T&gt; list)</td>
+						</tr>
+						<tr>
+							<td>synchronizedMap(Map&lt;K,V&gt; m)</td>
+						</tr>
+						<tr>
+							<td>synchronizedNavigableMap(NavigableMap&lt;K,V&gt; m)</td>
+						</tr>
+						<tr>
+							<td>synchronizedNavigableSet(NavigableSet&lt;T&gt; s)</td>
+						</tr>
+						<tr>
+							<td>synchronizedSet(Set&lt;T&gt; s)</td>
+						</tr>
+						<tr>
+							<td>synchronizedSortedMap(SortedMap&lt;K,V&gt; m)</td>
+						</tr>
+						<tr>
+							<td>synchronizedSortedSet(SortedSet&lt;T&gt; s)</td>
+						</tr>
+					</tbody>
 				</table>
-	
+				
+				</div>
 			</section>
 
 			<script src="dist/reveal.js"></script>
