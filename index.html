@@ -1207,8 +1207,6 @@
 						}
 					</script></code></pre>
 				<div class="text-2xl fragment fade-in red"><code>ConcurrentModificationException</code></div>
-
-					
 			</section>
 
 
@@ -1266,12 +1264,12 @@
 							<td>✓</td>
 						</tr>
 					</tbody>
-				</table>	
+				</table>
 			</section>
 
 			<section>
 				<div class="text-2xl m-4" data-id="text"><code>Collections</code> synchronized factory methods</div>
-				<table class="text-2xl">
+				<table class="text-2xl code-row">
 					<tbody>
 						<tr>
 							<td>synchronizedCollection(Collection&lt;T&gt; c)</td>
@@ -1299,9 +1297,120 @@
 						</tr>
 					</tbody>
 				</table>
-				
+			</section>
+
+			<section>
+				<h2>Parallel Streams</h2>
+			</section>
+
+			<section>
+				<div class="text-3xl m-4" data-id="text">Concurrent streams consist of:</div>
+				<table class="text-3xl">
+					<tr>
+						<td>1. Parallel decomposition</td>
+						<td>The process of taking a task, breaking it into smaller pieces that can be performed concurrently</td>
+					</tr>
+					<tr>
+						<td>2. Parallel reduction</td>
+						<td>Reassembling the results of a parallel decomposition</td>
+					</tr>
+				</table>
+
+			</section>
+			<section>
+				<div>
+					<div class="text-3xl m-4" data-id="text">Parallel Decomposition</div>
+					<pre><code class="language-java" data-trim ><script type="text/template">
+						List.of(1,2,3)
+									.stream()
+									.parallel()
+									// ...
+					</script></code></pre>
+					<div class="text-2xl">equivalent⭥</div>
+					<pre><code class="language-java" data-trim ><script type="text/template">
+						List.of(1,2,3)
+									.parallelStream()
+									// ...
+					</script></code></pre>
 				</div>
 			</section>
+			<!-- In a sequential stream, elements are processed one by one, so peek sees each element before skip is applied. That's straightforward.
+
+In a parallel stream, however, what often happens is that skip is applied earlier to reduce the amount of work that needs to be done in parallel. This early application of skip means that peek may not see all the elements you expect. This is a sort of optimization, and it's a characteristic of how parallel streams work in Java. -->
+
+			<section>
+				<div class="flex justify-center">
+					<div class="w-4/6 text-left text-3xl space-y-4">
+						<div class="text-4xl text-center m-4">Beware of the bottlenecks!</div>
+						<ul class="space-y-4">
+							<li><code>findFirst()</code></li>
+							<li><code>limit()</code></li>
+							<li><code>skip()</code></li>
+						</ul>
+						<div class="text-3xl">These operations force synchronization</div>
+					</div>
+				</div>
+				<!-- demo time.  -->
+			</section>
+
+			<section>
+				<div>
+					<div class="text-4xl m-4">Parallel Reduction</div>
+
+					<pre><code class="language-java" data-trim ><script type="text/template">
+						<U> U reduce(U identity,
+												 BiFunction<U,? super T,U> accumulator,
+								         BinaryOperator<U> combiner)
+	
+					</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+				<div>
+					<div class="text-4xl m-4">Parallel Reduction with <code>Collector</code></div>
+				</div>
+				<div class="fragment fade-in text-2xl">
+					<div class="text-1xl text-left m-4">Requirements for a reduction with <code>Collector</code> to be concurrent:
+					</div>
+					<ol>
+						<li>The stream is parallel</li>
+						<li class="fragment fade-in">The parameter of the <code>collect()</code> operation has the
+							<code>CONCURRENT</code> characteristic</li>
+						<li class="fragment fade-in">Either the stream is unordered or the collector has the characteristic
+							<code>UNORDERED</code></li>
+					</ol>
+				</div>
+				<div class="fragment fade-in text-xl italic m-6">Unless JVM decides otherwise...</div>
+			</section>
+
+			<section>
+				<div>
+					<div class="text-2xl m-4" data-id="text">Concurrent <code>Collectors</code> factory methods</div>
+					<table class="text-xl code-row">
+						<tr>
+							<td>Collectors.<span class="text-green-500">toConcurrentMap</span>(keyMapper, valueMapper);</td>
+						</tr>
+						<tr>
+							<td>Collectors.toConcurrentMap(keyMapper, valueMapper, mergeFunction);</td>
+						</tr>
+						<tr>
+							<td>Collectors.toConcurrentMap(keyMapper, valueMapper, mergeFunction, mapFactory);</td>
+						</tr>
+						<tr>
+							<td>Collectors.<span class="text-green-500">groupingByConcurrent</span>(classifier);</td>
+						</tr>
+						<tr>
+							<td>Collectors.groupingByConcurrent(classifier, downstream);</td>
+						</tr>
+						<tr>
+							<td>Collectors.groupingByConcurrent(classifier, mapFactory, downstream);</td>
+						</tr>
+					</table>
+
+				</div>
+			</section>
+
 
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
