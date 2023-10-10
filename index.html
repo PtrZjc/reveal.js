@@ -26,9 +26,21 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<em><small>Unlocking the Zoo: A Safari Through Java Concurrency</small></em>
-				<h1 class="r-fit-text">Concurrency workshop</h2>
+				<em><small>From zero to hero</small></em>
+				<h1 class="r-fit-text">A Safari Through Java Concurrency</h2>
 					<p style="text-align: right;">Piotr Zajac</p>
+			</section>
+
+			<section>
+					What this talk is about:
+						- Basic thread concepts
+						- Concurrency API
+						- Thread problems
+
+						What this talk is not about:
+						- Kotlin concurrency (coroutines)
+						- concurrency in Spring
+						- Deep dive into JVM (with small exceptions)
 			</section>
 			<!-- <section> -->
 			<section data-background="media/introducing-threads.png">
@@ -328,7 +340,7 @@
 			</section>
 
 			<section>
-				<h4>Concurrency API</h4>
+				<h2>Concurrency API</h2>
 			</section>
 
 			<section>
@@ -1033,7 +1045,32 @@
 
 			</section>
 
+			<section data-auto-animate="">
+				<div class="text-3xl font-bold" data-id="text">Double-checked locking optimization</div>
+				<pre class="fragment fade-in"><code class="language-java" data-id="text" data-trim data-line-numbers ><script type="text/template">
+					public class Singleton {
+						private static Singleton instance;
+				
+						private Singleton() { }
+				
+						public static Singleton getInstance() {
+							if (instance == null) {            // First Check
+								synchronized (Singleton.class) { // Synchronization
+									if (instance == null) {        // Second Check
+										instance = new Singleton();
+									}
+								}
+							}
+							return instance;
+						}
+				  }
+				</script></code></pre>
+				<div class="fragment fade-in text-2xl italic">But don't use double-locked singletons</div>
+				<div class="fragment fade-in text-xl">Use Bill Pugh (Lazy) or enum (Eager) singletons insteads</div>
+			</section>
+
 			<!-- LOCK FRAMEWORK  -->
+	
 			<section>
 				<h4>Lock framework</h4>
 			</section>
@@ -1186,8 +1223,7 @@
 						<td>
 							<div class="font-mono text-2xl">ForkJoinPool RecursiveTask/RecursiveAction</div>
 						</td>
-						<td>Provides a framework for parallel execution and is especially well-suited for divide-and-conquer
-							algorithms.</td>
+						<td>Provides a framework for parallel execution and is designed for work that can be broken into smaller pieces recursively</td>
 					</tr>
 				</table>
 			</section>
@@ -1376,9 +1412,11 @@ In a parallel stream, however, what often happens is that skip is applied earlie
 					<ol>
 						<li>The stream is parallel</li>
 						<li class="fragment fade-in">The parameter of the <code>collect()</code> operation has the
-							<code>CONCURRENT</code> characteristic</li>
+							<code>CONCURRENT</code> characteristic
+						</li>
 						<li class="fragment fade-in">Either the stream is unordered or the collector has the characteristic
-							<code>UNORDERED</code></li>
+							<code>UNORDERED</code>
+						</li>
 					</ol>
 				</div>
 				<div class="fragment fade-in text-xl italic m-6">Unless JVM decides otherwise...</div>
@@ -1411,7 +1449,80 @@ In a parallel stream, however, what often happens is that skip is applied earlie
 				</div>
 			</section>
 
+			<section>
+				<h4>Concurrency Problems</h4>
+			</section>
 
+			<section>
+				<div class="space-y-4">
+					<div class="text-2xl">But first let's check how are the foxes</div>
+				</div>
+				<!-- 
+Deadlock
+Deadlock occurs when two or more threads are blocked forever, each waiting on the other. We can illustrate this principle with the following example. Imagine that our zoo has two foxes: Foxy and Tails. Foxy likes to eat first and then drink water, while Tails likes to drink water first and then eat. Furthermore, neither animal likes to share, and they will finish their meal only if they have exclusive access to both food and water. The zookeeper places the food on one side of the environment and the water on the other side. Although our foxes are fast, it still takes them 100 milliseconds to run from one side of the environment to the other.
+What happens if Foxy gets the food first and Tails gets the water first? The following application models this behavior:-->
+			</section>
+
+<!-- Deadlock -->
+<section>
+	<div>
+		<div class="text-4xl m-6 font-bold">Deadlock</div>
+		<ul class="space-y-2 text-2xl">
+			<li>Threads wait indefinitely for a set of locks.</li>
+			<li>Each thread holds one lock and waits for another.</li>
+			<li>Results in a cycle where no thread can proceed.</li>
+		</ul>
+	</div>
+</section>
+
+<!-- Live Lock -->
+<section>
+	<div>
+		<div class="text-4xl m-6 font-bold">Live Lock</div>
+		<ul class="space-y-2 text-2xl">
+			<li>Threads are not blocked but can't make progress.</li>
+			<li>Too busy responding to each other to resume work.</li>
+			<li>"Conceptually" blocked</li>
+		</ul>
+	</div>
+	<!-- If Foxy and Tails continue this process forever, it is referred to as livelock. Both Foxy and Tails are active, running back and forth across their area, but neither can finish their meal. Foxy and Tails are executing a form of failed deadlock recovery. Each fox notices that they are potentially entering a deadlock state and responds by releasing all of its locked resources. Unfortunately, the lock and unlock process is cyclical, and the two foxes are conceptually deadlocked. -->
+</section>
+
+<!-- Starvation -->
+<section>
+	<div>
+		<div class="text-4xl m-6 font-bold">Starvation</div>
+		<ul class="space-y-2 text-2xl">
+			<li>Thread unable to gain regular access to shared resources.</li>
+			<li>Cannot make progress due to "greedy" threads.</li>
+		</ul>
+	</div>
+</section>
+
+<!-- Race Conditions -->
+<section>
+	<div>
+		<div class="text-4xl m-6 font-bold">Race Conditions</div>
+		<ul class="space-y-2 text-2xl">
+			<li>Program's behavior depends on the relative timing of events.</li>
+			<li>When two tasks that should be completed sequentially are completed at the same time.</li>
+			<li>Leads to inconsistent and unpredictable results.</li>
+		</ul>
+	</div>
+</section>
+
+<!-- Memory Consistency Errors -->
+<section>
+	<div>
+		<div class="text-4xl m-6 font-bold"">Memory Consistency Errors</div>
+		<ul class="space-y-2 text-2xl">
+			<li>Different threads have inconsistent views of shared memory.</li>
+			<li>Common in systems with extensive data caching.</li>
+		</ul>
+	</div>
+</section>
+
+</section>
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
 			<script src="plugin/markdown/markdown.js"></script>
