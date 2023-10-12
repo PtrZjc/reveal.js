@@ -25,26 +25,43 @@
 <body>
 	<div class="reveal">
 		<div class="slides">
-			<section>
-				<em><small>From zero to hero</small></em>
-				<h1 class="r-fit-text">A Safari Through Java Concurrency</h2>
-					<p style="text-align: right;">Piotr Zajac</p>
-			</section>
-
-			<section>
-					What this talk is about:
-						- Basic thread concepts
-						- Concurrency API
-						- Thread problems
-
-						What this talk is not about:
-						- Kotlin concurrency (coroutines)
-						- concurrency in Spring
-						- Deep dive into JVM (with small exceptions)
-			</section>
-			<!-- <section> -->
 			<section data-background="media/introducing-threads.png">
-				<h2 class="r-fit-text">Some Terminology</h2>
+
+				<div class="text-left text-2xl italic m-6">From zero to hero</div>
+				<h1 class="r-fit-text">A Safari Through Java Concurrency</h2>
+					<p class="text-right">Piotr Zajac</p>
+			</section>
+
+			<section>
+				<div class="relative">
+					<div class="flex text-3xl">
+						<div class="w-1/2">
+							<div class="m-6 text-4xl italic">What this talk is about</div>
+							<ul class="space-y-3">
+								<li>Basic thread concepts</li>
+								<li>Concurrency API</li>
+								<li>Parallel streams</li>
+								<li>General concurrency problems</li>
+							</ul>
+						</div>
+						<div class="w-1/2 fragment fade-in">
+							<div class="m-6 text-4xl italic">What this talk is <strong>not</strong> about</div>
+							<ul class="space-y-3">
+								<li>Heavy hands on experience</li>
+								<li>Kotlin concurrency (coroutines)</li>
+								<li>Concurrency in Spring</li>
+								<li>Deep dive into JVM</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</section>
+			<section>
+				<h2 class="r-fit-text">Basic Thread concepts</h2>
+			</section>
+			<section>
+				<h4>Some Terminology</h4>
 			</section>
 			<!-- Terminology -->
 			<section>
@@ -53,6 +70,18 @@
 					<div class="relative">
 						<div class="flex absolute fragment fade-out">
 							<div class="w-1/2">
+								<p><strong>Thread</strong></p>
+								<ul>
+									<li>Smallest unit of execution</li>
+								</ul>
+								<!-- A thread is the smallest unit of CPU execution, a path of execution within a process. It runs code, maintains its own stack, and can create additional threads. -->
+								<p><strong>Task</strong></p>
+								<ul>
+									<li>Single unit of work performed by a thread</li>
+									<li>Often implemented as lambda expressions</li>
+								</ul>
+							</div>
+							<div class="w-1/2 ml-4">
 								<p><strong>Concurrency</strong></p>
 								<ul>
 									<li>Execution of multiple threads and processes simultaneously</li>
@@ -63,31 +92,27 @@
 									<li>Execute in shared environment</li>
 								</ul>
 							</div>
-							<div class="w-1/2">
-								<p><strong>Thread</strong></p>
-								<ul>
-									<li>Smallest unit of execution</li>
-								</ul>
-								<p><strong>Task</strong></p>
-								<ul>
-									<li>Single unit of work performed by a thread</li>
-									<li>Often implemented as lambda expressions</li>
-								</ul>
-							</div>
 						</div>
-						<div class="flex absolute fragment fade-in">
-							<div class="w-1/2">
+						<div class="flex fragment fade-in">
+							<div class="w-1/3">
 								<p><strong>Shared Environment</strong></p>
 								<ul>
 									<li>Threads in same process share memory space</li>
 									<li>Direct communication between threads</li>
 								</ul>
 							</div>
-							<div class="w-1/2">
+							<div class="w-1/3">
 								<p><strong>Shared Memory</strong></p>
 								<ul>
 									<li>Includes static variables, instance and local variables</li>
 									<li>Enables direct communication between threads</li>
+								</ul>
+							</div>
+							<div class="w-1/3">
+								<p><strong>OS Thread Scheduler</strong></p>
+								<ul>
+									<li>Manages the execution of threads</li>
+									<li>Allocates CPU time to threads based on scheduling algorithms</li>
 								</ul>
 							</div>
 						</div>
@@ -100,25 +125,8 @@
 					<div class="align-top">
 						<img src="media/round-robin-negate.png">
 					</div>
-					<div class="flex">
-						<div class="w-1/2">
-							<p><strong>Thread Scheduler</strong></p>
-							<ul>
-								<li>Determines which threads to execute</li>
-								<li>May use strategies like round-robin scheduling</li>
-							</ul>
-							<p><strong>Context Switch</strong></p>
-							<ul>
-								<li>Stores and restores thread's state for later execution</li>
-								<li>Associated with a performance cost</li>
-							</ul>
-						</div>
-						<div class="w-1/2">
-							<p><strong>Optimised Thread Scheduling</strong></p>
-							<ul>
-								<li>Goal to minimize context switches</li>
-								<li>Maintains smooth application running</li>
-							</ul>
+					<div class="flex fragment fade-in">
+						<div class="w-1/3">
 							<p><strong>Thread Priority</strong></p>
 							<ul>
 								<li>Numeric value associated with each thread</li>
@@ -126,17 +134,37 @@
 								<li>In Java, specified as integer values</li>
 							</ul>
 						</div>
+						<div class="w-1/3">
+							<p><strong>Context Switch</strong></p>
+							<ul>
+								<li>Stores and restores thread's state for later execution</li>
+								<li>Associated with a performance cost</li>
+							</ul>
+						</div>
+						<div class="w-1/3">
+							<p><strong>Optimised Thread Scheduling</strong></p>
+							<ul>
+								<li>Goal to minimize context switches</li>
+								<li>Maintains smooth application running</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</section>
 
-			<section data-background="media/introducing-threads.png">
+			<section>
 				<h2 class="r-fit-text">Introducing Threads!</h2>
 			</section>
 
 			<section data-auto-animate>
 				<h6>Creating a Thread</h6>
-				<div class="text-left text-2xl">
+				<pre data-id="code" class="language-java"><code data-trim>
+					@FunctionalInterface
+					public interface Runnable { 
+					  	void run();
+					}
+					</code></pre>
+				<div class="text-left text-2xl fragment fade-in">
 					<p><strong>To create a Thread in Java:</strong></p>
 					<ul>
 						<div data-id="text">
@@ -150,14 +178,7 @@
 						<li>Use Concurrency API</li>
 					</ul>
 				</div>
-				<div class="">
-					<pre data-id="code" class="language-java"><code data-trim>
-					@FunctionalInterface
-					public interface Runnable { 
-					  	void run();
-					}
-					</code></pre>
-				</div>
+
 			</section>
 
 			<section data-auto-animate>
@@ -167,7 +188,7 @@
 					</ul>
 				</div>
 				<pre data-id="code"><code class="language-java" data-trim >
-					public class AnimalCounter extends Thread {
+					public class AnimalKeeper extends Thread {
 						@Override
 						public void run() {
 							System.out.println("Counting all the animals in the zoo");
@@ -239,26 +260,26 @@
 
 			<!-- Thread Types -->
 			<section>
-				<h4>There are more Threads!</h2>
+				<h4>There is more about Threads!</h2>
 			</section>
 
 			<section>
 				<h6>Thread Types</h2>
 					<div class="flex text-2xl text-left">
 						<div class="w-1/3">
-							<p><strong>System Threads</strong></p>
-							<ul>
-								<li>Created by JVM</li>
-								<li>Run in background</li>
-								<li>Example: Garbage collection</li>
-							</ul>
-						</div>
-						<div class="w-1/3">
 							<p><strong>User-Defined Threads</strong></p>
 							<ul>
 								<li>Created by developers</li>
 								<li>Specific tasks</li>
 								<li>Example: `main()` method thread</li>
+							</ul>
+						</div>
+						<div class="w-1/3 ml-10">
+							<p><strong>System Threads</strong></p>
+							<ul>
+								<li>Created by JVM</li>
+								<li>Run in background</li>
+								<li>Example: Garbage collection</li>
 							</ul>
 						</div>
 						<div class="w-1/3">
@@ -273,7 +294,7 @@
 
 			<section data-auto-animate>
 				<pre data-id="code"><code class="language-java" data-trim data-line-numbers>
-								public class Zookeper {
+								public class Zookeeper {
 									public static void main(String[] unused) {
 										var feedingJob = new Thread(Zookeper::feedAnimals);
 										feedingJob.start();
@@ -290,8 +311,8 @@
 			</section>
 
 			<section data-auto-animate>
-				<pre data-id="code"><code class="language-java" data-trim data-line-numbers>
-								public class EvilZookeper {
+				<pre data-id="code"><code class="language-java" data-trim data-line-numbers="4">
+								public class EvilZookeeper {
 									public static void main(String[] unused) {
 										var feedingJob = new Thread(Zookeper::feedAnimals);
 										feedingJob.setDaemon(true);
@@ -310,7 +331,7 @@
 
 			<!-- Managing a Thread’s Life Cycle -->
 			<section>
-				<h3>Thread’s Life Cycle</h3>
+				<h3>Thread Life Cycle</h3>
 			</section>
 
 			<section>
@@ -338,29 +359,14 @@
 			<section>
 				<h4>Let's wait for million visitors now!</h4>
 			</section>
-
+			
 			<section>
 				<h2>Concurrency API</h2>
 			</section>
 
 			<section>
-				ExecutorService
-				- java.util.concurrent interface for managing and scheduling the execution of tasks in a thread pool.
-			</section>
-
-			<section>
-				<div class="-mx-40 -my-10">
-					<img src="./media/d2plots/3_ExecutorService_file_cycle.svg" class="r-stretch" />
-				</div>
-			</section>
-
-			<section>
-				<h4>Concurrency API</h4>
-			</section>
-
-			<section>
 				<div class="text-2xl text-left">
-					<ul>
+					<ul class="space-y-4">
 						<li><strong>Thread Pool:</strong> A collection of pre-initialized threads, reusable for executing tasks.
 							Improves performance by reducing the overhead of thread creation and destruction.</li>
 						<li><strong>ExecutorService:</strong> An interface for managing a thread pool. Provides methods for task
@@ -368,7 +374,8 @@
 						<li><strong>Executors:</strong> Utility class in Java that provides factory methods for creating different
 							types of Executor Services, such as single-threaded, fixed-size, and cached thread pools.</li>
 					</ul>
-					Executor Service manages a Thread Pool, and Executors make it easy to create and configure an Executor Service
+	<div class="text-center text-3xl my-10 italic fragment fade-in"><div>Executor Service manages a Thread Pool</div>
+		<div>Executors make it easy to create and configure an Executor Service</div>
 				</div>
 			</section>
 
@@ -521,8 +528,12 @@
 				<div class="text-2xl text-left mx-20">
 					<ul class="space-y-2">
 						<li>Enables sheduling tasks</li>
-						<li>Subinterface of <strong>ExecutorService</strong> </li>
-						<li>All method return <strong>ScheduledFuture</strong> </li>
+						<li>Subinterface of <code>ExecutorService</code> </li>
+						<li>
+							<div>All method return <code>ScheduledFuture</code> </div>
+							<div class="text-xl mx-10 my-2 italic"><code>Future</code> subinterface implementing <code>Delayed</code></div>
+						
+						</li>
 				</div>
 			</section>
 
@@ -611,7 +622,7 @@
 							}
 						
 							public static void main(String[] args) {
-								try (ExecutorService service =
+								try (ExecutorService monkeyKeepers =
 																	Executors.newFixedThreadPool(10)) {
 									IntStream
 										.range(0, 10)
@@ -914,14 +925,14 @@
 			</section>
 
 			<section data-auto-animate>
-				<div class="text-2xl -m-4" data-id="text">Implementing a counter using CAS:</div>
+				<div class="text-2xl -m-4" data-id="text">Implementing an increment using CAS:</div>
 
 				<div class="flex justify-center">
 					<div class="w-3/4">
 						<pre><code class="language-java" data-id="code" data-trim ><script type="text/template">
-						int temp = counter;
+						int temp = currentValue
 						int newValue = temp + 1;
-					counter = newValue;
+					currentValue = newValue;
 						</script></code></pre>
 					</div>
 				</div>
@@ -929,13 +940,13 @@
 
 
 			<section data-auto-animate>
-				<div class="text-2xl -m-4" data-id="text">Implementing a counter using CAS:</div>
+				<div class="text-2xl -m-4" data-id="text">Implementing an increment using CAS:</div>
 
 				<div class="flex justify-center">
 					<div class="w-3/4">
 						<pre><code class="language-java" data-id="code" data-trim ><script type="text/template">
 							do {
-								int temp = counter;
+								int temp = currentValue;
 								int newValue = temp + 1;
 							} while (!compareAndSwap(temp, newValue)); 
 							// Keep trying until successful
@@ -1001,29 +1012,6 @@
 			</section>
 
 			<section>
-				<div class="text-3xl" data-id="text">Synchronization on instance methods</div>
-
-				<pre><code class="language-java" data-trim ><script type="text/template">
-					public class LionEnclosure {
-						private synchronized void ensureSafety() {
-							// Ensure all lions are in their cages
-						}
-					}
-				</script></code></pre>
-				<div class="text-2xl">equivalent⭥</div>
-				<pre><code class="language-java" data-trim ><script type="text/template">
-					public class LionEnclosure {
-						private void ensureSafety() {
-							synchronized(this) {
-								// Ensure all lions are in their cages
-							}
-						}
-					}
-				</script></code></pre>
-
-			</section>
-
-			<section>
 				<div class="text-3xl" data-id="text">Synchronization on static methods</div>
 				<pre><code class="language-java" data-trim ><script type="text/template">
 					Class ZooOperations {
@@ -1042,7 +1030,27 @@
 						}
 					}
 				</script></code></pre>
+			</section>
 
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on instance methods</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class LionEnclosure {
+						private synchronized void ensureSafety() {
+							// Ensure all lions are in their cages
+						}
+					}
+				</script></code></pre>
+				<div class="text-2xl">equivalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class LionEnclosure {
+						private void ensureSafety() {
+							synchronized(this) {
+								// Ensure all lions are in their cages
+							}
+						}
+					}
+				</script></code></pre>
 			</section>
 
 			<section data-auto-animate="">
@@ -1070,7 +1078,7 @@
 			</section>
 
 			<!-- LOCK FRAMEWORK  -->
-	
+
 			<section>
 				<h4>Lock framework</h4>
 			</section>
@@ -1171,7 +1179,7 @@
 
 			<section>
 				<div class="text-4xl font-bold m-6">CyclicBarrier</div>
-				<div class="text-2xl text-left fragment fade-in">
+				<div class="text-2xl text-left">
 					<ul class="space-y-2">
 						<li>A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier
 							point. </li>
@@ -1223,7 +1231,14 @@
 						<td>
 							<div class="font-mono text-2xl">ForkJoinPool RecursiveTask/RecursiveAction</div>
 						</td>
-						<td>Provides a framework for parallel execution and is designed for work that can be broken into smaller pieces recursively</td>
+						<td>Provides a framework for parallel execution and is designed for work that can be broken into smaller
+							pieces recursively</td>
+
+						<!-- if (my portion of the work is small enough)
+										do the work directly
+									else
+										split my work into two pieces
+										invoke the two pieces and wait for the results -->
 					</tr>
 				</table>
 			</section>
@@ -1340,7 +1355,7 @@
 			</section>
 
 			<section>
-				<div class="text-3xl m-4" data-id="text">Concurrent streams consist of:</div>
+				<div class="text-3xl m-4" data-id="text">Concurrent stream consists of:</div>
 				<table class="text-3xl">
 					<tr>
 						<td>1. Parallel decomposition</td>
@@ -1455,7 +1470,7 @@ In a parallel stream, however, what often happens is that skip is applied earlie
 
 			<section>
 				<div class="space-y-4">
-					<div class="text-2xl">But first let's check how are the foxes</div>
+					<div class="text-2xl">But first let's feed the foxes!</div>
 				</div>
 				<!-- 
 Deadlock
@@ -1463,66 +1478,71 @@ Deadlock occurs when two or more threads are blocked forever, each waiting on th
 What happens if Foxy gets the food first and Tails gets the water first? The following application models this behavior:-->
 			</section>
 
-<!-- Deadlock -->
-<section>
-	<div>
-		<div class="text-4xl m-6 font-bold">Deadlock</div>
-		<ul class="space-y-2 text-2xl">
-			<li>Threads wait indefinitely for a set of locks.</li>
-			<li>Each thread holds one lock and waits for another.</li>
-			<li>Results in a cycle where no thread can proceed.</li>
-		</ul>
-	</div>
-</section>
 
-<!-- Live Lock -->
-<section>
-	<div>
-		<div class="text-4xl m-6 font-bold">Live Lock</div>
-		<ul class="space-y-2 text-2xl">
-			<li>Threads are not blocked but can't make progress.</li>
-			<li>Too busy responding to each other to resume work.</li>
-			<li>"Conceptually" blocked</li>
-		</ul>
-	</div>
-	<!-- If Foxy and Tails continue this process forever, it is referred to as livelock. Both Foxy and Tails are active, running back and forth across their area, but neither can finish their meal. Foxy and Tails are executing a form of failed deadlock recovery. Each fox notices that they are potentially entering a deadlock state and responds by releasing all of its locked resources. Unfortunately, the lock and unlock process is cyclical, and the two foxes are conceptually deadlocked. -->
-</section>
+			<!-- Deadlock -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Deadlock</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Threads wait indefinitely for a set of locks.</li>
+						<li>Each thread holds one lock and waits for another.</li>
+						<li>Results in a cycle where no thread can proceed.</li>
+					</ul>
+				</div>
+			</section>
 
-<!-- Starvation -->
-<section>
-	<div>
-		<div class="text-4xl m-6 font-bold">Starvation</div>
-		<ul class="space-y-2 text-2xl">
-			<li>Thread unable to gain regular access to shared resources.</li>
-			<li>Cannot make progress due to "greedy" threads.</li>
-		</ul>
-	</div>
-</section>
+			<!-- Live Lock -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Livelock</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Threads are not blocked but can't make progress.</li>
+						<li>Too busy responding to each other to resume work.</li>
+						<li>"Conceptually" blocked</li>
+					</ul>
+				</div>
+				<!-- If Foxy and Tails continue this process forever, it is referred to as livelock. Both Foxy and Tails are active, running back and forth across their area, but neither can finish their meal. Foxy and Tails are executing a form of failed deadlock recovery. Each fox notices that they are potentially entering a deadlock state and responds by releasing all of its locked resources. Unfortunately, the lock and unlock process is cyclical, and the two foxes are conceptually deadlocked. -->
+			</section>
 
-<!-- Race Conditions -->
-<section>
-	<div>
-		<div class="text-4xl m-6 font-bold">Race Conditions</div>
-		<ul class="space-y-2 text-2xl">
-			<li>Program's behavior depends on the relative timing of events.</li>
-			<li>When two tasks that should be completed sequentially are completed at the same time.</li>
-			<li>Leads to inconsistent and unpredictable results.</li>
-		</ul>
-	</div>
-</section>
+			<!-- Starvation -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Starvation</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Thread unable to gain regular access to shared resources.</li>
+						<li>Cannot make progress due to "greedy" threads.</li>
+					</ul>
+				</div>
+			</section>
 
-<!-- Memory Consistency Errors -->
-<section>
-	<div>
-		<div class="text-4xl m-6 font-bold"">Memory Consistency Errors</div>
-		<ul class="space-y-2 text-2xl">
-			<li>Different threads have inconsistent views of shared memory.</li>
-			<li>Common in systems with extensive data caching.</li>
-		</ul>
-	</div>
-</section>
+			<!-- Race Conditions -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Race Conditions</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Program's behavior depends on the relative timing of events.</li>
+						<li>When two tasks that should be completed sequentially are completed at the same time.</li>
+						<li>Leads to inconsistent and unpredictable results.</li>
+					</ul>
+				</div>
+			</section>
 
-</section>
+			<!-- Memory Consistency Errors -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold"">Memory Consistency Errors</div>
+		<ul class=" space-y-2 text-2xl">
+						<li>Different threads have inconsistent views of shared memory.</li>
+						<li>Common in systems with extensive data caching.</li>
+						</ul>
+					</div>
+			</section>
+
+			<section data-background="./media/threaded-elephant.png">
+
+				<h1 class="r-fit-text">THE END</h2>
+			</section>
+
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
 			<script src="plugin/markdown/markdown.js"></script>
