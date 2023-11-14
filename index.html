@@ -1,40 +1,1898 @@
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<html>
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>AI Tools</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+	<!-- system required: -->
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+	<!-- actual stylesheet -->
+	<link rel="stylesheet" href="dist/theme/blood.css">
+
+	<!-- my custom styles  -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
+	<link rel="stylesheet" href="global.css">
+</head>
+<!-- https://www.mentimeter.com/app/presentation/alas16u23bckes4rbopdzgawmvvjjqso/r7os8h5sxnp9/edit -->
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-background="media/shovel_chisel.png">
+				<div class="relative h-screen">
+					<div class="absolute -top-10 w-full text-center">
+						<div class="text-5xl font-bold text-white shadow-outline">A programmer's shovel and chisel</div>
+					</div>
+					<div class="absolute bottom-64 w-full text-center">
+						<div class="text-4xl font-bold text-white shadow-outline">or optimizing everyday work with AI tools</div>
+					</div>
+					<div class="absolute bottom-60 -right-52">
+						<div class="text-4xl italic font-bold text-sky-300 shadow-outline">Piotr Zajac</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="relative">
+					<div class="flex text-3xl">
+						<div class="w-1/2">
+							<div class="m-6 text-4xl italic">What this talk is about</div>
+							<ul class="space-y-3">
+								<li>Using Chat-GPT...</li>
+								<li>Using Copilot...</li>
+								<li class="italic">...In daily developer's work</li>
+							</ul>
+						</div>
+						<div class="w-1/2 fragment fade-in">
+							<div class="m-6 text-4xl italic">What this talk is <strong>not</strong> about</div>
+							<ul class="space-y-3">
+								<li>Any other use cases</li>
+								<li>Any of myriad of other AI tools/plugins</li>
+								<li>Copilot Chat</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section data-background="media/chisel2.png">
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Sharpen your tool before the work</h2>
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Be aware of the context!</h2>
+				<h2 class="r-fit-text">~8,192 tokens</h2>
+				<h2 class="r-fit-text">3000-4000 words</h2>
+				<a href="https://platform.openai.com/tokenizer" target="_blank"
+					class="text-2xl">https://platform.openai.com/tokenizer</a>
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Assign roles as custom instructions</h2>
+			</section>
+
+			<section>
+				<table border="1">
+					<tr>
+						<th class="text-xl">Question</th>
+						<th class="text-xl">Answer</th>
+					</tr>
+					<tr>
+						<td class="text-xl">What would you like ChatGPT to know about you to provide better responses?</td>
+						<td class="text-xl">I am a software engineer with experience in Java, Kotlin, React, and Typescript, but I'm
+							also interested in exploring other technologies, tools, and methodologies to enhance my skills.<br>I work
+							on
+							macOS and use the terminal with CLI tools in my daily work.</td>
+					</tr>
+					<tr>
+						<td class="text-xl">How would you like ChatGPT to respond?</td>
+						<td class="text-xl">
+							Response as a senior software developer. Unless otherwise instructed, prefer to make consise explanations
+							to the given questions. Prefer to use CLI tools to solve the the asked problems.<br>
+							Exceptions:<br>
+							When I start my prompt as NEW, please forgot about your role and start as a brand clean instance. This
+							will
+							be used for all topics not related with my software development job.<br>
+							When I start my prompt with SHORT, then please give me as concise answer as you can. Skip the commentary
+							and provide very concise anwer it directly answer the question.<br>
+							When I start my prompt with CODE, then give me just code without any commentary and extra information.<br>
+							When I start my prompt with WAIT then just acknowledge you got the message by "waiting", as there will be
+							more context. When there is no more context, there will be READY command.<br>
+						</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Prepare the context</div>
+					<ul class="space-y-2">
+						<li>When speaking about particular code/technologies, in the first prompt write what technologies are used
+							in the project, e.g:</li>
+						<li class="italic">"We will work on a backend application using Java 17, Spring Boot 3 and having tests
+							written in Junit5 with JAssert library"</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Use pseudo-language to give accurate instructions</div>
+					<div class="text-2xl text-center mb-6">Chat-GPT is very good in understanding any arbitrary notation system
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">When providing a code, give instructions first</div>
+					<div class="text-2xl text-center italic mb-6">Or divide a message into separate messages ("WAIT")</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Support use cases</h2>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Generate templates</div>
+					<ul class="space-y-2">
+						<li>AWS CloudFormation/SAM</li>
+						<li>AWS policies</li>
+						<li>OpenApi definitions</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Generate Readme.md</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
+					<ul class="space-y-2">
+						<li>Obvious conversions (yml ↔ csv ↔ json) as possible but CLI tools are better</li>
+						<li>Strength lies in non-obvious conversions (arbitrary format to classes, markdown tables, openApi) </li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl text-center font-bold mb-6">Example of arbitrary modelled input</div>
+				<pre data-id="code"><code class="language-yml" data-trim >
+					waybillId: String
+					carrier: DPD/UPS/POCZTA_POLSKA/INPOST/ALLEGRO/SUUS/PACKETA/DHL/X_PRESS_COURIERS/WEDO
+					transportingCarrierId: String # nullable
+					buyerId: String
+					timestamp: Instant
+					serviceType: String
+					isFulfilment: Boolean
+					waybillType: OPERATIONAL_RETURN / REGULAR / REDIRECT
+					tags: [String]
+					deliveryId: String
+					currency: Currency
+					isFreeDeliveryFromSeller: Boolean
+					orders:
+						- orderId: String
+							value: BigDecimal
+							currency: Currency
+							isSmart: Boolean
+							sellerId: String
+							fee:
+								debit:
+									id: UUID
+									createdAt: Instant
+									status: String
+								refund: #nullable
+									id: UUID
+									createdAt: Instant
+									status: String
+								partialFee: BigDecimal # nullable - filled only for combined orders
+					terminalStatus: #nullable
+						name: String
+						receivedAt: Instant
+					pricing: #nullable
+						priceListId: UUID
+						pricingEntryId: UUID
+						billingCode: String # nullable
+						actualVariant: SMART/REGULAR/FULFILMENT
+						vatRate: Int
+						amount: BigDecimal
+					</code></pre>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Markdown tables</div>
+					<ul class="space-y-2">
+						<li>Precisely modify table content (e.g. "swap the columns")</li>
+						<li>Create tables using arbitrary notation</li>
+					</ul>
+					<div class="text-2xl mt-6 italic">
+						Generate markdown table. I use "RXCX: content" notation to indicate a cell, where R is row, C is column and
+						X is number.<br>
+						Absent cells should be empty.<br>
+						R1C3: Alice<br>
+						R2C4: Bob<br>
+						R5C1: fooBar<br>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
+					<ul class="space-y-2">
+						<li>bash / python / awk / unix-tools</li>
+						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div></li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Dealing with the Code</h2>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Review the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Document the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Explain the code</div>
+				<div class="text-3xl text-center mt-6">Handy command: <span class="italic">"Break it down"</span></div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Create the tests</div>
+				<div class="text-3xl text-center mt-6">Iterative process: general-to-specific</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Mock the data</div>
+				<div class="text-3xl text-center mt-6">Almost always the procedure looks identical:</div>:
+				<ol>
+					<li>A generation method is created</li>
+					<li>First few elements are created</li>
+					<li>All elements are created</li>
+				</ol>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Refactor the code</div>
+				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify" / "Correct"</s00pan></div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Find the bugs</div>
+				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify" / "Correct"</s00pan></div>
+			</section>
+	
+			<section data-background="media/shovel.png">
+			</section>
+
+			<section>
+				<ul>
+					<!-- Przygotowanie do pracy -->
+					<li>Creating mock data</li>
+					<li>Add unit tests</li>
+					<li>Code refactoring</li>
+					<li>Readme generating</li>
+					<li>Explaining code</li>
+					<li>Template generating</li>
+					<li>Script generating</li>
+				</ul>
+			</section>
+
+
+			<!-- comparison -->
+
+			<section>
+				Shovel:
+				Speed and efficiency
+				Here and now
+				Contextual support
+
+				Chisel:
+				Precision work
+				Unerstanding and context
+				Planning and preparation
+
+				Both are supplementary
+				Copilot $10
+				Chat-GPT Plus $20
+			</section>
+
+
+			<section>
+				Will AI take your job as developer?
+				No, but developer using AI will do.
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Basic Thread concepts</h2>
+			</section>
+			<section>
+				<h4>Some Terminology</h4>
+			</section>
+			<!-- Terminology -->
+			<section>
+				<div class="text-2xl text-left">
+					<img src="media/d2plots/1_process_model.svg">
+					<div class="relative">
+						<div class="flex absolute fragment fade-out">
+							<div class="w-1/2">
+								<p><strong>Thread</strong></p>
+								<ul>
+									<li>Smallest unit of execution</li>
+								</ul>
+								<!-- A thread is the smallest unit of CPU execution, a path of execution within a process. It runs code, maintains its own stack, and can create additional threads. -->
+								<p><strong>Task</strong></p>
+								<ul>
+									<li>Single unit of work performed by a thread</li>
+									<li>Often implemented as lambda expressions</li>
+								</ul>
+							</div>
+							<div class="w-1/2 ml-4">
+								<p><strong>Concurrency</strong></p>
+								<ul>
+									<li>Execution of multiple threads and processes simultaneously</li>
+								</ul>
+								<p><strong>Process</strong></p>
+								<ul>
+									<li>Group of associated threads</li>
+									<li>Execute in shared environment</li>
+								</ul>
+							</div>
+						</div>
+						<div class="flex fragment fade-in">
+							<div class="w-1/3">
+								<p><strong>Shared Environment</strong></p>
+								<ul>
+									<li>Threads in same process share memory space</li>
+									<li>Direct communication between threads</li>
+								</ul>
+							</div>
+							<div class="w-1/3">
+								<p><strong>Shared Memory</strong></p>
+								<ul>
+									<li>Includes static variables, instance and local variables</li>
+									<li>Enables direct communication between threads</li>
+								</ul>
+							</div>
+							<div class="w-1/3">
+								<p><strong>OS Thread Scheduler</strong></p>
+								<ul>
+									<li>Manages the execution of threads</li>
+									<li>Allocates CPU time to threads based on scheduling algorithms</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left -mt-40">
+					<div class="align-top">
+						<img src="media/round-robin-negate.png">
+					</div>
+					<div class="flex fragment fade-in">
+						<div class="w-1/3">
+							<p><strong>Thread Priority</strong></p>
+							<ul>
+								<li>Numeric value associated with each thread</li>
+								<li>Used by scheduler to determine execution order</li>
+								<li>In Java, specified as integer values</li>
+							</ul>
+						</div>
+						<div class="w-1/3">
+							<p><strong>Context Switch</strong></p>
+							<ul>
+								<li>Stores and restores thread's state for later execution</li>
+								<li>Associated with a performance cost</li>
+							</ul>
+						</div>
+						<div class="w-1/3">
+							<p><strong>Optimised Thread Scheduling</strong></p>
+							<ul>
+								<li>Goal to minimize context switches</li>
+								<li>Maintains smooth application running</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Introducing Threads!</h2>
+			</section>
+
+			<section data-auto-animate>
+				<h6>Creating a Thread</h6>
+				<pre data-id="code" class="language-java"><code data-trim>
+					@FunctionalInterface
+					public interface Runnable { 
+					  	void run();
+					}
+					</code></pre>
+				<div class="text-left text-2xl fragment fade-in">
+					<p><strong>To create a Thread in Java:</strong></p>
+					<ul>
+						<div data-id="text">
+							<li>Create a class that extends <code>Thread</code> and overrides the <code>run()</code> method</li>
+						</div>
+						<div>
+							<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code> constructor.
+							</li>
+						</div>
+						</li>
+						<li>Use Concurrency API</li>
+					</ul>
+				</div>
+
+			</section>
+
+			<section data-auto-animate>
+				<div class="text-2xl" data-id="text">
+					<ul>
+						<li>Create a class that extends <code>Thread</code> and overrides the <code>run()</code> method</li>
+					</ul>
+				</div>
+				<pre data-id="code"><code class="language-java" data-trim >
+					public class AnimalKeeper extends Thread {
+						@Override
+						public void run() {
+							System.out.println("Counting all the animals in the zoo");
+						}
+					}
+					</code></pre>
+				<div class="text-4xl">
+					<i class="fragment fade-in">Who even does that?</i>
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div class="text-2xl" data-id="text">
+					<ul>
+						<li>Provide a <code>Runnable</code> object or lambda expression to the <code>Thread</code>
+							constructor. </li>
+					</ul>
+				</div>
+				<pre data-id="code"><code class="language-java" data-trim >
+
+						new Thread(() -> System.out.print("Counting")).start();
+
+					</code></pre>
+				<div class="text-4xl">
+				</div>
+			</section>
+
+			<section data-auto-animate>
+				<div data-id="text" class="text-3xl">Let's work a bit!</div>
+				<pre data-id="code"><code class="language-java" data-trim >
+				Runnable countAnimals = () -> 
+					System.out.println("Counting all the animals in the zoo"); 
+				
+				Runnable printAnimalProfiles = () -> 
+					IntStream.rangeClosed(1, 3).forEach(i -> 
+						System.out.println("Printing profile of animal " + i)
+					);
+					</code></pre>
+			</section>
+
+			<section data-auto-animate>
+				<div data-id="text" class="text-3xl">Let's work a bit!</div>
+				<pre data-id="code"><code class="language-java" data-trim ="8-13">
+				Runnable countAnimals = () -> 
+					System.out.println("Counting all the animals in the zoo"); 
+					
+				Runnable printAnimalProfiles = () -> 
+					IntStream.rangeClosed(1, 3).forEach(i -> 
+						System.out.println("Printing profile of animal " + i)
+					);
+
+				System.out.println("Zoo day begins");  
+				new Thread(countAnimals).start(); 
+				new Thread(printAnimalProfiles).start(); 
+				new Thread(countAnimals).start(); 
+				System.out.println("Zoo day ends");
+					</code></pre>
+				<div class="text-3xl fragment fade-in">Overtime?</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<ul>
+						<li>Use Concurrency API</li>
+					</ul>
+					<p class="fragment fade-in italic">later!</p>
+				</div>
+			</section>
+
+			<!-- Thread Types -->
+			<section>
+				<h4>There is more about Threads!</h2>
+			</section>
+
+			<section>
+				<h6>Thread Types</h2>
+					<div class="flex text-2xl text-left">
+						<div class="w-1/3">
+							<p><strong>User-Defined Threads</strong></p>
+							<ul>
+								<li>Created by developers</li>
+								<li>Specific tasks</li>
+								<li>Example: `main()` method thread</li>
+							</ul>
+						</div>
+						<div class="w-1/3 ml-10">
+							<p><strong>System Threads</strong></p>
+							<ul>
+								<li>Created by JVM</li>
+								<li>Run in background</li>
+								<li>Example: Garbage collection</li>
+							</ul>
+						</div>
+						<div class="w-1/3">
+							<p><strong>Daemon Threads</strong></p>
+							<ul>
+								<li>JVM exits if only daemon threads are running</li>
+								<li>Example: Garbage collection</li>
+							</ul>
+						</div>
+					</div>
+			</section>
+
+			<section data-auto-animate>
+				<pre data-id="code"><code class="language-java" data-trim data-line-numbers>
+								public class Zookeeper {
+									public static void main(String[] unused) {
+										var feedingJob = new Thread(Zookeper::feedAnimals);
+										feedingJob.start();
+										System.out.println("Zoo is closing");
+									}
+							
+									@SneakyThrows
+									private static void feedAnimals() {
+										Thread.sleep(3_000);
+										System.out.println("All animals fed!");
+									}
+								}
+								</code></pre>
+			</section>
+
+			<section data-auto-animate>
+				<pre data-id="code"><code class="language-java" data-trim data-line-numbers="4">
+								public class EvilZookeeper {
+									public static void main(String[] unused) {
+										var feedingJob = new Thread(Zookeper::feedAnimals);
+										feedingJob.setDaemon(true);
+										feedingJob.start();
+										System.out.println("Zoo is closing");
+									}
+							
+									@SneakyThrows
+									private static void feedAnimals() {
+										Thread.sleep(3_000);
+										System.out.println("All animals fed!");
+									}
+								}
+								</code></pre>
+			</section>
+
+			<!-- Managing a Thread’s Life Cycle -->
+			<section>
+				<h3>Thread Life Cycle</h3>
+			</section>
+
+			<section>
+				<!-- <div class="flex text-2xl text-left"> -->
+				<div class="text-left">
+					<p>State <code>enum</code> in <code>java.lang.Thread</code>:</p>
+					<ul>
+						<li><code>NEW</code></li>
+						<li><code>RUNNABLE</code></li>
+						<li><code>BLOCKED</code></li>
+						<li><code>WAITING</code></li>
+						<li><code>TIMED_WAITING</code></li>
+						<li><code>TERMINATED</code></li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="-mx-40 -my-10">
+					<img src="./media/d2plots/2_thread_states.svg" class="r-stretch" />
+				</div>
+			</section>
+
+
+			<section>
+				<h4>Let's wait for million visitors now!</h4>
+			</section>
+
+			<section>
+				<div class="text-3xl my-6"><code>Thread.join()</code></div>
+				<ul class="text-2xl space-y-3">
+					<li>A method to ensure one thread completes its execution before another thread proceeds.</li>
+					<li><strong>Blocking Operation</strong> - The calling thread will be blocked until the joined thread
+						terminates.</li>
+					<li><strong>Sequential Execution</strong> - Ensures sequential execution of critical sections between multiple
+						threads.</li>
+					<li><strong>Use Cases</strong> - Commonly used for task dependencies, resource cleanup, or collecting results.
+					</li>
+					<li><strong>Exception Handling</strong> - Throws <code>InterruptedException</code> if the calling thread is
+						interrupted while waiting.</li>
+				</ul>
+			</section>
+
+			<section>
+				<div class="text-3xl italic m-6">It's task time!</div>
+				<div class="text-3xl font-bold m-6">Zoo Open/Close Announcement</div>
+				<ul class="text-2xl space-y-3">
+					<li>Create a Thread that will make an announcement that the zoo is opening</li>
+					<li>Create another Thread that will make an announcement that the zoo is closing</li>
+					<li>Invoke both threads</li>
+					<li>Make sure the opening announcement happens before the closing announcement</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Concurrency API</h2>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<ul class="space-y-4">
+						<li><strong>Thread Pool:</strong> A collection of pre-initialized threads, reusable for executing tasks.
+							Improves performance by reducing the overhead of thread creation and destruction.</li>
+						<li><strong>ExecutorService:</strong> An interface for managing a thread pool. Provides methods for task
+							scheduling and lifecycle management, like graceful shutdown.</li>
+						<li><strong>Executors:</strong> Utility class in Java that provides factory methods for creating different
+							types of Executor Services, such as single-threaded, fixed-size, and cached thread pools.</li>
+					</ul>
+					<div class="text-center text-3xl my-10 italic fragment fade-in">
+						<div>Executor Service manages a Thread Pool</div>
+						<div>Executors make it easy to create and configure an Executor Service</div>
+					</div>
+			</section>
+
+			<!-- https://www.baeldung.com/thread-pool-java-and-guava -->
+
+			<section data-auto-animate>
+				<div class="text-3xl" data-id="text">Let's rewrite earlier example</div>
+				<pre><code data-id="code" class="language-java" data-trim="">
+						Runnable countAnimals = () -> {}; //omitted
+						Runnable printAnimalProfiles = () -> {}; //omitted
+
+						ExecutorService service = Executors.newSingleThreadExecutor()
+						try {
+							  System.out.println("Zoo day begins");
+							  service.execute(countAnimals);
+							  service.execute(printAnimalProfiles);
+							  service.execute(countAnimals);
+							  System.out.println("Zoo day ends");
+						} finally {
+							  service.shutdown();
+						}
+					</code></pre>
+				<!-- Once you have finished using a thread executor, it is important that you call the shutdown() method. 
+					A thread executor creates a non-daemon thread on the first task that is executed, so failing to call 
+					shutdown() will result in your application never terminating. -->
+			</section>
+			</section>
+
+
+			<section data-auto-animate>
+				<div class="text-3xl" data-id="text">Or use try-with-resources</div>
+				<pre><code data-id="code" class="language-java" data-trim="">
+					Runnable countAnimals = () -> {}; //omitted
+					Runnable printAnimalProfiles = () -> {}; //omitted
+
+					try (ExecutorService service = 
+											Executors.newSingleThreadExecutor()) {
+						  System.out.println("Zoo day begins");
+						  service.execute(countAnimals);
+						  service.execute(printAnimalProfiles);
+						  service.execute(countAnimals);
+						  System.out.println("Zoo day ends");
+					}
+					</code></pre>
+				<!-- AutoCloseable interface -->
+			</section>
+
+
+
+			<section>
+				<div class="text-4xl font-semibold">ExecutorService life cycle</div>
+				<div>
+					<img src="./media/d2plots/3_ExecutorService_file_cycle.svg" class="r-stretch" />
+				</div>
+				<!-- be aware that shutdown() does not stop any tasks that have already been submitted to the thread executor -->
+			</section>
+
+
+
+			<section>
+				<div>
+					<div class="text-4xl" data-id="text">Meet the <code>Callable</code></div>
+					<pre data-id="code" class="language-java"><code data-trim><script type="text/template">
+					@FunctionalInterface
+					public interface Callable<V> {
+						V call() throws Exception;
+					}
+				</script></code></pre>
+				</div>
+			</section>
+
+
+			<section>
+				<div class="text-3xl" data-id="text">Executing tasks with <strong>ExecutorService</strong></div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim="" data-line-numbers="1-6|8-10|12-20"><script type="text/template">
+
+							void execute(Runnable command)
+							// Executes Runnable task at some point in future.
+							
+							Future<?> submit(Runnable task)
+							// Executes Runnable task at some point in future 
+							// and returns Future representing task.
+							
+							<T> Future<T> submit(Callable<T> task)
+							// Executes Callable task at some point in future 
+							// and returns Future representing pending results of task.
+							
+							<T> List<Future<T>> 
+									    invokeAll(Collection<? extends Callable<T>> tasks)
+							// Executes given tasks and waits for all tasks to 
+							// complete. Returns List of Future instances in same 
+							// order in which they were in original collection.
+							
+							<T> T invokeAny(Collection<? extends Callable<T>> tasks)
+							// Executes given tasks and waits for at least one to 
+							// complete.
+
+						</script></code></pre>
+				</div>
+			</section>
+
+
+			<section>
+				<div class="text-3xl" data-id="text">Waiting for <strong>Future</strong> results</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim="" data-line-numbers="1-7|9-12|14-22"><script type="text/template">
+
+						void isDone()
+						// Returns true if task was completed, threw an exception, 
+						// or was canceled.
+						
+						boolean isCancelled()
+						// Returns true if the task was canceled before it 
+						// completed normally.
+						
+						boolean cancel(boolean mayInterruptIfRunning)
+						// Attempts to cancel the execution of the task and returns
+						// true if it was successfully canceled or false if it 
+						// could not be canceled or is complete.
+						
+						V get()
+						// Retrieves the result of the task, waiting endlessly if 
+						// it is not yet available.
+						
+						V get(long timeout, TimeUnit unit)
+						// Retrieves the result of the task, waiting for the 
+						// specified amount of time. If the result is not ready by 
+						// the time the timeout is reached, a checked 
+						// TimeoutException will be thrown.
+						
+						</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+				<h4>Let's sell some tickets to zoo now!</h4>
+			</section>
+
+
+			<section>
+				<h3>Scheduling Tasks</h3>
+			</section>
+
+			<section>
+				<pre><code class="language-java" data-trim=""><script type="text/template">
+					ScheduledExecutorService service
+						= Executors.newSingleThreadScheduledExecutor();
+				</script></code></pre>
+				<div class="text-2xl text-left mx-20">
+					<ul class="space-y-2">
+						<li>Enables sheduling tasks</li>
+						<li>Subinterface of <code>ExecutorService</code> </li>
+						<li>
+							<div>All method return <code>ScheduledFuture</code> </div>
+							<div class="text-xl mx-10 my-2 italic"><code>Future</code> subinterface implementing <code>Delayed</code>
+							</div>
+
+						</li>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Scheduling tasks with <strong>ScheduledExecutorService</strong></div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="1-7|9-13|15-20"><script type="text/template">
+
+						schedule(Callable<V> callable, long delay, TimeUnit unit)
+						// Creates and executes a Callable task after the given 
+						// delay.
+						
+						schedule(Runnable command, long delay, TimeUnit unit)
+						// Creates and executes a Runnable task after the given
+						// delay.
+						
+						scheduleAtFixedRate(Runnable command, long initialDelay, 
+																long period, TimeUnit unit)
+						// Creates and executes a Runnable task after the given 
+						// initial delay, creating a new task every period value 
+						// that passes.
+						
+						scheduleWithFixedDelay(Runnable command, long initialDelay, 
+																	 long delay, TimeUnit unit)
+						// Creates and executes a Runnable task after the given 
+						// initial delay and subsequently with the given delay 
+						// between the termination of one execution and the 
+						// beginning of the next.
+						</script></code></pre>
+				</div>
+				<!-- These methods are among the most convenient in the Concurrency API, as they perform relatively complex tasks with a single line of code. -->
+
+			</section>
+
+			<section>
+				<img src="./media/ScheduledExecutorService.jpg" class="r-stretch" />
+			</section>
+
+			<section>
+				<h4>Okay, but where is concurrency?</h4>
+			</section>
+
+			<section>
+				<h3>Thread Pools</h3>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text"><strong>Executors</strong> factory methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="|5-8|10-16"><script type="text/template">
+
+						ExecutorService newSingleThreadExecutor()
+
+						ScheduledExecutorService newSingleThreadScheduledExecutor()
+						
+						ExecutorService newCachedThreadPool()
+						// Creates a thread pool that creates new threads as needed
+						// but reuses previously constructed threads when they are 
+						// available.
+						
+						ExecutorService newFixedThreadPool(int nThreads)
+						// Creates a thread pool that reuses a fixed number of 
+						// threads operating off a shared unbounded queue.
+						
+						ScheduledExecutorService newScheduledThreadPool(
+																											int nThreads)
+						// Creates a thread pool that can schedule commands to 
+						// run after a given delay or execute periodically.
+					</script></code></pre>
+				</div>
+				<!-- there is no hard limit to the number of threads it can spawn; it will keep creating new threads as long as tasks keep getting submitted and existing threads are occupied. However, unused threads will be terminated and removed from the cache if they remain idle for 60 seconds. -->
+			</section>
+
+			<section>
+				<h2>Thread safety</h2>
+			</section>
+
+			<section>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="|2|4-6|8-18"><script type="text/template">
+						public class MonkeyKeeper {
+							private static int monkeyCount;
+					
+							private static void incrementAndReport() {
+								System.out.print(++monkeyCount + " ");
+							}
+						
+							public static void main(String[] args) {
+								try (ExecutorService monkeyKeepers =
+																	Executors.newFixedThreadPool(10)) {
+									IntStream
+										.range(0, 10)
+										.forEach(i -> service.submit(
+																		MonkeyKeeper::incrementAndReport));
+								}
+							}
+						}
+					
+					</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">possible outcomes</div>
+				<div class="flex justify-center">
+					<div class="w-2/5">
+						<pre><code data-id="code" class="language-java" data-trim ><script type="text/template">
+						1 2 3 4 5 6 7 8 9 10 
+						1 8 7 3 2 6 5 4 10 9
+						1 9 8 7 3 6 6 2 4 5
+					</script></code></pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">What happened there?</div>
+				<div class="flex justify-center">
+					<img src="./media/lack-of-synchronization.drawio.svg" class="w-4/6" />
+				</div>
+			</section>
+
+			<!-- https://www.geeksforgeeks.org/volatile-keyword-in-java/ -->
+
+			<section>
+				<div class="space-y-4">
+					<div class="text-2xl">Also... </div>
+					<div class="text-3xl">Changes made to static <code>monkeyCount</code> in one thread </div>
+					<div class="text-3xl">may not immediately be visible to another thread</div>
+					<div class="text-3xl fragment fade-in">How to ensure its visibility?</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl my-5" data-id="text"><strong>volatile</strong> keyword</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class MonkeyKeeper {
+						private volatile static int monkeyCount;
+						//...
+					}
+				</script></code></pre>
+				<div class="text-3xl fragment fade-in">This won't work...</div>
+				<!-- https://www.geeksforgeeks.org/volatile-keyword-in-java/ -->
+			</section>
+
+			<section>
+				<div class="text-3xl my-5" data-id="text"><code>volatile</code> provides:</div>
+				<div class="flex justify-center">
+					<div class="text-2xl text-left w-2/3">
+						<div class="">1. <strong>Visibility</strong>: Every read of that field is read directly from the main
+							memory.
+						</div>
+						<div class="">2. <strong>Ordering</strong>: Every write to the field will be written/flushed directly to the
+							main memory ("happens-before" relationship)</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">typical <code>volatile</code> usage</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class SharedResource {
+						private volatile boolean flag = false;
+				
+						public void turnOn() {
+								flag = true;
+						}
+				
+						public void checkStatus() {
+								if (flag) {
+										// Do something...
+								}
+						}
+					}
+				</script></code></pre>
+				<div class="text-xl">
+					<div class="fragment fade-in">One thread is calling the <code>turnOn()</code> method and another thread
+						is calling <code>checkStatus()</code>
+					</div>
+					<div class="fragment fade-in">The second thread is guaranteed to see the updated value of <code>flag</code> if
+						it checks after the first thread has called <code>turnOn()</code>.
+					</div>
+			</section>
+
+
+			<section>
+				<div class="space-y-4">
+					<div class="text-2xl">Let's come back to the monkeys</div>
+					<div class="text-4xl fragment fade-in">How to fix it?</div>
+				</div>
+			</section>
+
+			<!--  ATOMIC CLASSES -->
+			<section>
+				<h3>Atomic classes</h3>
+			</section>
+
+
+			<section>
+				<ul class="text-2xl space-y-4">
+					<li><strong>Atomic</strong> is the property of an operation to be carried out as a single unit of execution
+						without any interference from another thread</li>
+					<li>Atomic classes provide a way to perform atomic operations on a single variable without using synchronized
+						blocks.</li>
+					<li>Part of the <code>java.util.concurrent.atomic</code></li>
+				</ul>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Atomic operations</div>
+				<div class="flex justify-center">
+					<img src="./media/atomic-operation.drawio.svg" class="w-4/6" />
+				</div>
+			</section>
+
+			<section>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class MonkeyKeeper {
+						private AtomicInteger monkeyCount = new AtomicInteger(0)
+
+						private void incrementAndReport() {
+							System.out.print(monkeyCount.incrementAndGet()+" ");
+						}
+						//...
+					}
+				</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-2xl">Other atomic classes</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					AtomicInteger counter = new AtomicInteger(0);
+
+					AtomicLong counter = new AtomicLong(0L);
+
+					AtomicBoolean flag = new AtomicBoolean(false);
+					
+					AtomicReference<String> string = new AtomicReference<>("");
+	
+				</script></code></pre>
+				<div class="fragment fade-in">
+					<div class="text-xl my-5">+ array versions:</div>
+					<pre><code class="language-java" data-trim >
+				AtomicIntegerArray, AtomicLongArray, AtomicReferenceArray
+				</code></pre>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Common atomic methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers="1-9|11-22"><script type="text/template">
+				get()
+				// Retrieves the current value.
+
+				set(type newValue)
+				// Sets the given value, 
+
+				getAndSet(type newValue)
+				//  sets a new value and returns the old value
+
+				// For numeric classes only:
+				incrementAndGet()
+				// equivalent to ++value
+
+				getAndIncrement()
+				// equivalent to value++
+
+				decrementAndGet()
+				// equivalent to --value
+
+				getAndDecrement()
+				// equivalent to value--
+			</script></code></pre>
+				</div>
+			</section>
+
+
+			<!--  LONGADDER -->
+			<section>
+				<div class="text-5xl font-bold" data-id="text">AtomicLong vs LongAdder</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">LongAdder methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim><script type="text/template">
+						void add(long x) // Adds the given value.
+						
+						void decrement() // Equivalent to add(-1).
+
+						void increment() // Equivalent to add(1).
+
+						void reset() // Resets variables maintaining the sum to zero.
+						
+						long sum() // Returns the current sum.
+						
+						long sumThenReset()
+						// Equivalent in effect to sum() followed by reset().
+						
+			</script></code></pre>
+				</div>
+			</section>
+
+
+			<section>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Criteria</th>
+							<th>AtomicLong</th>
+							<th>LongAdder</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Backing up structure</td>
+							<td>
+								<div class="text-center">long</div>
+							</td>
+							<td>
+								<div class="text-center">Cell[]</div>
+							</td>
+						</tr>
+						<tr class="fragment highlight-red">
+							<td>Atomic Operations</td>
+							<td>
+								<div class="text-center">CAS</div>
+							</td>
+							<td>
+								<div class="text-center">Striping</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Memory Footprint</td>
+							<td>
+								<div class="text-center">⬇</div>
+							</td>
+							<td>
+								<div class="text-center">⬆</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Contention</td>
+							<td>
+								<div class="text-center">⬆</div>
+							</td>
+							<td>
+								<div class="text-center">⬇</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Functionalities</td>
+							<td>
+								<div class="text-center">⬆</div>
+							</td>
+							<td>
+								<div class="text-center">⬇</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Consistency</td>
+							<td>
+								<div class="text-center">Immediate</div>
+							</td>
+							<td>
+								<div class="text-center">Eventual</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6" data-id="text">Compare-and-Swap (CAS)</div>
+				<div class="text-2xl -mb-2" data-id="text">Conceptual view how it works:</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public boolean compareAndSwap(int expectedValue, int newValue) {
+						if (currentValue == expectedValue) {
+							currentValue = newValue;
+							return true;
+						}
+						return false;
+					}
+				</script></code></pre>
+			</section>
+
+			<section data-auto-animate>
+				<div class="text-2xl -m-4" data-id="text">Implementing an increment using CAS:</div>
+
+				<div class="flex justify-center">
+					<div class="w-3/4">
+						<pre><code class="language-java" data-id="code" data-trim ><script type="text/template">
+						int temp = currentValue
+						int newValue = temp + 1;
+					currentValue = newValue;
+						</script></code></pre>
+					</div>
+				</div>
+			</section>
+
+
+			<section data-auto-animate>
+				<div class="text-2xl -m-4" data-id="text">Implementing an increment using CAS:</div>
+
+				<div class="flex justify-center">
+					<div class="w-3/4">
+						<pre><code class="language-java" data-id="code" data-trim ><script type="text/template">
+							do {
+								int temp = currentValue;
+								int newValue = temp + 1;
+							} while (!compareAndSwap(temp, newValue)); 
+							// Keep trying until successful
+						</script></code></pre>
+					</div>
+				</div>
+				<div class="text-2xl fragment fade-in">Atomic classes use CAS operations underneath to perform operations</div>
+			</section>
+
+			<section>
+				<div class="m-4 font-bold">STRIPING</div>
+				<div class="text-2xl text-left">
+					<ul class="space-y-2">
+						<li class="fragment fade-in">Use array of states to distribute the contention to different memory locations
+						</li>
+						<li class="fragment fade-in">JVM may allocate those states near each other in the heap, resulting in few
+							states can reside in the same CPI cache line (64B)</li>
+						<li class="fragment fade-in">This results in <em>False Sharing</em> degrading the performance</li>
+						<li class="fragment fade-in">Solution is to add a padding between the states (to 64B)</li>
+						<li class="fragment fade-in"><code>Cell</code> is effectively a padded <code>AtomicLong</code></li>
+						<li class="fragment fade-in">Above implementation is in the abstract class <a
+								href="https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/concurrent/atomic/Striped64.java">Striped64</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+
+			<!--  SYNCHRONIZATION -->
+			<section>
+				<h3>Synchronization</h3>
+			</section>
+
+			<section>
+				<div class="flex justify-center text-2xl text-left">
+					<ul class="space-y-2 w-5/6">
+						<li>The <em>monitor</em> (or lock) is used to synchronize an access</li>
+						<li>Each object in Java may act as a monitor and provide a <em>mutual exclusion</em></li>
+						<li>It is a property that at most one thread is executing a particular segment of code at a given time.</li>
+						<li class="fragment fade-in"><code>wait(), notify(), notifyAll()</code>: These methods, defined in Object,
+							allow threads to wait and wake up</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Common atomic methods</div>
+
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class MonkeyKeeper {
+
+						private static final Object cage = new Object(); // monitor
+						private static int monkeyCount;
+
+						private void incrementAndReport() {
+							synchronized (cage) {
+								System.out.print(++monkeyCount + " ");
+							}
+						}
+						//...
+					}
+				</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on static methods</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					Class ZooOperations {
+						private static synchronized void openGates() {
+								// Open all gates in the zoo
+						}
+					}
+				</script></code></pre>
+				<div class="text-2xl">equivalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					Class ZooOperations {
+						private static void openGates() {
+							synchronized(ZooOperations.class) {
+								// Open all gates in the zoo
+							}
+						}
+					}
+				</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on instance methods</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class LionEnclosure {
+						private synchronized void ensureSafety() {
+							// Ensure all lions are in their cages
+						}
+					}
+				</script></code></pre>
+				<div class="text-2xl">equivalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+					public class LionEnclosure {
+						private void ensureSafety() {
+							synchronized(this) {
+								// Ensure all lions are in their cages
+							}
+						}
+					}
+				</script></code></pre>
+			</section>
+
+			<section data-auto-animate="">
+				<div class="text-3xl font-bold" data-id="text">Double-checked locking optimization</div>
+				<pre class="fragment fade-in"><code class="language-java" data-id="text" data-trim data-line-numbers ><script type="text/template">
+					public class Singleton {
+						private static Singleton instance;
+				
+						private Singleton() { }
+				
+						public static Singleton getInstance() {
+							if (instance == null) {            // First Check
+								synchronized (Singleton.class) { // Synchronization
+									if (instance == null) {        // Second Check
+										instance = new Singleton();
+									}
+								}
+							}
+							return instance;
+						}
+				  }
+				</script></code></pre>
+				<div class="fragment fade-in text-2xl italic">But don't use double-locked singletons</div>
+				<div class="fragment fade-in text-xl">Use Bill Pugh (Lazy) or enum (Eager) singletons insteads</div>
+			</section>
+
+			<!-- LOCK FRAMEWORK  -->
+
+			<section>
+				<h4>Lock framework</h4>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<ul class="space-y-2">
+						<li>The <strong>Lock</strong> interface is the answer to limited functionality to the synchronized blocks.
+						</li>
+						<li>Conceptually is similar to synchronized keyword, but with a lot more bells and whistles.</li>
+						<li>A “lock” can be obtained on any object that implements the Lock interface (vs. any Object with
+							synchronized)</li>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text">Synchronization on instance methods</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+						Object object = new Object(); 
+						synchronized(object) {
+							// Protected code
+						}
+					</script></code></pre>
+				<div class="text-2xl">equivalent⭥</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+						Lock lock = new ReentrantLock();
+						try {
+							lock.lock();
+							// Protected code
+						} finally {
+							lock.unlock();
+						}
+					</script></code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl" data-id="text"><strong>Lock</strong> methods</div>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers><script type="text/template">
+						void lock()
+						// Requests lock and blocks until the lock is acquired.
+						
+						void unlock()
+						// Releases the lock.
+						
+						boolean tryLock()
+						// Requests lock and returns immediately. Returns a boolean
+						// indicating whether the lock was successfully acquired.
+						
+						boolean tryLock(long timeout, TimeUnit unit)
+						// Requests lock and blocks for the specified time or until
+						// the lock is acquired. Returns a boolean indicating 
+						// whether the lock was successfully acquired.						
+			</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+				<div>
+					<pre><code data-id="code" class="language-java" data-trim data-line-numbers><script type="text/template">
+						Lock gateLock = new ReentrantLock();		
+						if (gateLock.tryLock()) {
+							try {
+								lock.lock();
+								System.out.println("Gate locked, safely 
+																		feeding the lions.");
+							} finally {
+								gateLock.unlock();
+							}
+						} else {
+							System.out.println("Unable to lock the gate, 
+																	switching to feeding the ducks.");
+						}				
+			</script></code></pre>
+					<div class="text-3xl fragment fade-in">Can you spot a mistake?</div>
+					<div class="m-4 text-2xl fragment fade-in italic">It is critical to release a lock the same number of times it
+						was acquired!</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6">ReentrantReadWriteLock</div>
+				<div class="text-2xl text-left fragment fade-in">
+					<ul class="space-y-2">
+						<li>It includes separate locks for reading and writing data</li>
+						<li>Useful on data structures where reads are far more common than writes</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl italic m-6">It's task time!</div>
+				<div class="text-3xl font-bold m-6">Feeding the Animals pt. 2</div>
+				<ul class="text-2xl space-y-3">
+					<li>Create threads that represent different animals (Lion, Elephant, and so on).</li>
+					<li>Create a bowl which will be used by animals to eat.</li>
+					<li>Make sure that only one animal can eat from a shared food bowl at a time.</li>
+					<li>Make sure all animals ate before their respective threads exit.</li>
+					<li class="text-xl italic fragment fade-in">(Optional) Introduce a ZooKeeper thread that refills the food bowl
+						after a fixed number of animal meals. Ensure it refills the bowl only after it has been emptied.</li>
+				</ul>
+			</section>
+
+
+			<!--  CyclicBarrier -->
+			<section>
+				<div class="text-3xl font-bold">It's time to clean up the lions cages</div>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6">CyclicBarrier</div>
+				<div class="text-2xl text-left">
+					<ul class="space-y-2">
+						<li>A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier
+							point. </li>
+						<li>Useful in programs involving a fixed sized party of threads that must occasionally wait for each other.
+						</li>
+						<li>The barrier is called cyclic because it can be re-used after the waiting threads are released.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold m-6">CountDownLatch</div>
+				<div class="text-2xl text-left">
+					<ul class="space-y-2">
+						<li>A synchronization aid that allows one or more threads to wait until a set of operations being performed
+							in other threads completes.</li>
+						<li>Useful in scenarios where you need to wait for certain prerequisites to be completed before moving on.
+						</li>
+						<li>Unlike CyclicBarrier, CountDownLatch cannot be reset and reused; once the count reaches zero, it remains
+							zero.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl font-bold m-6">Other synchronization aid classes</div>
+				<table class="text-xl">
+					<tr>
+						<th class="w-1/6">Class</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>
+							<div class="font-mono text-2xl">Phaser</div>
+						</td>
+						<td>Similar to <code>CyclicBarrier</code> and <code>CountDownLatch</code> but more flexible. It allows
+							dynamic addition and
+							removal of threads that require synchronization.</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="font-mono text-2xl">Semaphore</div>
+						</td>
+						<td>Controls access to a shared resource by maintaining a set of permits, allowing or blocking thread access
+							based on the availability of these permits.</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="font-mono text-2xl">Exchanger</div>
+						</td>
+						<td>Allows two threads to exchange objects at a synchronization point. Useful in genetic algorithms,
+							pipeline designs, etc.</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="font-mono text-2xl">ForkJoinPool RecursiveTask/RecursiveAction</div>
+						</td>
+						<td>Provides a framework for parallel execution and is designed for work that can be broken into smaller
+							pieces recursively</td>
+
+						<!-- if (my portion of the work is small enough)
+										do the work directly
+									else
+										split my work into two pieces
+										invoke the two pieces and wait for the results -->
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<div class="text-3xl italic m-6">It's task time!</div>
+				<div class="text-3xl font-bold m-6">Feeding the Animals</div>
+				<ul class="text-2xl space-y-3">
+					<li>Create threads that represent different animals (Lion, Elephant, and so on).</li>
+					<li>Each animal waits for a specific amount of time (simulate this with Thread.sleep()) before it needs to
+						eat.</li>
+					<li>Create another thread representing a Zookeeper who goes around feeding the animals (it should be
+						initialized before the animals)</li>
+					<li>Make sure all animals have been fed before the Zookeeper's thread exits.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Concurrent Collections</h3>
+			</section>
+
+			<section>
+				<div class="text-2xl">What is the result?</div>
+				<pre><code class="language-java" data-trim ><script type="text/template">
+						var monkeyCount = new HashMap<String, Integer>();
+						monkeyCount.put("long-nosed", 1);
+						monkeyCount.put("capuchin", 2);
+						for (String monkey : monkeyCount.keySet()){
+								monkeyCount.remove(monkey);
+						}
+					</script></code></pre>
+				<div class="text-2xl fragment fade-in red"><code>ConcurrentModificationException</code></div>
+			</section>
+
+
+			<section>
+				<table class="text-xl">
+					<thead>
+						<tr>
+							<th>Class name</th>
+							<th>Java Collections interfaces</th>
+							<th>Sorted?</th>
+							<th>Blocking?</th>
+						</tr>
+					</thead>
+					<tbody class="code-row center">
+						<tr>
+							<td>ConcurrentHashMap</td>
+							<td>Map, ConcurrentMap</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>ConcurrentLinkedQueue</td>
+							<td>Queue</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>ConcurrentSkipListMap</td>
+							<td>Map, SortedMap, NavigableMap, ConcurrentMap, ConcurrentNavigableMap</td>
+							<td>✓</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>ConcurrentSkipListSet</td>
+							<td>Set, SortedSet, NavigableSet</td>
+							<td>✓</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>CopyOnWriteArrayList</td>
+							<td>List</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>CopyOnWriteArraySet</td>
+							<td>Set</td>
+							<td>✗</td>
+							<td>✗</td>
+						</tr>
+						<tr>
+							<td>LinkedBlockingQueue</td>
+							<td>Queue, BlockingQueue</td>
+							<td>✗</td>
+							<td>✓</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<div class="text-2xl m-4" data-id="text"><code>Collections</code> synchronized factory methods</div>
+				<table class="text-2xl code-row">
+					<tbody>
+						<tr>
+							<td>synchronizedCollection(Collection&lt;T&gt; c)</td>
+						</tr>
+						<tr>
+							<td>synchronizedList(List&lt;T&gt; list)</td>
+						</tr>
+						<tr>
+							<td>synchronizedMap(Map&lt;K,V&gt; m)</td>
+						</tr>
+						<tr>
+							<td>synchronizedNavigableMap(NavigableMap&lt;K,V&gt; m)</td>
+						</tr>
+						<tr>
+							<td>synchronizedNavigableSet(NavigableSet&lt;T&gt; s)</td>
+						</tr>
+						<tr>
+							<td>synchronizedSet(Set&lt;T&gt; s)</td>
+						</tr>
+						<tr>
+							<td>synchronizedSortedMap(SortedMap&lt;K,V&gt; m)</td>
+						</tr>
+						<tr>
+							<td>synchronizedSortedSet(SortedSet&lt;T&gt; s)</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h2>Parallel Streams</h2>
+			</section>
+
+			<section>
+				<div class="text-3xl m-4" data-id="text">Concurrent stream consists of:</div>
+				<table class="text-3xl">
+					<tr>
+						<td>1. Parallel decomposition</td>
+						<td>The process of taking a task, breaking it into smaller pieces that can be performed concurrently</td>
+					</tr>
+					<tr>
+						<td>2. Parallel reduction</td>
+						<td>Reassembling the results of a parallel decomposition</td>
+					</tr>
+				</table>
+
+			</section>
+			<section>
+				<div>
+					<div class="text-3xl m-4" data-id="text">Parallel Decomposition</div>
+					<pre><code class="language-java" data-trim ><script type="text/template">
+						List.of(1,2,3)
+									.stream()
+									.parallel()
+									// ...
+					</script></code></pre>
+					<div class="text-2xl">equivalent⭥</div>
+					<pre><code class="language-java" data-trim ><script type="text/template">
+						List.of(1,2,3)
+									.parallelStream()
+									// ...
+					</script></code></pre>
+				</div>
+			</section>
+			<!-- In a sequential stream, elements are processed one by one, so peek sees each element before skip is applied. That's straightforward.
+
+In a parallel stream, however, what often happens is that skip is applied earlier to reduce the amount of work that needs to be done in parallel. This early application of skip means that peek may not see all the elements you expect. This is a sort of optimization, and it's a characteristic of how parallel streams work in Java. -->
+
+			<section>
+				<div class="flex justify-center">
+					<div class="w-4/6 text-left text-3xl space-y-4">
+						<div class="text-4xl text-center m-4">Beware of the bottlenecks!</div>
+						<ul class="space-y-4">
+							<li><code>findFirst()</code></li>
+							<li><code>limit()</code></li>
+							<li><code>skip()</code></li>
+						</ul>
+						<div class="text-3xl">These operations force synchronization</div>
+					</div>
+				</div>
+				<!-- demo time.  -->
+			</section>
+
+			<section>
+				<div>
+					<div class="text-4xl m-4">Parallel Reduction</div>
+
+					<pre><code class="language-java" data-trim ><script type="text/template">
+						<U> U reduce(U identity,
+												 BiFunction<U,? super T,U> accumulator,
+								         BinaryOperator<U> combiner)
+	
+					</script></code></pre>
+				</div>
+			</section>
+
+			<section>
+				<div>
+					<div class="text-4xl m-4">Parallel Reduction with <code>Collector</code></div>
+				</div>
+				<div class="fragment fade-in text-2xl">
+					<div class="text-1xl text-left m-4">Requirements for a reduction with <code>Collector</code> to be concurrent:
+					</div>
+					<ol>
+						<li>The stream is parallel</li>
+						<li class="fragment fade-in">The parameter of the <code>collect()</code> operation has the
+							<code>CONCURRENT</code> characteristic
+						</li>
+						<li class="fragment fade-in">Either the stream is unordered or the collector has the characteristic
+							<code>UNORDERED</code>
+						</li>
+					</ol>
+				</div>
+				<div class="fragment fade-in text-xl italic m-6">Unless JVM decides otherwise...</div>
+			</section>
+
+			<section>
+				<div>
+					<div class="text-2xl m-4" data-id="text">Concurrent <code>Collectors</code> factory methods</div>
+					<table class="text-xl code-row">
+						<tr>
+							<td>Collectors.<span class="text-green-500">toConcurrentMap</span>(keyMapper, valueMapper);</td>
+						</tr>
+						<tr>
+							<td>Collectors.toConcurrentMap(keyMapper, valueMapper, mergeFunction);</td>
+						</tr>
+						<tr>
+							<td>Collectors.toConcurrentMap(keyMapper, valueMapper, mergeFunction, mapFactory);</td>
+						</tr>
+						<tr>
+							<td>Collectors.<span class="text-green-500">groupingByConcurrent</span>(classifier);</td>
+						</tr>
+						<tr>
+							<td>Collectors.groupingByConcurrent(classifier, downstream);</td>
+						</tr>
+						<tr>
+							<td>Collectors.groupingByConcurrent(classifier, mapFactory, downstream);</td>
+						</tr>
+					</table>
+
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl font-bold">Use parallel streams only when performance gain has been measured!</div>
+
+			</section>
+			<section>
+				<h4>Concurrency Problems</h4>
+			</section>
+
+			<section>
+				<div class="space-y-4">
+					<div class="text-2xl">But first let's feed the foxes!</div>
+				</div>
+				<!-- 
+Deadlock
+Deadlock occurs when two or more threads are blocked forever, each waiting on the other. We can illustrate this principle with the following example. Imagine that our zoo has two foxes: Foxy and Tails. Foxy likes to eat first and then drink water, while Tails likes to drink water first and then eat. Furthermore, neither animal likes to share, and they will finish their meal only if they have exclusive access to both food and water. The zookeeper places the food on one side of the environment and the water on the other side. Although our foxes are fast, it still takes them 100 milliseconds to run from one side of the environment to the other.
+What happens if Foxy gets the food first and Tails gets the water first? The following application models this behavior:-->
+			</section>
+
+
+			<!-- Deadlock -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Deadlock</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Threads wait indefinitely for a set of locks.</li>
+						<li>Each thread holds one lock and waits for another.</li>
+						<li>Results in a cycle where no thread can proceed.</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- Live Lock -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Livelock</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Threads are not blocked but can't make progress.</li>
+						<li>Too busy responding to each other to resume work.</li>
+						<li>"Conceptually" blocked</li>
+					</ul>
+				</div>
+				<!-- If Foxy and Tails continue this process forever, it is referred to as livelock. Both Foxy and Tails are active, running back and forth across their area, but neither can finish their meal. Foxy and Tails are executing a form of failed deadlock recovery. Each fox notices that they are potentially entering a deadlock state and responds by releasing all of its locked resources. Unfortunately, the lock and unlock process is cyclical, and the two foxes are conceptually deadlocked. -->
+			</section>
+
+			<!-- Starvation -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Starvation</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Thread unable to gain regular access to shared resources.</li>
+						<li>Cannot make progress due to "greedy" threads.</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- Race Conditions -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold">Race Conditions</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Program's behavior depends on the relative timing of events.</li>
+						<li>When two tasks that should be completed sequentially are completed at the same time.</li>
+						<li>Leads to inconsistent and unpredictable results.</li>
+					</ul>
+				</div>
+			</section>
+
+			<!-- Memory Consistency Errors -->
+			<section>
+				<div>
+					<div class="text-4xl m-6 font-bold"">Memory Consistency Errors</div>
+		<ul class=" space-y-2 text-2xl">
+						<li>Different threads have inconsistent views of shared memory.</li>
+						<li>Common in systems with extensive data caching.</li>
+						</ul>
+					</div>
+			</section>
+
+			<section data-background="./media/threaded-elephant.png">
+
+				<h1 class="r-fit-text">THE END</h2>
+			</section>
+
+			<script src="dist/reveal.js"></script>
+			<script src="plugin/notes/notes.js"></script>
+			<script src="plugin/markdown/markdown.js"></script>
+			<script src="plugin/highlight/highlight.js"></script>
+			<script>
+				// More info about initialization & config:
+				// - https://revealjs.com/initialization/
+				// - https://revealjs.com/config/
+				Reveal.initialize({
+					hash: true,
+					// Learn about plugins: https://revealjs.com/plugins/
+					plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+					margin: 0.15,
+					minScale: 0.2,
+					maxScale: 2.0
+				});
+			</script>
+</body>
+
 </html>
