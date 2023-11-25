@@ -64,14 +64,13 @@
 			</section>
 
 			<section>
-				<h2 class="r-fit-text">Let's check first!</h2>
+				<h2 class="r-fit-text">But let's count first!</h2>
 			</section>
 
 			<section data-background="media/chisel2.png">
 				<!-- Tutaj powiedziec o GPT-3 vs GPT-4 -->
 				<div class="text-4xl font-bold text-white shadow-outline">Chat-GPT4</div>
 			</section>
-
 
 			<section>
 				<h2 class="r-fit-text">Sharpen your tool before the work</h2>
@@ -82,7 +81,7 @@
 					<div class="text-center text-5xl">Be aware of the context!</div>
 					<div class="text-center font-bold text-7xl">~8,192 tokens</div>
 					<div class="text-center text-4xl">3000-4000 words</div>
-					<a href="https://platform.openai.com/tokenizer" target="_blank" class="text-2xl">Count the tokes here</a>
+					<a href="https://platform.openai.com/tokenizer" target="_blank" class="text-2xl">platform.openai.com/tokenizer</a>
 				</div>
 			</section>
 
@@ -161,8 +160,9 @@
 				</div>
 			</section>
 
-			<section>
-				<h2 class="r-fit-text">Support use cases</h2>
+			<section data-background="media/chisel_work.png">
+				<div class="">
+				<h2 class="r-fit-text">Concrete use cases</h2></div>
 			</section>
 
 			<section>
@@ -193,62 +193,134 @@
 
 			<section>
 				<div class="text-3xl text-center font-bold mb-6">Example of arbitrary modelled input</div>
-				<pre data-id="code"><code class="language-yml" data-trim >
-					waybillId: String
-					carrier: DPD/UPS/POCZTA_POLSKA/INPOST/ALLEGRO/SUUS/PACKETA/DHL/X_PRESS_COURIERS/WEDO
-					transportingCarrierId: String # nullable
-					buyerId: String
-					timestamp: Instant
-					serviceType: String
-					isFulfilment: Boolean
-					waybillType: OPERATIONAL_RETURN / REGULAR / REDIRECT
-					tags: [String]
-					deliveryId: String
-					currency: Currency
-					isFreeDeliveryFromSeller: Boolean
-					orders:
-						- orderId: String
-							value: BigDecimal
-							currency: Currency
-							isSmart: Boolean
-							sellerId: String
-							fee:
-								debit:
-									id: UUID
-									createdAt: Instant
-									status: String
-								refund: #nullable
-									id: UUID
-									createdAt: Instant
-									status: String
-								partialFee: BigDecimal # nullable - filled only for combined orders
-					terminalStatus: #nullable
-						name: String
-						receivedAt: Instant
-					pricing: #nullable
-						priceListId: UUID
-						pricingEntryId: UUID
-						billingCode: String # nullable
-						actualVariant: SMART/REGULAR/FULFILMENT
-						vatRate: Int
-						amount: BigDecimal
+				<pre data-id="code"><code class="language-yml" data-trim data-line-numbers="">
+					matchId: UUID
+					teams: 
+						- teamType: HOME_TEAM/AWAY_TEAM
+							name: String
+							players:
+								- name: String
+									position: String
+									jerseyNumber: Int
+					stadium: String
+					kickOffTime: Instant
+					matchType: LEAGUE/CUP/FRIENDLY/INTERNATIONAL # nullable
+					score:
+						homeTeamScore: Int
+						awayTeamScore: Int
+					extraTime: # nullable
+						firstHalfExtraTime: Int 
+						secondHalfExtraTime: Int
+					events:
+						- minute: Int
+							team: HOME_TEAM/AWAY_TEAM
+							type: String
+							player: String
+							description: String					
 					</code></pre>
 			</section>
 
 			<section>
-				<div class="text-2xl text-left">
-					<div class="text-3xl text-center font-bold mb-6">Markdown tables</div>
+				<div class="text-3xl text-center font-bold mb-6">Result of <span class="italic text-green-300">Make Kotlin
+						classes</span>:</div>
+				<pre>
+					<code class="language-kotlin" data-id="id" data-trim data-line-numbers >
+						<script type="text/template">
+								import java.time.Instant
+								import java.util.UUID
+
+								enum class TeamType {
+										HOME_TEAM, AWAY_TEAM
+								}
+
+								enum class MatchType {
+										LEAGUE, CUP, FRIENDLY, INTERNATIONAL
+								}
+
+								data class FootballMatch(
+									val matchId: UUID,
+									val teams: List<Team>,
+									val stadium: String,
+									val kickOffTime: Instant,
+									val matchType: MatchType?,
+									val score: Score,
+									val extraTime: ExtraTime?,
+									val events: List<Event>
+								)
+
+								data class Team(
+									val teamType: TeamType,
+									val name: String,
+									val players: List<Player>
+							)
+
+								data class Player(
+										val name: String,
+										val position: String,
+										val jerseyNumber: Int
+								)
+
+								data class Score(
+										val homeTeamScore: Int,
+										val awayTeamScore: Int
+								)
+
+								data class ExtraTime(
+										val firstHalfExtraTime: Int,
+										val secondHalfExtraTime: Int
+								)
+
+								data class Event(
+										val minute: Int,
+										val team: TeamType,
+										val type: String,
+										val player: String,
+										val description: String
+								)
+						</script>
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
 					<ul class="space-y-2">
 						<li>Precisely modify table content (e.g. "swap the columns")</li>
 						<li>Create tables using arbitrary notation</li>
 					</ul>
-					<div class="text-2xl mt-6 italic fragment">
-						Generate markdown table. I use "RXCX: content" notation to indicate a cell, where R is row, C is column and
-						X is number.<br>
-						Absent cells should be empty.<br>
-						R1C3: Alice<br>
-						R2C4: Bob<br>
-						R5C1: fooBar<br>
+				</div>
+			</section>
+
+			<section>
+				<div class="flex flex-col items-center space-y-2">
+				<div class="text-2xl text-center font-bold">Example prompt</div>
+				<div class="text-xl text-left italic w-2/3">
+					Generate markdown table. I use 
+					<span class="fragment highlight-green" data-fragment-index="1">
+					"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
+					X is number.<br>
+					Absent cells should be empty.<br>
+					<span class="fragment highlight-green" data-fragment-index="1">
+					R1C3: Alice</span><br>
+					<span class="fragment highlight-green" data-fragment-index="1">
+					R2C4: Bob</span><br>
+					<span class="fragment highlight-green" data-fragment-index="1">
+					R5C1: fooBar</span><br>
+				</div>
+				<div class="text-2xl text-center font-bold">Result</div>
+					<div class="w-1/2">
+						<pre>
+						<code data-trim>
+							|       |     |       |       |
+							|-------|-----|-------|-------|
+							|       |     | Alice |       |
+							|       |     |       | Bob   |
+							|       |     |       |       |
+							|       |     |       |       |
+							| fooBar|     |       |       |
+						</code>
+					</pre>
 					</div>
 				</div>
 			</section>
@@ -257,7 +329,7 @@
 				<div class="text-2xl">
 					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
 					<ul class="space-y-2">
-						<li>bash / python / awk / unix-tools</li>
+						<li>bash / python / awk / any unix tools</li>
 						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
 						</li>
 					</ul>
@@ -265,7 +337,18 @@
 			</section>
 
 			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
+					<ul class="space-y-2">
+						<li>Always paste text fragment to be matched against</li>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section data-background="media/code_work.png">
 				<h2 class="r-fit-text">Dealing with the Code</h2>
+				DOPISAC PROMPTY
 			</section>
 
 			<section>
