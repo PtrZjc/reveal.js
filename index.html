@@ -27,18 +27,20 @@
 	<div class="reveal">
 		<div class="slides">
 			<section data-background="media/shovel_chisel.png">
-				<div class="relative h-screen">
-					<div class="absolute -top-10 w-full text-center">
-						<div class="text-5xl font-bold text-white shadow-outline">A programmer's shovel and chisel</div>
-					</div>
-					<div class="absolute bottom-72 w-full text-center">
-						<div class="text-4xl font-bold text-white shadow-outline">or optimizing everyday work with AI tools</div>
-					</div>
-					<div class="absolute bottom-64 -right-52">
+				<div class="flex flex-col -mt-4 z-0">
+					<div class="text-5xl font-bold text-white shadow-outline">A programmer's shovel and chisel</div>
+					<div class="mt-96"></div>
+					<div class="mt-60"></div>
+					<div class="text-4xl font-bold text-white shadow-outline">or optimizing everyday work with AI tools</div>
+					<div class="absolute -bottom-6 -right-56">
 						<div class="text-4xl italic font-bold text-sky-300 shadow-outline">Piotr Zajac</div>
+					</div>
+					<div class="absolute -bottom-6 -left-56">
+						<div class="text-4xl italic font-bold text-sky-300 shadow-outline">Ya!vaConf 2023</div>
 					</div>
 				</div>
 			</section>
+
 
 			<section>
 				<div class="relative">
@@ -64,26 +66,38 @@
 			</section>
 
 			<section>
-				<h2 class="r-fit-text">But let's count first!</h2>
+				<div class="text-2xl">
+					<h2>But let's count first!</h2>
+
+				</div>
+				<div class="text-left text-3xl ml-52 space-y-3 mt-4">
+					<div data-fragment-index="1" class="fragment fade-in">
+						<div data-fragment-index="2" class="fragment semi-fade-out">
+							1. Who here uses Chat-GPT in daily work?
+						</div>
+					</div>
+					<div data-fragment-index="2" class="fragment fade-in">
+						<div data-fragment-index="3" class="fragment semi-fade-out">
+							2. Who has Chat-GPT Plus subscription?
+						</div>
+					</div>
+					<div data-fragment-index="3" class="fragment fade-in">
+						3. Who is using GitHub copilot in daily work?
+					</div>
+				</div>
 			</section>
 
-			<section data-background="media/chisel2.png">
+			<section data-background="media/chisel1.png">
 				<!-- Tutaj powiedziec o GPT-3 vs GPT-4 -->
-				<div class="text-4xl font-bold text-white shadow-outline">Chat-GPT4</div>
+				<div class="text-3xl ml-36 mb-10">
+					<h2>Chat<br>GPT-4</h2>
+				</div>
 			</section>
 
 			<section>
 				<h2 class="r-fit-text">Sharpen your tool before the work</h2>
 			</section>
 
-			<section>
-				<div class="space-y-6">
-					<div class="text-center text-5xl">Be aware of the context!</div>
-					<div class="text-center font-bold text-7xl">~8,192 tokens</div>
-					<div class="text-center text-4xl">3000-4000 words</div>
-					<a href="https://platform.openai.com/tokenizer" target="_blank" class="text-2xl">platform.openai.com/tokenizer</a>
-				</div>
-			</section>
 
 			<section>
 				<h2 class="r-fit-text">Assign roles as custom instructions</h2>
@@ -133,15 +147,20 @@
 			</section>
 
 			<section>
-				<div class="text-2xl text-left">
+				<div class="space-y-6">
+					<div class="text-center text-5xl">Be aware of the context!</div>
+					<div class="text-center font-bold text-7xl">~8,192 tokens</div>
+					<div class="text-center text-4xl">3000-4000 words</div>
+					<a href="https://platform.openai.com/tokenizer" target="_blank"
+						class="text-2xl">platform.openai.com/tokenizer</a>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
 					<div class="text-3xl text-center font-bold mb-6">Prepare the context</div>
-					<ul class="space-y-2">
-						<li>When speaking about particular code/technologies, write in the first prompt what technologies are used
-							in the context, e.g:</li>
-						<li class="italic">"Let's talk about backend application created with Java 17, Spring Boot 3 and having
-							tests
-							written in Junit5 with JAssert library"</li>
-					</ul>
+					When handling with particular code/technologies, <br>specify in the first prompt what technologies will be
+					used in the context
 				</div>
 			</section>
 
@@ -161,8 +180,9 @@
 			</section>
 
 			<section data-background="media/chisel_work.png">
-				<div class="">
-				<h2 class="r-fit-text">Concrete use cases</h2></div>
+				<div class="text-3xl mt-40">
+					<h2>Concrete use cases</h2>
+				</div>
 			</section>
 
 			<section>
@@ -184,8 +204,8 @@
 				<div class="text-2xl text-left">
 					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
 					<ul class="space-y-2">
-						<li>Obvious conversions (yml ↔ csv ↔ json) is possible but CLI tools are better</li>
-						<li>Strength lies in non-obvious conversions (arbitrary format to classes, markdown tables, openApi) </li>
+						<li>Obvious conversions (yml ↔ csv ↔ json) are possible but CLI tools are better</li>
+						<li>Power lies in non-obvious conversions (arbitrary to classes, markdown tables, OpenApi) </li>
 						<li>Programming language conversions. Also from pseudo-language.</li>
 					</ul>
 				</div>
@@ -294,21 +314,21 @@
 
 			<section>
 				<div class="flex flex-col items-center space-y-2">
-				<div class="text-2xl text-center font-bold">Example prompt</div>
-				<div class="text-xl text-left italic w-2/3">
-					Generate markdown table. I use 
-					<span class="fragment highlight-green" data-fragment-index="1">
-					"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
-					X is number.<br>
-					Absent cells should be empty.<br>
-					<span class="fragment highlight-green" data-fragment-index="1">
-					R1C3: Alice</span><br>
-					<span class="fragment highlight-green" data-fragment-index="1">
-					R2C4: Bob</span><br>
-					<span class="fragment highlight-green" data-fragment-index="1">
-					R5C1: fooBar</span><br>
-				</div>
-				<div class="text-2xl text-center font-bold">Result</div>
+					<div class="text-2xl text-center font-bold">Example prompt</div>
+					<div class="text-xl text-left italic w-2/3">
+						Generate markdown table. I use
+						<span class="fragment highlight-green" data-fragment-index="1">
+							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
+						X is number.<br>
+						Absent cells should be empty.<br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R1C3: Alice</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R2C4: Bob</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R5C1: fooBar</span><br>
+					</div>
+					<div class="text-2xl text-center font-bold">Result</div>
 					<div class="w-1/2">
 						<pre>
 						<code data-trim>
@@ -347,8 +367,10 @@
 			</section>
 
 			<section data-background="media/code_work.png">
-				<h2 class="r-fit-text">Dealing with the Code</h2>
-				DOPISAC PROMPTY
+				<div class="text-3xl mb-40">
+					<h2>Dealing with the Code</h2>
+				</div>
+				<!-- fd -t f | xargs cat | pbcopy -->
 			</section>
 
 			<section>
@@ -390,30 +412,35 @@
 
 			<section>
 				<div class="text-5xl text-center font-bold">Find the bugs</div>
-				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify" / "Correct"
-						</s00pan>
-				</div>
 			</section>
 
 			<section>
-				<div class="text-5xl text-center font-bold">Whatever you do, do iteratively!</div>
-				<div class="text-4xl text-center mt-6 fragment">Ask follow up questions</div>
+				<div class="text-4xl italic text-center font-bold">And whatever you do, do iteratively!</div>
+				<div class="text-3xl text-center mt-6 fragment">Ask follow up questions</div>
 			</section>
 
 			<section data-background="media/shovel.png">
+				<div class="flex justify-center text-2xl mt-60 mr-48">
+					<h2>GitHub Copilot</h2>
+				</div>
 			</section>
 
 			<section>
 				<div class="text-2xl text-center space-y-6">
 					<div class="text-4xl font-bold">Two main Copilot usages</div>
 					<ol class="w-3/5 space-y-6">
-						<li class="text-2xl"><strong>Suggesting Code:</strong><br> Copilot offers real-time code suggestions as you
+						<li class="text-2xl"><strong>Suggesting Code:</strong><br> Real-time code suggestions as you
 							type.</li>
-						<li class="text-2xl"><strong>Whole Function Generation:</strong><br> Copilot can generate entire functions
+						<li class="text-2xl"><strong>Whole Function Generation:</strong><br> Generate entire code blocks
 							based on descriptive
 							comments.</li>
 					</ol>
 				</div>
+				<!-- co pokazac:
+				- Make team name 1st letter uppercased
+				- method find -> change if(isPresent)
+				
+				-->
 			</section>
 
 			<section>
@@ -426,19 +453,17 @@
 						<div class="w-1/2">
 							<div class="m-6 text-4xl font-bold">Chisel (Chat-GPT)</div>
 							<ul class="space-y-3 fragment fade-in">
-								<li>Precision work</li>
-								<li>Understanding the context</li>
-								<li>Planning and preparation</li>
 								<li>Requires awarness</li>
+								<li>Precision work</li>
+								<li>Planning and preparation</li>
 							</ul>
 						</div>
 						<div class="w-1/2">
 							<div class="m-6 text-4xl font-bold">Shovel (Copilot)</div>
-							<ul class="space-y-3 fragment fade-in">
-								<li>Speed and efficiency</li>
-								<li>Here and now</li>
-								<li>Contextual support</li>
+							<ul class="space-y-3">
 								<li>Can operate subconsciously</li>
+								<li>Speed and efficiency</li>
+								<li>Contextual support</li>
 							</ul>
 						</div>
 					</div>
@@ -448,6 +473,13 @@
 			<section>
 				<div class="text-5xl text-center font-bold">Both are supplementary!</div>
 			</section>
+
+			<section data-background="media/chisel2.png">
+				<div class="flex justify-center text-2xl mt-40 mr-40">
+					<h2>But if I had<br> to pick one...</h2>
+				</div>
+			</section>
+
 
 			<section data-auto-animate>
 				<div class="text-5xl mb-16">Monthly pricing</div>
