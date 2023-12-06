@@ -208,15 +208,75 @@
 			</section>
 
 			<section>
-				<div class="text-5xl text-center font-bold">Generate Readme.md</div>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
+					<ul class="space-y-2">
+						<li>bash / python / awk / any unix tools</li>
+						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
+						</li>
+					</ul>
+				</div>
 			</section>
 
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
+					<ul class="space-y-2">
+						<li>Always paste text fragment to be matched against</li>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
+					<ul class="space-y-2">
+						<li>Precisely modify table content (e.g. "swap the columns")</li>
+						<li>Create tables using arbitrary notation</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="flex flex-col items-center space-y-2">
+					<div class="text-2xl text-center font-bold">Example prompt</div>
+					<div class="text-xl text-left italic w-2/3">
+						Generate markdown table. I use
+						<span class="fragment highlight-green" data-fragment-index="1">
+							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
+						X is number.<br>
+						Absent cells should be empty.<br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R1C3: Alice</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R2C4: Bob</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R5C1: fooBar</span><br>
+					</div>
+					<div class="text-2xl text-center font-bold">Result</div>
+					<div class="w-1/2">
+						<pre>
+						<code data-trim>
+							|       |     |       |       |
+							|-------|-----|-------|-------|
+							|       |     | Alice |       |
+							|       |     |       | Bob   |
+							|       |     |       |       |
+							|       |     |       |       |
+							| fooBar|     |       |       |
+						</code>
+					</pre>
+					</div>
+				</div>
+			</section>
+			
 			<section>
 				<div class="text-2xl text-left">
 					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
 					<ul class="space-y-2">
 						<li>Obvious conversions (yml ↔ csv ↔ json) are possible but CLI tools are better</li>
-						<li>Power lies in non-obvious conversions (arbitrary to classes, markdown tables, OpenApi) </li>
+						<li>Power lies in non-obvious conversions (e.g. arbitrary text to classes, OpenApi) </li>
 						<li>Programming language conversions. Also from pseudo-language.</li>
 					</ul>
 				</div>
@@ -313,69 +373,6 @@
 				</pre>
 			</section>
 
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
-					<ul class="space-y-2">
-						<li>Precisely modify table content (e.g. "swap the columns")</li>
-						<li>Create tables using arbitrary notation</li>
-					</ul>
-				</div>
-			</section>
-
-			<section>
-				<div class="flex flex-col items-center space-y-2">
-					<div class="text-2xl text-center font-bold">Example prompt</div>
-					<div class="text-xl text-left italic w-2/3">
-						Generate markdown table. I use
-						<span class="fragment highlight-green" data-fragment-index="1">
-							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
-						X is number.<br>
-						Absent cells should be empty.<br>
-						<span class="fragment highlight-green" data-fragment-index="1">
-							R1C3: Alice</span><br>
-						<span class="fragment highlight-green" data-fragment-index="1">
-							R2C4: Bob</span><br>
-						<span class="fragment highlight-green" data-fragment-index="1">
-							R5C1: fooBar</span><br>
-					</div>
-					<div class="text-2xl text-center font-bold">Result</div>
-					<div class="w-1/2">
-						<pre>
-						<code data-trim>
-							|       |     |       |       |
-							|-------|-----|-------|-------|
-							|       |     | Alice |       |
-							|       |     |       | Bob   |
-							|       |     |       |       |
-							|       |     |       |       |
-							| fooBar|     |       |       |
-						</code>
-					</pre>
-					</div>
-				</div>
-			</section>
-
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
-					<ul class="space-y-2">
-						<li>bash / python / awk / any unix tools</li>
-						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
-						</li>
-					</ul>
-				</div>
-			</section>
-
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
-					<ul class="space-y-2">
-						<li>Always paste text fragment to be matched against</li>
-						</li>
-					</ul>
-				</div>
-			</section>
 
 			<section data-background="media/code_work.png">
 				<div class="text-3xl mb-40">

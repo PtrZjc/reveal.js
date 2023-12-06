@@ -31,17 +31,18 @@
 		<div class="slides">
 			<section data-background="media/shovel_chisel.png">
 				<div class="flex flex-col -mt-4 z-0">
-					<div class="text-5xl font-bold text-white shadow-outline"><span class="p-1" style="background-color: #143142;">&nbspA programmer's shovel and chisel&nbsp</span></div>
+					<div class="text-5xl font-bold text-white shadow-outline"><span class="p-1"
+							style="background-color: #143142;">&nbspA programmer's shovel and chisel&nbsp</span></div>
 					<div class="mt-96"></div>
 					<div class="mt-56 text-5xl items-center font-bold text-white shadow-outline space-y-2">
-							<div><span class="p-1" style="background-color: #143142;">&nbspor optimizing everyday&nbsp</span></div>
-							<div><span class="p-1" style="background-color: #143142;">&nbspwork with AI tools&nbsp</span></div>
+						<div><span class="p-1" style="background-color: #143142;">&nbspor optimizing everyday&nbsp</span></div>
+						<div><span class="p-1" style="background-color: #143142;">&nbspwork with AI tools&nbsp</span></div>
 					</div>
 					<div class="absolute -bottom-2 -left-40">
 						<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
-								<div> <span style="background-color: #1a669b;">&nbspPiotr Zajac&nbsp</span></div>
-								<div> <span style="background-color: #1a669b;">&nbspSportradar&nbsp</span></div>
-								<div> <span style="background-color: #1a669b;">&nbspYa!vaConf 2023&nbsp</span></div>
+							<div> <span style="background-color: #1a669b;">&nbspPiotr Zajac&nbsp</span></div>
+							<div> <span style="background-color: #1a669b;">&nbspSportradar&nbsp</span></div>
+							<div> <span style="background-color: #1a669b;">&nbspYa!vaConf 2023&nbsp</span></div>
 						</div>
 					</div>
 				</div>
@@ -88,8 +89,14 @@
 						</div>
 					</div>
 					<div data-fragment-index="3" class="fragment fade-in">
-						3. Who is using GitHub copilot in daily work?
+						<div data-fragment-index="4" class="fragment semi-fade-out">
+							3. Who has used GitHub Copilot?
+						</div>
 					</div>
+					<div data-fragment-index="4" class="fragment fade-in">
+						4. Who is still using GitHub Copilot in daily work?
+					</div>
+
 				</div>
 			</section>
 
@@ -102,7 +109,7 @@
 							Chat<br>
 							GPT-4<br>
 						</h2>
-				</div>
+					</div>
 			</section>
 
 			<section>
@@ -111,72 +118,35 @@
 
 
 			<section>
-				<h2 class="r-fit-text">Assign roles as custom instructions</h2>
+				<div class="text-5xl text-center font-bold">Assign roles as custom instructions</div>
 			</section>
 
 			<section>
-				<table border="1">
-					<tr>
-						<th class="text-xl">Question</th>
-						<th class="text-xl">Answer</th>
-					</tr>
-					<tr>
-						<td class="text-xl">What would you like ChatGPT to know about you to provide better responses?</td>
-						<td class="text-xl">
-							<span class="fragment semi-fade-out" data-fragment-index="2">
-								I am a software engineer with experience in Java, Kotlin, React, and Typescript, but I'm
-								also interested in exploring other technologies, tools, and methodologies to enhance my skills.<br>I
-								work
-								on macOS and use the terminal with CLI tools in my daily work.
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td class="text-xl">How would you like ChatGPT to respond?</td>
-						<td class="text-xl">
-							<span class="fragment semi-fade-out" data-fragment-index="2">
-								Response as a senior software engineer. Unless otherwise instructed, prefer to make consise
-								explanations to the given questions. Prefer to use CLI tools to solve the asked problems.<br>
-							</span>
+				<div class="text-xl">How would you like ChatGPT to respond?</div>
 
-							Exceptions:<br>
-							<span class="fragment highlight-green" data-fragment-index="2">
-								When I start my prompt as NEW</span>, please forgot about your role and start as a brand clean instance.
-							This will be used for all topics not related with my software development job.<br>
-							<span class="fragment highlight-green" data-fragment-index="2">
-								When I start my prompt with SHORT</span>, then please give me as concise answer as you can. Skip the
-							commentary and provide very concise anwer it directly answer the question.<br>
-							<span class="fragment highlight-green" data-fragment-index="2">
-								When I start my prompt with CODE</span>, then give me just code without any commentary and extra
-							information.<br>
-							<span class="fragment highlight-green" data-fragment-index="2">
-								When I start my prompt with WAIT</span> then just acknowledge you got the message by "waiting", as there
-							will be more context. When there is no more context, there will be READY command.<br>
-						</td>
-					</tr>
-				</table>
+				<div>
+					<div class="text-2xl text-left">
+						Exceptions:<br>
+						<span class="fragment highlight-green" data-fragment-index="2">
+							When I start my prompt as NEW</span>, please forgot about your role and start as a brand clean instance.
+						This will be used for all topics not related with my software development job.<br>
+						<span class="fragment highlight-green" data-fragment-index="2">
+							When I start my prompt with SHORT</span>, then please give me as concise answer as you can. Skip the
+						commentary and provide very concise anwer it directly answer the question.<br>
+						<span class="fragment highlight-green" data-fragment-index="2">
+							When I start my prompt with CODE</span>, then give me just code without any commentary and extra
+						information.<br>
+						<span class="fragment highlight-green" data-fragment-index="2">
+							When I start my prompt with WAIT</span> then just acknowledge you got the message by "waiting", as there
+						will be more context. When there is no more context, there will be READY command.<br>
+					</div>
+				</div>
 			</section>
-			
+
 			<section>
 				<div class="text-2xl text-left">
 					<div class="text-3xl text-center font-bold mb-6">When providing a code, give instructions first</div>
 					<div class="text-2xl text-center italic mb-6">Or divide a message into separate messages ("WAIT")</div>
-				</div>
-			</section>
-			
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-6">Prepare the context</div>
-					When handling with particular code/technologies, <br>specify in the first prompt what technologies will be
-					used in the context
-				</div>
-			</section>
-
-			<section>
-				<div class="text-2xl text-left">
-					<div class="text-3xl text-center font-bold mb-6">Use pseudo-language to give accurate instructions</div>
-					<div class="text-2xl text-center mb-6">Chat-GPT is very good in understanding any arbitrary notation system
-					</div>
 				</div>
 			</section>
 
@@ -198,7 +168,67 @@
 			</section>
 
 			<section>
-				<div class="text-5xl text-center font-bold">Generate Readme.md</div>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
+					<ul class="space-y-2">
+						<li>bash / python / awk / any unix tools</li>
+						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
+					<ul class="space-y-2">
+						<li>Always paste text fragment to be matched against</li>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
+					<ul class="space-y-2">
+						<li>Precisely modify table content (e.g. "swap the columns")</li>
+						<li>Create tables using arbitrary notation</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="flex flex-col items-center space-y-2">
+					<div class="text-2xl text-center font-bold">Example prompt</div>
+					<div class="text-xl text-left italic w-2/3">
+						Generate markdown table. I use
+						<span class="fragment highlight-green" data-fragment-index="1">
+							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
+						X is number.<br>
+						Absent cells should be empty.<br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R1C3: Alice</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R2C4: Bob</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R5C1: fooBar</span><br>
+					</div>
+					<div class="text-2xl text-center font-bold">Result</div>
+					<div class="w-1/2">
+						<pre>
+						<code data-trim>
+							|       |     |       |       |
+							|-------|-----|-------|-------|
+							|       |     | Alice |       |
+							|       |     |       | Bob   |
+							|       |     |       |       |
+							|       |     |       |       |
+							| fooBar|     |       |       |
+						</code>
+					</pre>
+					</div>
+				</div>
 			</section>
 
 			<section>
@@ -206,7 +236,7 @@
 					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
 					<ul class="space-y-2">
 						<li>Obvious conversions (yml ↔ csv ↔ json) are possible but CLI tools are better</li>
-						<li>Power lies in non-obvious conversions (arbitrary to classes, markdown tables, OpenApi) </li>
+						<li>Power lies in non-obvious conversions (e.g. arbitrary text to classes, OpenApi) </li>
 						<li>Programming language conversions. Also from pseudo-language.</li>
 					</ul>
 				</div>
@@ -303,79 +333,11 @@
 				</pre>
 			</section>
 
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
-					<ul class="space-y-2">
-						<li>Precisely modify table content (e.g. "swap the columns")</li>
-						<li>Create tables using arbitrary notation</li>
-					</ul>
-				</div>
-			</section>
-
-			<section>
-				<div class="flex flex-col items-center space-y-2">
-					<div class="text-2xl text-center font-bold">Example prompt</div>
-					<div class="text-xl text-left italic w-2/3">
-						Generate markdown table. I use
-						<span class="fragment highlight-green" data-fragment-index="1">
-							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
-						X is number.<br>
-						Absent cells should be empty.<br>
-						<span class="fragment highlight-green" data-fragment-index="1">
-							R1C3: Alice</span><br>
-						<span class="fragment highlight-green" data-fragment-index="1">
-							R2C4: Bob</span><br>
-						<span class="fragment highlight-green" data-fragment-index="1">
-							R5C1: fooBar</span><br>
-					</div>
-					<div class="text-2xl text-center font-bold">Result</div>
-					<div class="w-1/2">
-						<pre>
-						<code data-trim>
-							|       |     |       |       |
-							|-------|-----|-------|-------|
-							|       |     | Alice |       |
-							|       |     |       | Bob   |
-							|       |     |       |       |
-							|       |     |       |       |
-							| fooBar|     |       |       |
-						</code>
-					</pre>
-					</div>
-				</div>
-			</section>
-
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
-					<ul class="space-y-2">
-						<li>bash / python / awk / any unix tools</li>
-						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
-						</li>
-					</ul>
-				</div>
-			</section>
-
-			<section>
-				<div class="text-2xl">
-					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
-					<ul class="space-y-2">
-						<li>Always paste text fragment to be matched against</li>
-						</li>
-					</ul>
-				</div>
-			</section>
-
 			<section data-background="media/code_work.png">
 				<div class="text-3xl mb-40">
 					<h2>Dealing with the Code</h2>
 				</div>
 				<!-- fd -t f | xargs cat | pbcopy -->
-			</section>
-
-			<section>
-				<div class="text-5xl text-center font-bold">Review the code</div>
 			</section>
 
 			<section>
@@ -388,27 +350,13 @@
 			</section>
 
 			<section>
-				<div class="text-5xl text-center font-bold">Create the tests</div>
-				<div class="text-3xl text-center mt-6">Iterative process: general-to-specific</div>
-			</section>
-
-			<section>
-				<div class="text-5xl text-center font-bold">Mock the data</div>
-				<div class="text-3xl text-center mt-6">Almost always the procedure looks identical:</div>
-				<div class="text-3xl mt-6 flex justify-center">
-					<div class="space-y-3 text-left">
-						<div>1. A generation method is created</div>
-						<div>2. First few elements are created</div>
-						<div>3. All elements are created</div>
-					</div>
-				</div>
-			</section>
-
-			<section>
 				<div class="text-5xl text-center font-bold">Refactor the code</div>
-				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify" / "Correct"
-						</s00pan>
+				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify"</span>
 				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Review the code</div>
 			</section>
 
 			<section>
@@ -416,8 +364,17 @@
 			</section>
 
 			<section>
+				<div class="text-5xl text-center font-bold">Create the tests</div>
+				<div class="text-3xl text-center mt-6">Iterative process: general-to-specific</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Mock the data</div>
+				<div class="text-3xl text-center mt-6">Ask until the real data is generated</div>
+			</section>
+
+			<section>
 				<div class="text-4xl italic text-center font-bold">And whatever you do, do iteratively!</div>
-				<div class="text-3xl text-center mt-6 fragment">Ask follow up questions</div>
 			</section>
 
 			<section data-background="media/shovel.png">
