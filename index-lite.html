@@ -1,0 +1,525 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>AI Tools</title>
+
+	<!-- system required: -->
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<!-- actual stylesheet -->
+	<link rel="stylesheet" href="dist/theme/blood.css">
+
+	<!-- my custom styles  -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
+	<link rel="stylesheet" href="global.css">
+</head>
+<!-- https://www.mentimeter.com/app/presentation/alas16u23bckes4rbopdzgawmvvjjqso/r7os8h5sxnp9/edit -->
+
+<!-- <div><span class="bg-gray-700 bg-opacity-80 p-0">&nbsp;or optimizing everyday</span></div> -->
+<!-- <div><span class="bg-gray-700 bg-opacity-80 p-0">&nbsp;work with AI tools</span></div> -->
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-background="media/shovel_chisel.png">
+				<div class="flex flex-col -mt-4 z-0">
+					<div class="text-5xl font-bold text-white shadow-outline"><span class="p-1" style="background-color: #143142;">&nbspA programmer's shovel and chisel&nbsp</span></div>
+					<div class="mt-96"></div>
+					<div class="mt-56 text-5xl items-center font-bold text-white shadow-outline space-y-2">
+							<div><span class="p-1" style="background-color: #143142;">&nbspor optimizing everyday&nbsp</span></div>
+							<div><span class="p-1" style="background-color: #143142;">&nbspwork with AI tools&nbsp</span></div>
+					</div>
+					<div class="absolute -bottom-2 -left-40">
+						<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
+								<div> <span style="background-color: #1a669b;">&nbspPiotr Zajac&nbsp</span></div>
+								<div> <span style="background-color: #1a669b;">&nbspSportradar&nbsp</span></div>
+								<div> <span style="background-color: #1a669b;">&nbspYa!vaConf 2023&nbsp</span></div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+			<section>
+				<div class="relative">
+					<div class="flex text-3xl">
+						<div class="w-1/2">
+							<div class="m-6 text-4xl italic">What this talk is about</div>
+							<ul class="space-y-3">
+								<li>Using Chat-GPT...</li>
+								<li>Using Copilot...</li>
+								<li class="italic">...In daily developer's work</li>
+							</ul>
+						</div>
+						<div class="w-1/2 fragment fade-in">
+							<div class="m-6 text-4xl italic">What this talk is <strong>not</strong> about</div>
+							<ul class="space-y-3">
+								<li>Other use cases</li>
+								<li>Myriad of other AI tools/plugins</li>
+								<li>Copilot Chat</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<h2>But let's count first!</h2>
+
+				</div>
+				<div class="text-left text-3xl ml-52 space-y-3 mt-4">
+					<div data-fragment-index="1" class="fragment fade-in">
+						<div data-fragment-index="2" class="fragment semi-fade-out">
+							1. Who here uses Chat-GPT in daily work?
+						</div>
+					</div>
+					<div data-fragment-index="2" class="fragment fade-in">
+						<div data-fragment-index="3" class="fragment semi-fade-out">
+							2. Who has Chat-GPT Plus subscription?
+						</div>
+					</div>
+					<div data-fragment-index="3" class="fragment fade-in">
+						3. Who is using GitHub copilot in daily work?
+					</div>
+				</div>
+			</section>
+
+			<section data-background="media/chisel1.png">
+				<!-- Tutaj powiedziec o GPT-3 vs GPT-4 -->
+				<div class="flex flex-col">
+					<div class="mt-96"></div>
+					<div class="mt-40 mr-32 text-4rxl">
+						<h2>
+							Chat<br>
+							GPT-4<br>
+						</h2>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Sharpen your tool before the work</h2>
+			</section>
+
+
+			<section>
+				<h2 class="r-fit-text">Assign roles as custom instructions</h2>
+			</section>
+
+			<section>
+				<table border="1">
+					<tr>
+						<th class="text-xl">Question</th>
+						<th class="text-xl">Answer</th>
+					</tr>
+					<tr>
+						<td class="text-xl">What would you like ChatGPT to know about you to provide better responses?</td>
+						<td class="text-xl">
+							<span class="fragment semi-fade-out" data-fragment-index="2">
+								I am a software engineer with experience in Java, Kotlin, React, and Typescript, but I'm
+								also interested in exploring other technologies, tools, and methodologies to enhance my skills.<br>I
+								work
+								on macOS and use the terminal with CLI tools in my daily work.
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-xl">How would you like ChatGPT to respond?</td>
+						<td class="text-xl">
+							<span class="fragment semi-fade-out" data-fragment-index="2">
+								Response as a senior software engineer. Unless otherwise instructed, prefer to make consise
+								explanations to the given questions. Prefer to use CLI tools to solve the asked problems.<br>
+							</span>
+
+							Exceptions:<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt as NEW</span>, please forgot about your role and start as a brand clean instance.
+							This will be used for all topics not related with my software development job.<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt with SHORT</span>, then please give me as concise answer as you can. Skip the
+							commentary and provide very concise anwer it directly answer the question.<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt with CODE</span>, then give me just code without any commentary and extra
+							information.<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt with WAIT</span> then just acknowledge you got the message by "waiting", as there
+							will be more context. When there is no more context, there will be READY command.<br>
+						</td>
+					</tr>
+				</table>
+			</section>
+			
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">When providing a code, give instructions first</div>
+					<div class="text-2xl text-center italic mb-6">Or divide a message into separate messages ("WAIT")</div>
+				</div>
+			</section>
+			
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Prepare the context</div>
+					When handling with particular code/technologies, <br>specify in the first prompt what technologies will be
+					used in the context
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Use pseudo-language to give accurate instructions</div>
+					<div class="text-2xl text-center mb-6">Chat-GPT is very good in understanding any arbitrary notation system
+					</div>
+				</div>
+			</section>
+
+			<section data-background="media/chisel_work.png">
+				<div class="text-3xl mt-40">
+					<h2>Concrete use cases</h2>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl font-bold mb-6">Generate templates</div>
+					<ul class="space-y-2">
+						<li>AWS CloudFormation/SAM</li>
+						<li>AWS policies</li>
+						<li>OpenApi definitions</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Generate Readme.md</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
+					<ul class="space-y-2">
+						<li>Obvious conversions (yml ↔ csv ↔ json) are possible but CLI tools are better</li>
+						<li>Power lies in non-obvious conversions (arbitrary to classes, markdown tables, OpenApi) </li>
+						<li>Programming language conversions. Also from pseudo-language.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl text-center font-bold mb-6">Example of arbitrary modelled input</div>
+				<pre data-id="code"><code class="language-yml" data-trim data-line-numbers="">
+					matchId: UUID
+					teams: 
+						- teamType: HOME_TEAM/AWAY_TEAM
+							name: String
+							players:
+								- name: String
+									position: String
+									jerseyNumber: Int
+					stadium: String
+					kickOffTime: Instant
+					matchType: LEAGUE/CUP/FRIENDLY/INTERNATIONAL # nullable
+					score:
+						homeTeamScore: Int
+						awayTeamScore: Int
+					extraTime: # nullable
+						firstHalfExtraTime: Int 
+						secondHalfExtraTime: Int
+					events:
+						- minute: Int
+							team: HOME_TEAM/AWAY_TEAM
+							type: String
+							player: String
+							description: String					
+					</code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl text-center font-bold mb-6">Result of <span class="italic text-green-300">Make Kotlin
+						classes</span>:</div>
+				<pre>
+					<code class="language-kotlin" data-id="id" data-trim data-line-numbers >
+						<script type="text/template">
+								import java.time.Instant
+								import java.util.UUID
+
+								enum class TeamType {
+										HOME_TEAM, AWAY_TEAM
+								}
+
+								enum class MatchType {
+										LEAGUE, CUP, FRIENDLY, INTERNATIONAL
+								}
+
+								data class FootballMatch(
+									val matchId: UUID,
+									val teams: List<Team>,
+									val stadium: String,
+									val kickOffTime: Instant,
+									val matchType: MatchType?,
+									val score: Score,
+									val extraTime: ExtraTime?,
+									val events: List<Event>
+								)
+
+								data class Team(
+									val teamType: TeamType,
+									val name: String,
+									val players: List<Player>
+							)
+
+								data class Player(
+										val name: String,
+										val position: String,
+										val jerseyNumber: Int
+								)
+
+								data class Score(
+										val homeTeamScore: Int,
+										val awayTeamScore: Int
+								)
+
+								data class ExtraTime(
+										val firstHalfExtraTime: Int,
+										val secondHalfExtraTime: Int
+								)
+
+								data class Event(
+										val minute: Int,
+										val team: TeamType,
+										val type: String,
+										val player: String,
+										val description: String
+								)
+						</script>
+					</code>
+				</pre>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
+					<ul class="space-y-2">
+						<li>Precisely modify table content (e.g. "swap the columns")</li>
+						<li>Create tables using arbitrary notation</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="flex flex-col items-center space-y-2">
+					<div class="text-2xl text-center font-bold">Example prompt</div>
+					<div class="text-xl text-left italic w-2/3">
+						Generate markdown table. I use
+						<span class="fragment highlight-green" data-fragment-index="1">
+							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
+						X is number.<br>
+						Absent cells should be empty.<br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R1C3: Alice</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R2C4: Bob</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R5C1: fooBar</span><br>
+					</div>
+					<div class="text-2xl text-center font-bold">Result</div>
+					<div class="w-1/2">
+						<pre>
+						<code data-trim>
+							|       |     |       |       |
+							|-------|-----|-------|-------|
+							|       |     | Alice |       |
+							|       |     |       | Bob   |
+							|       |     |       |       |
+							|       |     |       |       |
+							| fooBar|     |       |       |
+						</code>
+					</pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
+					<ul class="space-y-2">
+						<li>bash / python / awk / any unix tools</li>
+						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
+					<ul class="space-y-2">
+						<li>Always paste text fragment to be matched against</li>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section data-background="media/code_work.png">
+				<div class="text-3xl mb-40">
+					<h2>Dealing with the Code</h2>
+				</div>
+				<!-- fd -t f | xargs cat | pbcopy -->
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Review the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Document the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Explain the code</div>
+				<div class="text-3xl text-center mt-6">Handy command: <span class="italic">"Break it down"</span></div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Create the tests</div>
+				<div class="text-3xl text-center mt-6">Iterative process: general-to-specific</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Mock the data</div>
+				<div class="text-3xl text-center mt-6">Almost always the procedure looks identical:</div>
+				<div class="text-3xl mt-6 flex justify-center">
+					<div class="space-y-3 text-left">
+						<div>1. A generation method is created</div>
+						<div>2. First few elements are created</div>
+						<div>3. All elements are created</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Refactor the code</div>
+				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify" / "Correct"
+						</s00pan>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Find the bugs</div>
+			</section>
+
+			<section>
+				<div class="text-4xl italic text-center font-bold">And whatever you do, do iteratively!</div>
+				<div class="text-3xl text-center mt-6 fragment">Ask follow up questions</div>
+			</section>
+
+			<section data-background="media/shovel.png">
+				<div class="flex justify-center text-2xl mt-60 mr-48">
+					<h2>GitHub Copilot</h2>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-center space-y-6">
+					<div class="text-4xl font-bold">Two main Copilot usages</div>
+					<ol class="w-3/5 space-y-6">
+						<li class="text-2xl"><strong>Suggesting Code:</strong><br> Real-time code suggestions as you
+							type.</li>
+						<li class="text-2xl"><strong>Whole Function Generation:</strong><br> Generate entire code blocks
+							based on descriptive
+							comments.</li>
+					</ol>
+				</div>
+				<!-- co pokazac:
+				- Make team name 1st letter uppercased
+				- method find -> change if(isPresent)
+				
+				-->
+			</section>
+
+			<section>
+				<h2 class="r-fit-text">Which tool to choose?</h2>
+			</section>
+
+			<section data-background="media/choose_tool.png">
+				<div class="flex text-3xl mt-48">
+					<div class="w-1/2">
+						<div class="text-4xl font-bold">
+							<span class="bg-gray-700 bg-opacity-80 p-1">
+								Chisel (Chat-GPT)
+							</span>
+						</div>
+						<div class="mt-6 mx-10 space-y-3 text-left">
+							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Requires awarness</span></div>
+							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Precision work</span></div>
+							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Planning and preparation</span></div>
+						</div>
+					</div>
+					<div class="w-1/2">
+						<div class="text-4xl font-bold">
+							<span class="bg-gray-700 bg-opacity-80 p-1">
+								Shovel (Copilot)
+							</span>
+						</div>
+						<div class="mt-6 mx-10 space-y-3 text-left">
+							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Can operate subconsciously</span></div>
+							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Speed and efficiency</span></div>
+							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Contextual support</span></div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Both are supplementary!</div>
+			</section>
+
+			<section data-background="media/chisel2.png">
+				<div class="flex justify-center text-2xl mb-32 ml-40">
+					<h2>
+						But if<br>
+						I had<br>
+						to pick<br>
+						one...<br>
+					</h2>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl font-bold">Will AI take your job as developer?</div>
+				<div class="text-5xl italic mt-9 fragment">No, but developer using AI will do.</div>
+			</section>
+
+			<section data-background="./media/questions.png">
+
+			</section>
+
+			<script src="dist/reveal.js"></script>
+			<script src="plugin/notes/notes.js"></script>
+			<script src="plugin/markdown/markdown.js"></script>
+			<script src="plugin/highlight/highlight.js"></script>
+			<script>
+				// More info about initialization & config:
+				// - https://revealjs.com/initialization/
+				// - https://revealjs.com/config/
+				Reveal.initialize({
+					hash: true,
+					// Learn about plugins: https://revealjs.com/plugins/
+					plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+					margin: 0.15,
+					minScale: 0.2,
+					maxScale: 2.0,
+					autoAnimateUnmatched: false,
+				});
+			</script>
+</body>
+
+</html>
