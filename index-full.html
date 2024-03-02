@@ -26,52 +26,50 @@
 <!-- <div><span class="bg-gray-700 bg-opacity-80 p-0">&nbsp;or optimizing everyday</span></div> -->
 <!-- <div><span class="bg-gray-700 bg-opacity-80 p-0">&nbsp;work with AI tools</span></div> -->
 
+<!-- https://twitter.com/GregKamradt/status/1722386725635580292 -->
+
 <body>
 	<div class="reveal">
 		<div class="slides">
 			<section data-background="media/shovel_chisel.png">
 				<div class="flex flex-col -mt-4 z-0">
 					<div class="text-5xl font-bold text-white shadow-outline"><span class="p-1"
-							style="background-color: #143142;">&nbspA programmer's shovel and chisel&nbsp</span></div>
+							style="background-color: #143142;">&nbspA Programmer's Chisel:&nbsp</span></div>
 					<div class="mt-96"></div>
 					<div class="mt-56 text-5xl items-center font-bold text-white shadow-outline space-y-2">
-						<div><span class="p-1" style="background-color: #143142;">&nbspor optimizing everyday&nbsp</span></div>
-						<div><span class="p-1" style="background-color: #143142;">&nbspwork with AI tools&nbsp</span></div>
+						<div><span class="p-1" style="background-color: #143142;">&nbspEffective Work With Code&nbsp</span></div>
+						<div><span class="p-1" style="background-color: #143142;">&nbspUsing Chat-GPT&nbsp</span></div>
 					</div>
 					<div class="absolute -bottom-2 -left-40">
 						<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
 							<div> <span style="background-color: #1a669b;">&nbspPiotr Zajac&nbsp</span></div>
 							<div> <span style="background-color: #1a669b;">&nbspSportradar&nbsp</span></div>
-							<div> <span style="background-color: #1a669b;">&nbspYa!vaConf 2023&nbsp</span></div>
+							<!-- <div> <span style="background-color: #1a669b;">&nbspYa!vaConf 2023&nbsp</span></div> -->
 						</div>
 					</div>
 				</div>
 			</section>
 
-
-			<section>
-				<div class="relative">
-					<div class="flex text-3xl">
-						<div class="w-1/2">
-							<div class="m-6 text-4xl italic">What this talk is about</div>
-							<ul class="space-y-3">
-								<li>Using Chat-GPT...</li>
-								<li>Using Copilot...</li>
-								<li class="italic">...In daily developer's work</li>
-							</ul>
-						</div>
-						<div class="w-1/2 fragment fade-in">
-							<div class="m-6 text-4xl italic">What this talk is <strong>not</strong> about</div>
-							<ul class="space-y-3">
-								<li>Other use cases</li>
-								<li>Myriad of other AI tools/plugins</li>
-								<li>Copilot Chat</li>
-							</ul>
+			<section data-background="media/shovel_chisel.png">
+				<div class="flex flex-col -mt-4 z-0">
+					<div class="text-5xl font-bold text-white shadow-outline"><span class="p-1"
+							style="background-color: #143142;">&nbspA Programmer's Chisel:&nbsp</span></div>
+					<div class="mt-96"></div>
+					<div class="mt-56 text-5xl items-center font-bold text-white shadow-outline space-y-2">
+						<div><span class="p-1" style="background-color: #143142;">&nbspEffective Work With Code&nbsp</span></div>
+						<div><span class="p-1" style="background-color: #143142;">&nbspUsing Chat-GPT&nbsp</span></div>
+					</div>
+					<div class="absolute -bottom-2 -left-40">
+						<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
+							<div> <span style="background-color: #1a669b;">&nbspPiotr Zajac&nbsp</span></div>
+							<div> <span style="background-color: #1a669b;">&nbspSportradar&nbsp</span></div>
+							<!-- <div> <span style="background-color: #1a669b;">&nbspYa!vaConf 2023&nbsp</span></div> -->
 						</div>
 					</div>
 				</div>
 			</section>
 
+			<!-- Tu bedzie gadka ustalona -->
 			<section>
 				<div class="text-2xl">
 					<h2>But let's count first!</h2>
@@ -89,14 +87,8 @@
 						</div>
 					</div>
 					<div data-fragment-index="3" class="fragment fade-in">
-						<div data-fragment-index="4" class="fragment semi-fade-out">
-							3. Who has used GitHub Copilot?
-						</div>
+						3. Who is using GitHub copilot in daily work?
 					</div>
-					<div data-fragment-index="4" class="fragment fade-in">
-						4. Who is still using GitHub Copilot in daily work?
-					</div>
-
 				</div>
 			</section>
 
@@ -104,41 +96,74 @@
 				<!-- Tutaj powiedziec o GPT-3 vs GPT-4 -->
 				<div class="flex flex-col">
 					<div class="mt-96"></div>
-					<div class="mt-40 mr-32 text-4rxl">
-						<h2>
-							Chat<br>
-							GPT-4<br>
-						</h2>
+					<div class="mt-56 mr-32 text-6xl font-extrabold shadow-outline">
+						SHARPEN YOUR TOOL BEFORE THE WORK
 					</div>
 			</section>
 
-			<section>
-				<h2 class="r-fit-text">Sharpen your tool before the work</h2>
-			</section>
-
 
 			<section>
-				<div class="text-5xl text-center font-bold">Assign roles as custom instructions</div>
+				<h2 class="r-fit-text">Customize your GPT by custom roles</h2>
 			</section>
 
 			<section>
-				<div class="text-3xl mb-6">How would you like ChatGPT to respond?</div>
-				<div>
-					<div class="text-2xl text-left">
-						<div class="italic mb-2">(... normal role definition...)</div>
-						Exceptions:<br>
-						<span class="fragment highlight-green" data-fragment-index="2">
-							When I start my prompt as NEW</span>, please forgot about your role and start as a brand clean instance.
-						This will be used for all topics not related with my software development job.<br>
-						<span class="fragment highlight-green" data-fragment-index="2">
-							When I start my prompt with SHORT</span>, then please give me as concise answer as you can. Skip the
-						commentary and provide very concise anwer it directly answer the question.<br>
-						<span class="fragment highlight-green" data-fragment-index="2">
-							When I start my prompt with CODE</span>, then give me just code without any commentary and extra
-						information.<br>
-						<span class="fragment highlight-green" data-fragment-index="2">
-							When I start my prompt with WAIT</span> then just acknowledge you got the message by "waiting", as there
-						will be more context. When there is no more context, there will be READY command.<br>
+				<table border="1">
+					<tr>
+						<th class="text-xl">Question</th>
+						<th class="text-xl">Answer</th>
+					</tr>
+					<tr>
+						<td class="text-xl">What would you like ChatGPT to know about you to provide better responses?</td>
+						<td class="text-xl">
+							<span class="fragment semi-fade-out" data-fragment-index="2">
+								I am a software engineer with experience in Java, Kotlin, React, and Typescript, but I'm
+								also interested in exploring other technologies, tools, and methodologies to enhance my skills.<br>I
+								work
+								on macOS and use the terminal with CLI tools in my daily work.
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-xl">How would you like ChatGPT to respond?</td>
+						<td class="text-xl">
+							<span class="fragment semi-fade-out" data-fragment-index="2">
+								Response as a senior software engineer. Unless otherwise instructed, prefer to make consise
+								explanations to the given questions. Prefer to use CLI tools to solve the asked problems.<br>
+							</span>
+
+							Exceptions:<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt as NEW</span>, please forgot about your role and start as a brand clean instance.
+							This will be used for all topics not related with my software development job.<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt with SHORT</span>, then please give me as concise answer as you can. Skip the
+							commentary and provide very concise anwer it directly answer the question.<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt with CODE</span>, then give me just code without any commentary and extra
+							information.<br>
+							<span class="fragment highlight-green" data-fragment-index="2">
+								When I start my prompt with WAIT</span> then just acknowledge you got the message by "waiting", as there
+							will be more context. When there is no more context, there will be <span class="fragment highlight-green"
+								data-fragment-index="2">READY</span> command.<br>
+						</td>
+					</tr>
+				</table>
+			</section>
+
+
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Prepare the context</div>
+					When handling with particular code/technologies, <br>specify in the first prompt what technologies will be
+					used in the context
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Use pseudo-language to give accurate instructions</div>
+					<div class="text-2xl text-center mb-6">Chat-GPT is very good in understanding any arbitrary notation system
 					</div>
 				</div>
 			</section>
@@ -150,6 +175,28 @@
 				</div>
 			</section>
 
+			<section>
+				<div class="text-center text-5xl mb-6">Be aware of the context window!</div>
+				<div class="text-center font-bold text-7xl">128k tokens</div>
+				<a href="https://platform.openai.com/tokenizer" target="_blank"
+					class="text-2xl">platform.openai.com/tokenizer</a>
+				<div class="fragment fade-in">
+					<div class="text-center text-3xl mt-6 mb-4">Maximum single input to chat window:</div>
+					<ul class="text-4xl">
+						<li>~128k characters</li>
+						<li>30k-40k tokens</li>
+					</ul>
+				</div>
+			</section>
+
+
+			<section>
+				<img src="./media/gpt-4_testing.jpeg" class="r-stretch mb-20" style="scale: 1.4;" />
+				<div class="-mr-40 text-5xl font-bold text-right shadow-outline "> : <a
+						href="https://twitter.com/GregKamradt/status/1722386725635580292">Source</a></div>
+			</section>
+			</section>
+
 			<section data-background="media/chisel_work.png">
 				<div class="text-3xl mt-40">
 					<h2>Concrete use cases</h2>
@@ -158,11 +205,8 @@
 
 			<section>
 				<div class="text-2xl">
-					<div class="text-3xl font-bold mb-6">Generate templates</div>
-					<ul class="space-y-2">
-						<li>AWS CloudFormation/SAM</li>
-						<li>AWS policies</li>
-						<li>OpenApi definitions</li>
+					<div class="text-3xl text-center font-bold mb-3">Generate templates</div>
+					<div class="text-2xl text-center italic mb-6">e.g. Docker Compose / AWS policies / OpenApi definitions</div>
 					</ul>
 				</div>
 			</section>
@@ -172,7 +216,7 @@
 					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
 					<ul class="space-y-2">
 						<li>bash / python / awk / any unix tools</li>
-						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
+						<li>Provide exemplary input/ desired output for best results
 						</li>
 					</ul>
 				</div>
@@ -235,8 +279,8 @@
 				<div class="text-2xl text-left">
 					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
 					<ul class="space-y-2">
-						<li>Obvious conversions (yml ↔ csv ↔ json) are possible but CLI tools are better</li>
-						<li>Power lies in non-obvious conversions (e.g. arbitrary text to classes, OpenApi) </li>
+						<li>Obvious data format conversions are possible but CLI tools are faster.</li>
+						<li>Power lies in non-obvious conversions (e.g. arbitrary text to code).</li>
 						<li>Programming language conversions. Also from pseudo-language.</li>
 					</ul>
 				</div>
@@ -333,11 +377,16 @@
 				</pre>
 			</section>
 
+
 			<section data-background="media/code_work.png">
 				<div class="text-3xl mb-40">
 					<h2>Dealing with the Code</h2>
 				</div>
 				<!-- fd -t f | xargs cat | pbcopy -->
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Review the code</div>
 			</section>
 
 			<section>
@@ -351,16 +400,9 @@
 
 			<section>
 				<div class="text-5xl text-center font-bold">Refactor the code</div>
-				<div class="text-3xl text-center mt-6">Handy commands: <span class="italic">"Improve" / "Simplify"</span>
+				<div class="text-3xl text-center mt-6">Depending of goal: <span class="italic">"Improve" / "Simplify" / "Fix"
+						</s00pan>
 				</div>
-			</section>
-
-			<section>
-				<div class="text-5xl text-center font-bold">Review the code</div>
-			</section>
-
-			<section>
-				<div class="text-5xl text-center font-bold">Find the bugs</div>
 			</section>
 
 			<section>
@@ -370,114 +412,42 @@
 
 			<section>
 				<div class="text-5xl text-center font-bold">Mock the data</div>
-				<div class="text-3xl text-center mt-6">Ask until the real data is generated</div>
+				<div class="text-3xl text-center mt-6">Almost always the procedure looks identical:</div>
+				<div class="text-3xl mt-6 flex justify-center">
+					<div class="space-y-3 text-left">
+						<div>1. A generation method is created</div>
+						<div>2. First few elements are created</div>
+						<div>3. All elements are created</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Find the bugs</div>
 			</section>
 
 			<section>
 				<div class="text-4xl italic text-center font-bold">And whatever you do, do iteratively!</div>
 			</section>
 
-			<section data-background="media/shovel.png">
-				<div class="flex justify-center text-2xl mt-60 mr-48">
-					<h2>GitHub Copilot</h2>
-				</div>
-			</section>
-
-			<section>
-				<div class="text-2xl text-center space-y-6">
-					<div class="text-4xl font-bold">Two main Copilot usages</div>
-					<ol class="w-3/5 space-y-6">
-						<li class="text-2xl"><strong>Suggesting Code:</strong><br> Real-time code suggestions as you
-							type.</li>
-						<li class="text-2xl"><strong>Whole Function Generation:</strong><br> Generate entire code blocks
-							based on descriptive
-							comments.</li>
-					</ol>
-				</div>
-				<!-- co pokazac:
-				- Make team name 1st letter uppercased
-				- method find -> change if(isPresent)
-				
-				-->
-			</section>
-
-			<section>
-				<h2 class="r-fit-text">Which tool to choose?</h2>
-			</section>
-
-			<section data-background="media/choose_tool.png">
-				<div class="flex text-3xl mt-48">
-					<div class="w-1/2">
-						<div class="text-4xl font-bold">
-							<span class="bg-gray-700 bg-opacity-80 p-1">
-								Chisel (Chat-GPT)
-							</span>
-						</div>
-						<div class="mt-6 mx-10 space-y-3 text-left">
-							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Requires awarness</span></div>
-							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Precision work</span></div>
-							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Planning and preparation</span></div>
-						</div>
-					</div>
-					<div class="w-1/2">
-						<div class="text-4xl font-bold">
-							<span class="bg-gray-700 bg-opacity-80 p-1">
-								Shovel (Copilot)
-							</span>
-						</div>
-						<div class="mt-6 mx-10 space-y-3 text-left">
-							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Can operate subconsciously</span></div>
-							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Speed and efficiency</span></div>
-							<div><span class="bg-gray-700 bg-opacity-80 p-1">• Contextual support</span></div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section>
-				<div class="text-5xl text-center font-bold">Both are supplementary!</div>
-			</section>
-
 			<section data-background="media/chisel2.png">
 				<div class="flex justify-center text-2xl mb-32 ml-40">
 					<h2>
-						But if<br>
-						I had<br>
-						to pick<br>
-						one...<br>
+						a kid<br>
+						with<br>
+						super-<br>
+						powers<br>
 					</h2>
 				</div>
 			</section>
 
-			<section>
-				<div class="text-5xl font-bold">Will AI take your job as developer?</div>
-				<div class="text-5xl italic mt-9 fragment">No, but developer using AI will do.</div>
-			</section>
-
 			<section data-background="./media/questions.png">
-				<div class="flex justify-center items-center  bg-white text-black fragment">
-					<div class="w-1/2 text-left text-3xl space-y-2 ml-12">
-						<div>Slides:</div>
-						<div><a href="http://ai-tools.slides.pzjc.pl/">http://ai-tools.slides.pzjc.pl/</a></div>
-						<br>
-						<div>Contact:</div>
-						<div><a href="mailto:ptr.zjc@gmail.com">ptr.zjc@gmail.com</a></div>
-						<div><a href="https://linkedin.com/in/ptrzjc/">https://linkedin.com/in/ptrzjc/</a></div>
-					</div>
 
-					<div class="w-1/2 bg-white ">
-						<div class="mt-6 text-3xl">Rate me:</div>
-						<img src="./media/qr_rate.png" class="" />
-						<!-- <img class="w-7/12" src="./media/qr_slides.svg" class="" /> -->
-					</div>
+				<div class="fragment fade-in flex justify-center ">
+					<img src="media/qr_rate.png" width="600"/>
 				</div>
 			</section>
-			<!-- 					
-		<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
 
-						</div>
-					
-					-->
 			<script src="dist/reveal.js"></script>
 			<script src="plugin/notes/notes.js"></script>
 			<script src="plugin/markdown/markdown.js"></script>
