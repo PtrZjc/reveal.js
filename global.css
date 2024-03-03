@@ -1,3 +1,7 @@
+* {
+    border: 1px solid rgba(255, 140, 0, 0.439) !important;
+}
+
 td {
     vertical-align: middle
 }
