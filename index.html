@@ -1,39 +1,2086 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Java dla średnio zaawansowanych</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+<!--	Fallback white theme -->
+<!--		<link rel="stylesheet" href="css/theme/beige.css">-->
+		<link rel="stylesheet" href="css/style.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+		<!--	Fallback white theme -->
+<!--		<link rel="stylesheet" href="lib/css/zenburn.css">-->
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Java dla średnio zaawansowanych</h1>
+					<p><small>by <a href="https://jgardo.dev">jgardo.dev</a></small></p>
+					<aside class="notes">
+						<p>
+							Witam wszystkich wielbicieli Javy, JVMa i innych OpenJDKów.
+							Mam nadzieję, że jesteście gotowi na niskiego poziomu prezentację.
+							Będzie będzie trochę bajtkodu i kodu źródłowego. Kodu maszynowego tym razem nie będzie.
+						</p>
+						<p>
+							Java dla średnio zaawansowanych, czyli dla kogo?
+							Zakładam, że taka osoba programowała już kilka lat w Javie oraz zna ogólnie koncepcje i
+							założenia Javy. Przydatne będzie też pewne podstawowe wykształcenie
+							techniczne, czyli jak ogólnie działa procesor, pamięć oraz co to jest asembler, ale bez
+							przesady - wspomnienia ze studiów na ten temat wystarczą.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h1>O mnie:</h1>
+					<div class="left-alligned">
+						<ul>
+							<li>Jakub Gardo</li>
+							<li>Senior Java developer</li>
+							<li>10 lat stażu</li>
+						</ul>
+						<br/>
+						<ul class="fragment">
+							<li class="bullet-off"><img style="max-width: 35%;" src="images/DS_logo_white.svg"/></li>
+<!--							<li class="bullet-off"><img style="max-width: 35%;" src="images/DS_logo_color.svg"/></li>-->
+						</ul>
+						<ul class="fragment">
+							<li class="bullet-off"><img style="max-width: 12%;" src="images/poznan-jug.png"/></li>
+						</ul>
+						<br/>
+						<ul class="fragment">
+							<li><a href="https://blog.jgardo.dev">blog.jgardo.dev</a></li>
+						</ul>
+					</div>
+					<aside class="notes">
+						<p>
+							Myślę, że warto się przedstawić. Jestem Jakub Gardo i jestem Senior Java Developerem z 10 letnim
+							stażem.
+						</p>
+						<p>
+							Na codzień pracuję w Dynamic Solutions,
+						</p>
+						<p>
+							współorganizuję Poznańskiego JUGa,
+						</p>
+						<p>
+							a jeśli kogoś prezentacja zaciekawiła, to o podobnych sprawach piszę bloga - jgardo.dev
+						</p>
+						<p>
+							Na tym koniec autopromocji, czas przejść do sedna.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h1>Jak ta Java działa?</h1>
+					<dl>
+						<dt class="fragment">Czymże jest Java?</dt>
+						<dd class="fragment">Java (wym. dżawa) – współbieżny, oparty na klasach, obiektowy język programowania ogólnego zastosowania</dd>
+						<dt class="fragment">Jak działają programy napisane w Javie?</dt>
+						<dd class="fragment">To zależy.</dd>
+					  </dl>
+					<aside class="notes">
+						<p>
+							A sednem tej prezentacji jest pytanie - Jak ta Java działa?
+						</p>
+						<p>
+							Trzeba najpierw zadać sobie pytanie - co to w ogóle jest ta Java.
+							Wg wikipedii jest to "współbieżny, oparty na klasach, obiektowy język programowania ogólnego zastosowania".
+							Zatem sama Java jest językiem, więc nie bardzo język może działać...
+						</p>
+						<p>
+							Poprawnym pytaniem powinno być, jak działają programy napisane w Javie.
+						</p>
+						<p>
+							Odpowiedż jest standardowa i brzmi: to zależy
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Programy napisane w Javie</h2>
+					<p>
+						<ul class="programs-in-java">
+							<li class="fragment"><span>Android,&nbsp;</span><img src="images/android.png"/></li>
+							<li class="fragment"><span>GraalVM Native Image,<img src="images/graalvm.png"/></span></li>
+							<li class="fragment"><span>JRE,&nbsp;<img src="images/duke.png"/></span></li>
+							<li class="fragment"><span>JDK&nbsp;<img src="images/jdk.png"/></span></li>
+						</ul>
+					</p>
+					<aside class="notes">
+						<p>
+							Jednak jest wiele platform, na które można pisać w Javie.
+							Przykładowo na Androida tworzy się kod pisany w Javie.
+							Również kod uruchamiany na GraalVM Native Image.
+						</p>
+						<p>
+							Są też aplikacje klienckie tzn JRE, które pozwalają tylko na uruchomienie bajtkodu.
+							Właściwie to pozwalały, bo Oracle zakończył wydawanie JRE na wersji 10.
+						</p>
+						<p>
+							Ostatecznie mamy też aplikacje serwerowe, które chyba stanowią większość zastosowań Javy.
+							<br/>
+							Właśnie o aplikacjach serwerowych uruchamianych z użyciem
+							implementacji OpenJDK chciałem właśnie dziś opowiedzieć.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Cykl życia kodu w OpenJDK</h2>
+					<table style="width: 100%;">
+						<tr>
+							<th style="width: 20%;">
+								Clazz.java
+							</th>
+							<th style="width: 10%;" class="fragment" data-fragment-index="1">-></th>
+							<th style="width: 20%;" class="fragment" data-fragment-index="1">
+								<span class="fragment highlight-green" data-fragment-index="4">Clazz.class</span>
+							</th>
+							<th style="width: 10%;" class="fragment" data-fragment-index="2">-></th>
+							<th style="width: 20%;" class="fragment" data-fragment-index="2">
+								C1
+							</th>
+							<th style="width: 10%;" class="fragment" data-fragment-index="3">-></th>
+							<th style="width: 20%;" class="fragment" data-fragment-index="3">
+								<p class="fragment highlight-green" data-fragment-index="4">C2</p>
+							</th>
+						</tr>
+					</table>
+					<aside class="notes">
+						<p>
+							Aby nie było znów zbyt łatwo, kod wykonywany jest w różny sposób w różnych fazach
+							działania programu.
+						</p>
+						<p>
+							Najpierw kod żródłowy kompilowany jest do bytecodu.
+							Następnie włączana jest maszyna wirtualna Javy, która ten bytecode interpretuje.
+						</p>
+						<p>
+							Po bodajże 2 000 uruchomień metody jest ona kompilowana z użyciem kompilatora C1.
+						</p>
+						<p>
+							Jeśli wszystko pójdzie dobrze, to po 15 000 uruchomień metody jest ona kompilowana z
+							użyciem kompilatora C2.
+						</p>
+						<p>
+							W tej prezentacji skupię się na kodzie interpretowanym oraz kodzie skompilowanym przez C2.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="zoom-out">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+<span class="fragment highlight-current-background">   private static final Logger log =
+      LoggerFactory.getLogger(SmsTemplateService.class);</span>
+
+   private final SmsService smsService;
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+       new IllegalStateException("Something's wrong..."));
+
+      var text = createTextByTemplate(smsTemplateDTO);
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+					</code></pre>
+					<aside class="notes">
+						<p>
+							Po tym krótkim wstępie czas do kodu!
+						</p>
+						<p>
+							Załóżmy, że mamy aplikację do wysyłania smsów, a w niej taki feature, który pozwala na
+							generowanie smsów na podstawie szablonu.
+						</p>
+						<p>
+							Kod, jak to każdy kod - nie jest idealny.
+							Jednak, co zobaczmy w tym kodzie się dzieje.
+						</p>
+						<p>
+							Na rozgrzewkę zajmiemy się zmienną statyczną, czyli w tym przypadku Loggerem.
+							Kieda ta zmienna jest inicjalizowana?
+						</p>
+					</aside>
+				</section>
+				<section data-transition="zoom-in fade-out">
+					<h2>Inicjalizacja klasy - kiedy?</h2>
+					<blockquote class="fragment" data-fragment-index="2" style="width: 80%;">
+						A class or interface type T will be initialized immediately before the first occurrence of any one of the following:
+						<br/>
+						<ul>
+							<li>T is a class and an instance of T is created.</li>
+							<li>A static method declared by T is invoked.</li>
+							<li>A static field declared by T is assigned.</li>
+							<li>A static field declared by T is used and the field is not a constant variable (§4.12.4).</li>
+						</ul>
+					</blockquote>
+					<span class="fragment more" data-fragment-index="2">Cytat z <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-12.html#jls-12.4.1">JLS</a>
+					<aside class="notes">
+						<p>
+							Odpowiedź na to pytanie jest zawarta w Java Language Specification.
+							Nie wiem, czy kiedyś czytaliście JLS, ale przy odrobinie samozaparcia można to zrozumieć.
+						</p>
+						<p>
+							Przytoczony cytat można streścić w zdaniu - klasa jest inicjalizowana,
+							gdy po raz pierwszy odwołujemy się do klasy.
+							Można by założyć, że gdy używamy stałej, czyli pola static final
+							typu prymitywnego lub String, to klasa również powinna być inicjalizowana.
+							I tu pierwsza ciekawostka - tak nie jest. Pokrywa się to z punktem 4 JLS.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Inicjalizacja klasy - jak?</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+<span class="fragment highlight-current-green" data-fragment-index="2">public static final Object OBJECT = new Object();</span>
+<span class="fragment highlight-current-green" data-fragment-index="3">static { System.out.println("Whatever"); }</span>
+<span class="fragment highlight-current-green" data-fragment-index="4">public static final String SOME_STRING = calculateString();</span>
+</code></pre>
+<pre class="fragment" data-fragment-index="1" style="margin-top: 20px;"><code class="hljs java" data-noescape data-trim>
+static {};             // ukryta nazwa &lt;clinit&gt;
+flags: (0x0008) ACC_STATIC
+Code:   stack=2, locals=0, args_size=0
+<span class="fragment highlight-current-green" data-fragment-index="2">     0: new           #3   // class
+	java/lang/Object
+     3: dup
+     4: invokespecial #1   // Method java/lang/Object."&lt;init&gt;":()V
+	 7: putstatic     #4   // Field OBJECT:Ljava/lang/Object;</span>
+<span class="fragment highlight-current-green" data-fragment-index="3">    10: getstatic     #5   // Field java/lang/System.out:Ljava/io/PrintStream;
+    13: ldc           #6   // String Whatever
+    15: invokevirtual #7   // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span>
+<span class="fragment highlight-current-green" data-fragment-index="4">    18: invokestatic  #8   // Method calculateString:()Ljava/lang/String;
+    21: putstatic     #9   // Field SOME_STRING:Ljava/lang/String;
+    24: return</span>
+  LineNumberTable:
+<span class="fragment highlight-current-green" data-fragment-index="5">    line 10: 0</span>
+<span class="fragment highlight-current-green" data-fragment-index="6">    line 13: 10</span>
+<span class="fragment highlight-current-green" data-fragment-index="7">    line 16: 18</span>
+</code></pre>
+					<aside class="notes">
+						<p>
+							A w jaki sposób klasa jest inicjalizowana?
+						</p>
+						<p>
+							Jeżeli napisalibyśmy taki kawałek kodu jak na górze slide'u,
+							przepuścili przez kompilator, to w zdekompilowanym kodzie
+							zobaczylibyśmy bytecode ukazany na dole slide'u.
+							Krótko mówiąc - wszystkie bloki inicjalizacyjne i inicjalizacje zmiennych statycznych
+							brane są według kolejności w kodzie, łączone i wrzucane do specjalnej metody
+							&lt;clinit&gt; w nawiasach trójkątnych.
+						</p>
+						<p>
+							Jeśli chodzi o informacje o źródłowych liniach kodu są one trzymane w bytecodzie.
+							Dzięki temu, gdy podepniemy się debugerem to widać skakanie odpowiednio po kolejnych
+							liniach kodu.
+
+							Metoda &lt;clinit&gt; jest maksymalnie jedna w klasie i musi mieć sygnaturę static void.
+							Jest ona takim swoistym konstruktorem klasy...
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+<span class="fragment unhighlight-current-background">   private static final Logger log =
+      LoggerFactory.getLogger(SmsTemplateService.class);</span>
+
+   private final SmsService smsService;
+
+<span class="fragment highlight-current-background">   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+</span>
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+       new IllegalStateException("Something's wrong..."));
+
+      var text = createTextByTemplate(smsTemplateDTO);
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+					</code></pre>
+					<aside class="notes">
+						<p>
+							Wróćmy jednak do naszego kodu.
+							Inicjalizacja klasy jest dość prostym zagadnieniem, a jak to wygląda w przypadku konstruktora?
+						</p>
+					</aside>
+				</section>
+				<section data-transition="zoom-in fade-out">
+				<pre><code class="hljs java" data-noescape data-trim>
+public class Init extends SuperInit {
+   public final Object OBJECT;
+<span class="fragment highlight-current-background" data-fragment-index="2">   {
+      OBJECT = new Object();
+      System.out.println("Whatever");
+   }
+</span><span class="fragment highlight-current-background" data-fragment-index="3">   public final String SOME_STRING = calculateString();
+</span>   public final String whatver;
+   private String calculateString() {
+      System.out.println(SOME_STRING);
+      return "A" + "B";
+   }
+
+   public Init(String whatever) {
+<span class="fragment highlight-current-background" data-fragment-index="1">      super("super");</span>
+<span class="fragment highlight-current-background" data-fragment-index="4">      this.whatver = whatever;</span>
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							W jakiej kolejności się będzie dokonywać inicjalizacja nowego obiektu?
+
+							Tak na intuicję, to treść konstruktora powinnna być wykonywana niepodzielnie.
+							Kiedy jednak uruchomić bloki inicjalizacyjne lub zainicjalizować pola?
+
+							Z drugiej strony wywołanie konstruktora nadklasy musi być wykonane jako pierwsze wywołanie inicjalizacji instancji.
+						</p>
+						<p>
+							Te mechanizmy są oczywiście opisane w Java Language Specification.
+
+							Zgodnie z nim jako pierwszy uruchomi się konstruktor nadklasy. Następnie uruchamiane są bloki inicjalizacyjne lub inicjalizacja pól według kolejności występowania w kodziem, a na koniec (co nieco nieintuicyjne) reszta konstruktora.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+public dev.jgardo.lambda.Init(java.lang.String);
+descriptor: (Ljava/lang/String;)V
+flags: (0x0001) ACC_PUBLIC
+Code:
+stack=3, locals=2, args_size=2
+<span class="fragment highlight-current-green" data-fragment-index="1">    0: aload_0
+    1: ldc           #5    // String super
+	3: invokespecial #6    // Method dev/jgardo/lambda/SuperInit."&lt;init&gt;":(Ljava/lang/String;)V</span>
+<span class="fragment highlight-current-green" data-fragment-index="2">    6: aload_0
+    7: new           #7    // class java/lang/Object
+    10: dup
+    11: invokespecial #8    // Method java/lang/Object."&lt;init&gt;":()V
+    14: putfield      #9    // Field OBJECT:Ljava/lang/Object;
+    17: getstatic     #1    // Field java/lang/System.out:Ljava/io/PrintStream;
+	20: ldc           #10   // String Whatever</span>
+<span class="fragment highlight-current-green" data-fragment-index="3">    22: invokevirtual #3    // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+    25: aload_0
+    26: aload_0
+    27: invokespecial #11   // Method calculateString:()Ljava/lang/String;
+    30: putfield      #2    // Field SOME_STRING:Ljava/lang/String;</span>
+<span class="fragment highlight-current-green" data-fragment-index="4">    33: aload_0
+    34: aload_1
+    35: putfield      #12   // Field whatver:Ljava/lang/String;
+	38: return</span>
+</code></pre>
+					<aside class="notes">
+						<p>
+							Kolejność ta odzwierciedlona jest w bajtkodzie. Podobnie do inicjalizacji klasy, konstruktor jest ukryty pod nazwą &lt;init&gt;.
+							Konstruktorów może być wiele, zatem wiele może być w bajtkodzie metod &lt;init&gt; o różnych sygnaturach.
+
+							Podobnie do inicjalizacji klasy, włączając debuger również możemy zaobserwować to skakanie po linijkach kodu.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>A jak to będzie w JDK 22?</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+public class Init extends SuperInit {
+   private static String calculateString() {
+      System.out.println(SOME_STRING);
+      return "A" + "B";
+   }
+
+   public Init(String whatever) {
+<span class="fragment" data-fragment-index="1">      if (whatever == null)</span>
+<span class="fragment" data-fragment-index="1">          throw new IllegalArgumentException();</span>
+      super(calculateString());
+      this.whatver = whatever;
+   }
+</code></pre>
+				<span class="fragment more" data-fragment-index="2">
+					Więcej w <a href="https://openjdk.org/jeps/447">JEP-447</a>
+				</span>
+					<aside class="notes">
+						<p>
+							Oczywiście Java cały czas się zmienia i w JDK 22 w preview będzie możliwość umieszczenia
+							kodu także przed super(). Zasadniczo do konstruktora nadklasy już wcześniej mogliśmy
+							przekazywać argumenty będące wynikiem działania statycznej funkcji.
+
+							Teraz restrykcje są jeszcze bardziej rozluźnione - możemy pisać kod działający przed
+							konstruktorem nadklasy, ale tylko taki, który jest w "statycznym kontekście"
+							tzn. nie odnosi się do pól i metod instancyjnych.
+
+							Dzięki temu można w konstruktorze zamieścić proste walidacje przed uruchomieniem konstruktora nadklasy.
+
+							Więcej o tym w JEP-447.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+<span class="fragment highlight-current-background" data-fragment-index="2">   private final SmsService smsService;</span>
+
+<span class="fragment unhighlight-current-background" data-fragment-index="1">   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }</span>
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+       new IllegalStateException("Something's wrong..."));
+
+      var text = createTextByTemplate(smsTemplateDTO);
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+					</code></pre>
+					<aside class="notes">
+						<p>
+							Wracając do kodu, to między inicjalizacjami klasy i obiektu jest jeszcze takie piękne słowo,
+							czyli final.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Optymalizacje finala</h2>
+					<ul>
+						<li class="fragment">Przy zmiennych <span class="fragment"> - pomijany</span></li>
+						<li class="fragment">Przy metodach <span class="fragment">- zbędny</span></li>
+						<li class="fragment">Przy klasach <span class="fragment">- nadmiarowy</span></li>
+						<li class="fragment">Przy polach statycznych <span class="fragment">- przydaje się</span></li>
+						<li class="fragment">Przy polach <span class="fragment">- mało używane</span></li>
+					</ul>
+					<aside class="notes">
+						<p>
+							Niestety słowo final, które mogłoby być pewną furtką do optymalizacji obiektów
+							niezmiennych, jest w OpenJDK traktowane bardzo po macoszemu.
+						</p>
+						<p>
+							Przy zmiennych final zapewnia, że nie można ponownie przypisać wartości do zmiennej.
+							Niestety jest pomijany na etapie kompilacji do bytecode'u.
+						</p>
+						<p>
+							Przy metodach final zapewnia, że w podklasie nie będzie można nadpisać danej metody.
+							Niestety ta informacja jest zbędna, gdyż tę informację można łatwo wywnioskować
+							mechanizmem Class Hierarchy Analysis.
+						</p>
+						<p>
+							Przy klasach final zapewnia, że nie będzie żadnej podklasy.
+							Tutaj również ta informacja jest wnioskowana w ramach Class Hierarchy Analysis
+						</p>
+						<p>
+							Jedynym przypadkiem użycia finala, który jest odpowiednio dobrze potraktowany przez JVMa
+							jest final na polach statycznych. Dla wartości prymitywnych i stringów wykonywane jest w
+							miarę możliwości Constant Folding, czyli wyliczenie wartości pola i podmiana wartości,
+							tam gdzie jest użyta stała. W niektórych przypadkach optymalizowane są również operacje
+							na obiektach w polach statycznych finalnych.
+						</p>
+						<p>
+							Przy polach final zapewnia, że dane pole nie zostanie przypisane ponownie.
+							Ta informacja jest używana w bardzo niewielkim stopniu, o przyczynach w następnym slide'zie.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Ile wart jest final na polach?</h2>
+					<ul>
+						<li class="fragment">Zmiana refleksją</li>
+						<li class="fragment">Zmiana metodą natywną </li>
+						<li class="fragment">Zmiana poprzez <code class="hljs">misc.Unsafe</code></li>
+						<li class="fragment">Zmiana poprzez <code class="hljs">VarHandle</code><br/>
+							<span class="fragment more">O zmienności finali: <a href="http://www.progdoc.de/papers/JET2015/How_final_is_final.pdf">slajdy</a>;
+							<a href="https://www.youtube.com/watch?v=Wt4xsqBy3wI">prezentacja</a></span>
+						</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							Są 4 powody, dlaczego optymalizacje na polach finalnych nie mają większego sensu.
+						</p>
+						<p>Ich wartość da się zmienić refleksją</p>
+						<p>Ich wartość da się zmienić metodą natywną</p>
+						<p>Ich wartość da się zmienić z użyciem misc.Unsafe</p>
+						<p>Ich wartość da się zmienić z użyciem VarHandle</p>
+						<p>Na co więc takie pola finalne, które nie są finalne...</p>
+					</aside>
+				</section>
+				<section>
+					<h4>Co daje final?</h4>
+					<pre><code class="hljs java" data-noescape data-trim>
+@Actor                      <span class="fragment" data-fragment-index="2">// Observed state / Occurrences</span>
+public void actor1() {              <span class="fragment" data-fragment-index="2">// -1   82,909,900</span>
+   o = new MyObject(v);             <span class="fragment" data-fragment-index="2">// 0             0</span>
+}                                   <span class="fragment" data-fragment-index="2">// 1             0</span>
+                                    <span class="fragment" data-fragment-index="2">// 2             0</span>
+@Actor                              <span class="fragment" data-fragment-index="2">// 3             0</span>
+public void actor2(I_Result r) {    <span class="fragment" data-fragment-index="2">// 4             0</span>
+   MyObject o = this.o;             <span class="fragment" data-fragment-index="2">// 5           622</span>
+   if (o != null) {                 <span class="fragment" data-fragment-index="2">// 6         1,434</span>
+      r.r1 = o.x8 + o.x7 + (...);   <span class="fragment" data-fragment-index="2">// 7           420</span>
+   } else {                         <span class="fragment" data-fragment-index="2">// 8    16,973,344</span>
+      r.r1 = -1;
+   }
+}
+public static class MyObject {
+   /*final*/ int x1, x2, x3, x4, x5, x6, x7, x8;
+   public MyObject(int v) {
+      x1 = v; x2 = v; // (...)
+   }
+}</code></pre>
+					<span class="fragment more" data-fragment-index="2">
+					<a href="https://github.com/openjdk/jcstress/blob/master/jcstress-samples/src/main/java/org/openjdk/jcstress/samples/jmm/basic/BasicJMM_08_Finals.java">Źródło powyższego JCStressu</a>;
+					więcej o finalach <a href="https://blog.jgardo.dev/2019/12/28/tworzenie-obiektow-z-finalnymi-polami-instancyjnymi/">tu</a>
+					</span>
+					<aside class="notes">
+						<p>
+							Final na polach ma jedną niewątpliwą zaletę, o której się rzadko mówi.
+							Otóż w bardzo rzadkich przypadkach stworzony obiekt może być udostępniony innym wątkom,
+							zanim zostanie w pełni zainicjalizowany.
+							Obrazuje to stress test pokazany na slajdzie.
+							Sytuacja jest następująca: jeden wątek ciągle tworzy obiekt i od razu go udostępnia w
+							polu klasy, drugi wątek odczytuje obiekt i sprawdza, czy wszystkie pola są zainicjalizowane.
+						</p>
+						<p>
+							Okazuje się, że w dwóch na sto tysięcy przypadków, widać niezainicjalizowane
+							pola. Może się to wydawać mało, ale znając życie na produkcji akurat znajdą się takie
+							przypadki.
+
+							I tu wchodzi final cały na biało. Zapewnienia on, że obiekty będą widoczne
+							dopiero, gdy wszystkie pola finalne będą zainicjalizowane.
+						</p>
+						<p>
+							Oczywiście zapewnienie to dzieje się pewnym kosztem niewielkim wydajności w czasie
+							tworzenia
+							obiektu.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+<span class="fragment unhighlight-current-background">   private final SmsService smsService;</span>
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+<span class="fragment highlight-current-background">         .filter(dto -> Objects.nonNull(dto.getType()))</span>
+         .orElseThrow(() ->
+       new IllegalStateException("Something's wrong..."));
+
+      var text = createTextByTemplate(smsTemplateDTO);
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+					</code></pre>
+					<aside class="notes">
+						<p>
+							Czas przejść do ciekawszych aspektów Javy.
+						</p>
+						<p>
+							Na początek pytanie nurtujące wiele osób od 2015 roku - czym tak naprawdę są wyrażenia lambda?
+						</p>
+					</aside>
+				</section>
+				<section data-transition="zoom-in fade-out">
+					<h2>Możliwe implementacje wyrażeń lambda</h2>
+					<div class="left-alligned">
+						<ul class="fragment">
+							<li>Klasa anonimowa</li>
+						</ul>
+						<ul class="fragment">
+							<li>Dynamiczne proxy</li>
+						</ul>
+						<ul class="fragment">
+							<li>Method handle</li>
+						</ul>
+					</div>
+					<aside class="notes">
+						<p>
+							Istnieje wiele potencjalnych implementacji lambdy.
+							Przykładowo może to być klasa anonimowa,
+							dynamiczne proxy albo method handle.
+						</p>
+						<p>
+							Zacznijmy od spojrzenia w bajtkod.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+public SmsDTO save(SmsTemplateDTO);
+Code:
+<span class="fragment highlight-current-green" data-fragment-index="1">0: aload_1</span>              | <span class="fragment highlight-current-green" data-fragment-index="2">Optional.ofNullable</span>(<span class="fragment highlight-current-green" data-fragment-index="1">smsTemplateDTO</span>)
+<span class="fragment highlight-current-green" data-fragment-index="2">1: invokestatic  #3 </span>    |    <span class="fragment highlight-current-green" data-fragment-index="4">.filter</span>(<span class="fragment highlight-current-green" data-fragment-index="3">Objects::nonNull</span>)
+<span class="fragment highlight-current-green" data-fragment-index="3">4: invokedynamic #4,  0</span> |    <span class="fragment highlight-current-green" data-fragment-index="6">.filter</span>(<span class="fragment highlight-current-green" data-fragment-index="5">dto -> Objects.nonNull(dto.getTemplateType())</span>)
+<span class="fragment highlight-current-green" data-fragment-index="4">9: invokevirtual #5</span>     |    .orElseThrow(<span class="fragment highlight-current-green" data-fragment-index="7">() -> new IllegalStateException("Something went wrong...")</span>);
+<span class="fragment highlight-current-green" data-fragment-index="5">12: invokedynamic #6,  0</span>
+<span class="fragment highlight-current-green" data-fragment-index="6">17: invokevirtual #5</span>
+<span class="fragment highlight-current-green" data-fragment-index="7">20: invokedynamic #7,  0</span>
+25: invokevirtual #8
+</code></pre>
+					<aside class="notes">
+						<p>
+							Porównując kod bajtowy z kodem źródłowym można zauważyć,
+							że w miejscach lambd mamy wywołania invokedynamic.
+							Odpowiadają one za zwrócennie obiektu, który implementuje wymagany przez metodę
+							interfejs.
+						</p>
+						<p>
+							Jednak jak sama nazwa wskazuje invokedynamic wywołuje dynamiczny kod -
+							ten kod na etapie kompilacji fizycznie nie istnieje.
+						</p>
+						<p>
+							Skąd zatem jvm wie, co ma zrobić?
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>invokedynamic</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+if (callsite == null) {
+    callsite = initializeWithBootstrapMethod(args);
+}
+
+MethodHandle mh = callsite.dynamicInvoker();
+T result = mh.invoke();
+return result;
+</code></pre>
+					<aside class="notes">
+						<p>
+							Otóż invokedynamic najpierw musi się dowiedzieć, co tak naprawdę chce wykonać.
+							Wiedza, jak ten dynamiczny kod utworzyć jest zdefiniowana przez metodę wskazywaną przy
+							invokedynamic. Nazwa tej metody znajduje się w sekcji BootstrapMethod w definicji klasy.
+						</p>
+						<p>
+							Przy pierwszym uruchomieniu invokedynamic Bootstrap Method jest wywoływana i zwraca
+							obiekt typu Callsite, który jest swego rodzaju fabryką kodu dynamicznego.
+							Po inicjalizacji Callsite, możemy ten kod pobrać, a następnie wykonać.
+						</p>
+						<p>
+							Jeśli zastanawiacie się, po co jest ten Callsite i czy by sam uchwyt na metodę by nie
+							wystarczył,
+							to jest to furtka na podmianę wywoływanej metody.
+							W końcu jest to kod dynamiczny i może się zmieniać.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokedynamic w lambdach</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+if (callsite == null) {
+    callsite = java.lang.invoke.LambdaMetafactory.metafactory(
+        _,
+        _,
+        _,
+        argument,
+        MethodHandle,
+        TargetInterface
+    );
+}
+
+MethodHandle mh = callsite.dynamicInvoker();
+T result = mh.invoke();
+return result;
+</code></pre>
+					<aside class="notes">
+						<p>
+							W przypadku lambdy Callsite uzyskuje się poprzez wywołanie metody
+							metafactory obiektu LambdaMetafactory.
+							W argumentach przekazywany jest wskaźnik na treść lambdy, czy docelowy Interfejs.
+
+							CallSite w jakiś sposób musi pozyskać obiekt implementujący interfejs.
+							W jaki sposób? To jest zdefiniowane dopiero w implementacji JVMa.
+							Na poziomie kompilacji do bytecodu tego nie wiemy...
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+Constant pool:
+<span class="fragment highlight-current-green" data-fragment-index="1">  #6 = InvokeDynamic  #1:#93 //#1:test:()Ljava/util/function/Predicate;</span>
+  #89 = MethodHandle  6:#148  // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #95 = MethodHandle  6:#154  // REF_invokeStatic SmsTemplateService.lambda$save$0:(Ldev/jgardo/jvmers/service/dto/SmsTemplateDTO;)Z
+
+public SmsDTO save(SmsTemplateDTO);
+  Code:
+    12: invokedynamic #6,  0  // InvokeDynamic #1:test:()Ljava/util/function/Predicate;
+
+<span class="fragment highlight-current-green" data-fragment-index="3">private static boolean lambda$save$0(SmsTemplateDTO);</span>
+  descriptor: (LSmsTemplateDTO;)Z
+  flags: (0x100a) ACC_PRIVATE, <span class="fragment highlight-current-green" data-fragment-index="4">ACC_STATIC,ACC_SYNTHETIC</span>
+
+BootstrapMethods:
+<span class="fragment highlight-current-green" data-fragment-index="2">  1: #89 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;</span>
+    Method arguments:
+      #90 (Ljava/lang/Object;)Z
+      #95 REF_invokeStatic SmsTemplateService.lambda$save$0:(LSmsTemplateDTO;)Z
+      #92 (LSmsTemplateDTO;)Z
+</code></pre>
+					<aside class="notes">
+						<p>
+							Wszystkie wspomniane informacje widać w bytecodzie.
+						</p>
+						<p>
+							Po pierwsze - w sekcji Constant pool widać invokedynamic z odniesieniem do metody inicjalizującej callSite.
+						</p>
+						<p>
+							Po drugie - w sekcji BootstrapMethods widać, że dla lambdy tworzymy callsite z użyciem LambdaMetafactory.
+						</p>
+						<p>
+							Po trzecie - w lisitingu widzimy metodę statyczną prywatną z dodatkową flagą synthetic, która oznacza,
+							że to kompilator wygenerował tę metodę. Treść metody to treść lambdy.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Lambda vs Method Reference</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+   .filter(a -> Objects.nonNull(a))
+   // vs
+   .filter(Objects::nonNull)
+
+<span class="fragment">  private static boolean methodName$lambda$0(Integer);
+    descriptor: (Ljava/lang/Integer;)Z
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC</span>
+					</code></pre>
+					<aside class="notes">
+						<p>
+							Można się zastanawiać, jaka jest różnica między pierwszym, a drugim zapisem?
+							Biznesowo są one tożsame, a technicznie, pierwszy tworzy nową metodę pomocniczą, która
+							jest używana przez LambdaMetafactory, a druga korzysta z uchwytu do istniejącej.
+						</p>
+						<p>
+							A ile tych lambd może maksymalnie stworzyć? Limit jest identyczny z maksymalną liczbą
+							metod, czyli 65 535. To znaczy, jeśli mamy jakiś "ośmiotysięcznik", to w każdej linijce
+							możemy użyć maksymalnie 8 lambd.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Możliwe implementacje wyrażeń lambda</h2>
+					<div class="left-alligned">
+						<ul>
+							<li>Klasa anonimowa</li>
+						</ul>
+						<ul>
+							<li>Dynamiczne proxy</li>
+						</ul>
+						<ul>
+							<li>Method handle</li>
+						</ul>
+						<br/>
+						<br/>
+						<h3 class="fragment">
+							Implementacja zależy od JVMa...
+						</h3>
+						<h5 class="fragment">
+							... choć w <a href="https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/lang/invoke/LambdaMetafactory.java#L323"> OpenJDK </a>jest to wygenerowana w runtime klasa wewnętrzna.
+						</h5>
+					</div>
+					<aside class="notes">
+						<p>
+							I na koniec rozwiązanie zagadki, czym jest lambda.
+						</p>
+						<p>
+							Jak już mówiłem, zależy to od implmementacji JVMa,
+						</p>
+						<p>
+							a w OpenJDK jest to wygenerowana w runtime klasa wewnętrzna.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+   private final SmsService smsService;
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+<span class="fragment unhighlight-current-background">         .filter(dto -> Objects.nonNull(dto.getType()))</span>
+         .orElseThrow(() ->
+<span class="fragment highlight-current-background">         new IllegalStateException("Something's wrong..."));</span>
+
+      var text = createTextByTemplate(smsTemplateDTO);
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							Po lambdach czas przejść do nieco starszego mechanizmu - do wyjątków.
+						</p>
+						<p>
+							Kto z Was słyszał o Exception Driven Development?
+							To taki sposób programowania, gdzie biznesowymi przepływami zamiast sterować ifem
+							preferuje się rzucanie wyjątku. Prowadzi to do tego, że wyjątki nie są wyjątkową sytuacją.
+
+							A jak bardzo nie jest to wydajne?
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+public static void main(String[] args) {
+    try {
+        throwSth(/*10,20*/ 100);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+private static void throwSth(int i) {
+    if (i == 0) {
+        // throw new RuntimeException();
+    } else {
+        throwSth(i--);
+    }
+}
+</code></pre>
+					<aside class="notes">
+						<p>
+							Otóż to wszystko zależy.
+							Najbardziej zależy od tego, jak na jakim poziomie łapiemy wyjątek.
+						</p>
+						<p>
+							Jeśli w powyższej metodzie, wywoływana metoda prywatna zostanie zinline'owana, to
+							ostatecznie w kodzie maszynowym zobaczymy proste goto.
+							Nie będziemy widzieć jakiegoś strasznego wpływu wyjątków na wykonanie metody.
+
+							Warto tu wspomnieć, że domyślnie C2 inline'uje maksymalnie 9 poziomów wgłąb.
+							Jeśli zastanawiacie się, czy 9 poziomów to dużo, to standardowa Springowa adnotacja
+							@Transactional generuje właśnie 9 dodatkowych frame'ów.
+							Oznacza to, że jeśli w jakimś serwisie oznaczonym @Transactional rzucicie wyjątek i na poziomie kontrolera go złapiecie,
+							to z pewnością ten wyjątek będzie obsłużony z większym narzutem niż w przypadku goto.
+						</p>
+						<p>
+							A jak szybko wykona się metoda z rzuceniem wyjątku versus bez rzucenia
+							wyjątku? Jest to jakieś kilkanaście razy wolniej. Dodatkowo im głębiej zarzucamy
+							wyjątkiem, tym proporcjonalnie dłużej będziemy go łowić.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+private static final RuntimeException EXCEPTION =
+                             new RuntimeException();
+
+public static void main(String[] args) {
+    try {
+        throw EXCEPTION;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+// java.lang.RuntimeException
+//   at dev.jgardo.lambda.Exceptions.&lt;clinit&gt;(Exceptions.java:10)
+</code></pre>
+					<aside class="notes">
+						<p>
+							Czas rzucania wyjątku zależy również od tego, czy tworzymy obiekt wyjątku.
+
+							Bo, co ciekawe, można wyjątek zcache'ować w polu i go rzucać bez tworzenia.
+
+							I równie ciekawe - choć logiczne - w stacktrace będzie widać moment tworzenia wyjątku.
+							Przy okazji widzimy też tę nazwę metody wykorzystywaną przy inicjalizacji statycznej klasy, czyli clinit.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+private static final class CustomException
+                      extends RuntimeException {
+    public CustomException() {
+        super(null, null, false, false);
+    }
+ // lub
+    @Override
+    public synchronized Throwable fillInStackTrace() {
+        return this;
+    }
+
+}
+// lub
+// -XX:-StackTraceInThrowable
+
+</code></pre>
+					<aside class="notes">
+						<p>
+							Najwolniejszą częścią tworzenia obiektu wyjątku jest wypełnianie stacktrace'a.
+							Jednak nie jesteśmy skazani na ten stacktrace - na kilka sposobów można się go pozbyć.
+							Chociażby poprzez odpowiedni konstruktor, flagę JVMa lub nadpisanie metody fillInStacktrace.
+						</p>
+						<p>
+							O ile wyłączenie stacktrace'ów może mieć dobry wpływ na wydajność,
+							o tyle jest idealnym strzałem w stopę - mam nadzieję, że nikt z was nie miał okazji debugować NullPointerException bez stacktrace'a.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+public static void main(String[] args) {
+    try {
+        doSth();
+        otherStuff();
+    } catch (Exception e) {
+        handleException();
+    }
+
+    // vs
+
+    int res = doSth();
+    if (res == 0) {
+        otherStuff();
+    } else {
+        handleException();
+    }
+}</code></pre>
+					<span class="fragment more">Źródło: <a href="https://shipilev.net/blog/2014/exceptional-performance/">Alexey Shipilëv</a>;
+						<a href="https://blog.jgardo.dev/2019/10/30/jak-wydajnie-rzucac-wyjatki/">blog.jgardo.dev</a>
+					</span>
+					<aside class="notes">
+						<p>
+							Skoro te wyjątki są takie złe, to czy istnieje jakaś alternatywa?
+							Najprostszą implementacją obsługującą błędy bez korzystania z wyjątków jest zwracanie flag błędów.
+							Jeśli wystąpi błąd, to zamiast rzucać wyjątkiem możemy zwrócić wartość o której wiemy, że jest kodem błędu.
+						</p>
+						<p>
+							Takie podejście jest stosowane chociażby w języku c.
+							O ile koszt obsługi błędu jest niższy niż w przypadku rzucania wyjątku,
+							o tyle to podejście wymaga stałego dodatkowego narzutu róznież w przypadku pozytywnej ścieżki.
+						</p>
+						<p>
+							Taki eksperyment między innymi przeprowadził Alexey Shipilev.
+							Krótko mówiąc, wyszło mu, że rzucanie wyjątku jest bardziej wydajne, jeśli wystąpi raz na tysiąc wywołań.
+							Jeśli błędy występują częściej lepiej stosować kody błędów.
+						</p>
+						<p>
+							W tym samym eksperymencie mu wyszło, że jeśli nie mamy stacktrace'ów, proporcje są 1-10.
+							A jeśli używamy zcache'owanego wyjątku w polu statycznym, to właściwie zawsze wydajniej używać wyjątków.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+   private final SmsService smsService;
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+<span class="fragment unhighlight-current-background">         new IllegalStateException("Something's wrong..."));</span>
+
+<span class="fragment highlight-current-background">      var text = createTextByTemplate(smsTemplateDTO);</span>
+
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							W kolejnej linijce widzimy mechanizm dowieziony w Javie 10 czyli var.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+List&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.size();           // invokeinterface
+
+var varList = new ArrayList&lt;String&gt;();
+varList.size();        // invokevirtual
+</code></pre>
+					<aside class="notes">
+						<p>
+							Var jest ciekawą konstrukcją wpływającą pozytywnie na czytelność kodu szczególnie z generykami generyków.
+							Może też mieć pewien niewielki pozytywny wpływ na wydajność.
+						</p>
+						<p>
+							Rozważmy dwa przypadki tworzenia ArrayList.
+							W pierwszym przypadku - zgodnie z dobrymi praktykami ukrywamy implementację za interfejsem.
+							Wobec tego mamy wywołanie metody zmiennej typowanej interfejsem oraz wywołanie z użyciem invokeinterface.
+
+							W drugim przypadku słowo zarezerwowane var jest rozwiązywane/wyliczane na etapie kompilacji do bytecode'u.
+							Oznacza to, że przy uruchomieniu zmienna ma typ wywnioskowany, czyli w tym przypadku ArrayList.
+							A to oznacza, że przy wywoływaniu metody size() użyjemy kodu invokevirtual zamiast invokeinterface.
+
+							Generalnie, jeśli starczy czasu, to opowiem, dlaczego invokeinterface jest wolniejsze.
+							Póki co uwierzcie mi na słowo, że nieco wolniejsze jest.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+var anonymous = new Object() {   // vs Object anonymous = new Object() {
+    int anInt;
+    public int ret() {
+        return anInt;
+    }
+};
+anonymous.anInt = 4;
+System.out.println(anonymous.ret());
+</code></pre>
+					<aside class="notes">
+						<p>
+							Jest jeszcze druga nieoczywista cecha słowa var.
+							Dotyczy ona klas anonimowych. Standardowo, gdy jej używamy, musimy zmienną określić typem
+							nadklasy lub interfejsem.
+							Przez to tracimy możliwości dostępu do specyficznych metod/zmiennych dla tej klasy.
+						</p>
+						<p>
+							I tutaj wkracza var cały na biało.
+							W przypadku vara wnioskowanie robione jest na etapie kompilacji kodu, czyli na tym samym etapie,
+							co generowanie klas anonimowych.
+							Dzięki temu znamy ten typ klasy anonimowej.
+							Dodatkowo możemy zdefiniować za pomocą var zmienną typu klasy anonimowej,
+							a nawet korzystać z jego specyficznych pól i metod.
+						</p>
+						<p>
+							Nie wiem jednak jak często zdarzało wam się korzystać ze specyficznych metod klas anonimowych.
+							Mnie nie za często... Właściwie nigdy. Ale da się? Da się!
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+   private final SmsService smsService;
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+      Optional.ofNullable(smsTemplateDTO)
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+         new IllegalStateException("Something's wrong..."));
+
+<span class="fragment unhighlight-current-background">      var text = createTextByTemplate(smsTemplateDTO);</span>
+
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      log.info(<span class="fragment highlight-current-background">"Sms saved. [id=" + savedDto.getId() + "]"</span>);
+      return savedDto;
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							Kolejnym mechanizmem w kolejce jest... konkatenacja stringów...
+							Temat tak banalny, że wydaje się, że nic tu nie może nas zaskoczyć.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Konkatenacja Stringów - jak?</h2>
+						<p>
+							<ol class="programs-in-java">
+								<li class="fragment" data-fragment-index="1"><span>Tworzony jest ciąg wywołań <code class="hljs">String.concat()</code> </span> </li>
+								<li class="fragment" data-fragment-index="2"><span>Przy pomocy <code class="hljs">StringBuffer</code>
+								</span><span class="fragment" data-fragment-index="5" style="color: #17ff2e;"> do Javy 1.4</span></li>
+								<li class="fragment" data-fragment-index="3"><span>Przy pomocy <code class="hljs">StringBuilder</code>
+								</span><span class="fragment" data-fragment-index="5" style="color: #17ff2e;"> do Javy 1.8</span></li>
+								<li class="fragment" data-fragment-index="4"><span>Kod generowany jest indywidualnie dla każdej konkatenacji
+								</span><span class="fragment" data-fragment-index="5" style="color: #17ff2e;"> od Javy 9</span></li>
+							</ol>
+						</p>
+						<aside class="notes">
+						<p>
+							Zatem proponuję ankietę: Jak zaimplementowana jest konkatenacja stringów (ta z użyciem plusa).
+							A - Na pierwszym Stringu wywoływana jest metoda concat z argumentem drugiego Stringa,
+							na nim jest wykonywana concat trzeciego stringa itd.
+							B - Tworzony jest obiekt pomocniczy StringBuffer, następnie na nim wywoływane jest append
+							z wszystkimi argumentami, a na końcu jest wywołanie metody toString().
+							C - analogicznie ale z użyciem StringBuildera
+							D - Dla każdego przypadku konkatenacji kod jest generowany indywidualnie
+						</p>
+						<p>
+							Chwila na zastanowienie i na łyka wody dla prowadzącego.
+							A teraz proszę śmiało podnosić ręce - kto głosuje na odpowiedź A. Kto na B?
+						</p>
+						<p>
+							Prawidłowa odpowiedź jest do przewidzenia - to zależy. Dokładniej od wersji Javy.
+							StringBuffer był używany do Javy 1.4, StringBuilder do Javy 1.8 włącznie, a od Javy 9
+							konkatenacja jest generowana indywidualnie.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<pre><code class="hljs java" data-noescape data-trim>
+public String helloWorldFromOldMen(long age) {
+    return "Hello " + " world from " + age + " years old men";
+<span class="fragment highlight-current-green" data-fragment-index="4">  //  for JDK 21 preview feature:</span>
+<span class="fragment highlight-current-green" data-fragment-index="4">    return STR."Hello world from \{age} years old men";</span>
+}
+
+Code:
+  0: lload_1
+<span class="fragment highlight-current-green" data-fragment-index="1">  1: invokedynamic #2, 0 // InvokeDynamic #0:makeConcatWithConstants:(J)Ljava/lang/String;</span>
+  6: areturn
+
+BootstrapMethods:
+<span class="fragment highlight-current-green" data-fragment-index="2">  0: #20 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;</span>
+    Method arguments:
+<span class="fragment highlight-current-green" data-fragment-index="3">    #21 Hello  world from \u0001 years old men</span>
+</code></pre>
+					<span class="fragment more">Źródło: <a href="https://openjdk.org/jeps/280">JEP-280</a>;<a href="https://openjdk.org/jeps/430">JEP-430</a>;
+						<a href="https://cr.openjdk.org/~shade/8085796/notes.txt">eksperymenty Shipilëv'a</a>
+					</span>
+					<aside class="notes">
+						<p>
+							I jeśli spojrzymy do bytecodu w wersji 9 wzwyż, zauważymy mechanizm znany z implementacji lambd,
+							czyli invokedynamic, BootstrapMethods oraz CallSite.
+							Działa to analogicznie, czyli przy pierwszym użyciu generowany jest kod konkatenacji,
+							a następnie jest on uruchamiany z użyciem invokedynamic
+						</p>
+						<p>
+							Po co do konkatenacji Stringów invokedynamic? W czym on jest lepszy od StringBuildera?
+							Otóż wykorzystanie Stringów jest tak powszechne, że ich optymalizacja jest bardzo pożądana.
+							Były podejścia do agresywnych optymalizacji w Javie 1.6 i 1.7 ale były kruche (łamliwe? z angielskiego fragile),
+							łatwe do zepsucia, a ich utrzymanie było kosztowne.
+							Dlatego zdecydowano o wyżej ukazanej implementacji. Pozwoliło to na ograniczenie kruchości,
+							gdyż nie musimy się godzić z optymalizacjami z poprzednich wersji,
+							dzięki czemu ograniczamy wymagalność wstecznej kompatybilności.
+							Dodatkowym atutem jest automatyczna poprawa wydajności w zależności od wersji Jvma -
+							wystarczy przepiąć JVMa na nowszy, bez potrzebnej rekompilacji starego kodu.
+						</p>
+						<p>
+							O czym warto wspomnieć to konkatenacja stringów z użyciem invokedynamic spowodowała wzrost wydajności 3-4 razy,
+							oraz zmniejszenie zapotrzebowania na pamięć również 3-4 razy. Ta redukcja zapotrzebowania na pamięć spowodowała,
+							że konkatenacja jest wykonywana praktycznie bez dodatkowych zmiennych, które by były łatwą pożywką dla Garbage Collectora.
+						</p>
+						<p>
+							Jeśli chodzi o tak zwane string templates (a przynajmniej STR template processor), to wygląda on dokładnie tak samo jak konkatenacja stringów.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+   private final SmsService smsService;
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+	<span class="fragment highlight-current-background" data-fragment-index="2">Optional.ofNullable(smsTemplateDTO)</span>
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+         <span class="fragment highlight-current-background" data-fragment-index="2">new IllegalStateException("Something's wrong...")</span>);
+
+      var text = <span class="fragment highlight-current-background" data-fragment-index="2">createTextByTemplate(smsTemplateDTO)</span>;
+
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      <span class="fragment highlight-current-background" data-fragment-index="2">log.info</span>(<span class="fragment unhighlight-current-background" data-fragment-index="1">"Sms saved. [id=" + savedDto.getId() + "]"</span>);
+      return savedDto;
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							Tak sobie mówimy o wywoływaniu metod, a nie koniecznie wiemy, jak to następuje...
+							Wśród zaznaczonych metod, każda jest wywoływana z użyciem różnych instrukcji bytecode'u.
+							Jednak, żeby zrozumieć, dlaczego potrzebujemy różnych kodów bajtowych,
+							musimy przypomnieć sobie, w jaki sposób działają wątki w JVMie.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Struktura wątku w pamięci</h2>
+					<div class="left-alligned">
+						<ul>
+							<li>Program counter</li>
+							<li class="fragment">Thread stack
+								<ul>
+								  <li class="fragment">Stack frames...
+									<ul class="fragment">
+									  <li>This (?)</li>
+									  <li>Params...</li>
+									  <li>Local variables...</li>
+									  <li>Returned value (?)</li>
+									  <li>Operand stack</li>
+									</ul>
+								  </li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<aside class="notes">
+						<p>
+							O ile wiemy, że wątki mają swoje stosy, o tyle nie zawsze wiemy, co się na nich znajduje.
+							Wbrew pozorom znajdują się na nich przede wszystkim ramki czyli frame'y.
+							Dopiero wewnątrz tych frame'ów znajdują się poszczególne parametry,
+							zmienne, wskaźnik na this i co ciekawe nawet zwrócona wartość.
+
+							W ramce znajduje się również wewnętrzny prywatny stos do wykonywania bytecode'u.
+							Wielkość tego stosu jest określana na etapie kompilacji metody.
+						</p>
+						<p>
+							Zatem jeśli chcemy wywołać metodę, to:
+							Po pierwsze musimy wiedzieć, co chcemy wywołać.
+							Następnie tworzymy nową ramkę odpowiedniej wielkości.
+							Kolejne - Wrzucamy na stos nowej ramki najpierw - jeśli istnieje - nowy obiekt "this",
+							a za nim wszystkie parametry z sygnatury metody.
+							Na samym końcu możemy się zająć samym uruchomieniem metody.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokestatic</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+Optional.ofNullable(smsTemplateDTO)
+
+Code:
+stack=2, locals=5, args_size=2
+   0: aload_1           // smsTemplateDTO
+   1: invokestatic  #3  // Method java/util/Optional.ofNullable:(Ljava/lang/Object;)Ljava/util/Optional;
+</code></pre>
+					<aside class="notes">
+						<p>
+							Invokestatic służy jak sama nazwa wskazuje do wywołania metod statycznych.
+
+							Wiemy, jaką metodę chcemy wywołać, nie ma przeciążania metod statycznych.
+							Dokładniej mówię o wiązaniu statycznym, czyli po angielsku static binding.
+						</p>
+						<p>
+							I druga ważna sprawa, że w przeciwieństwie do pozostałych 3 omawianych kodów bajtowych,
+							nie jest przekazywany this.
+						</p>
+						<p>
+							Innymi słowy, jak interpreter widzi invokestatic, to ma rozumie to jako:
+							1. Wywołaj dokładnie tę metodę o którą Cię proszę,
+							2. Pierwszy element na stosie ramki to nie jest this.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokespecial</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+var smsDTO = new SmsDTO();
+
+Code:
+stack=2, locals=3, args_size=2
+0: new           #30  // class SmsDTO
+3: dup
+4: invokespecial #31  // Method SmsDTO."&lt;init&gt;":()V
+</code></pre>
+					<aside class="notes">
+						<p>
+							Kolejnym kodem bytecode'u jest invokespecial.
+							W nim już wiemy, że mamy przekazać obiekt, który w wywołanej metodzie posłuży jako this.
+							Przekazanie parametrów we wszystkich odbywa się poprzez stos aktywnej ramki wątku.
+
+							Jednym z przykładów użycia wywołania invokespecial jest konstruktor.
+							Jednak samo wywołanie konstruktora zapisane za pomocą trzech instrukcji kodu bajtowego.
+							Pierwsza odpowiada za zarezerwowanie miejsca oraz wypełnienie domyślnymi wartościami tzn nullami lub zerami.
+							Druga odpowiada za traktowanie stworzonego obiektu jako this w konstruktorze.
+							Dopiero trzecia instrukcja czyli właśnie invokespecial odpowiada za ciało konstruktora.
+
+							Kluczową cechą invokespecial jest to, że wywołujemy dokładnie tą metodę, o którą prosimy.
+							Nie interesuje nas, czy metoda jest przeciążona, czy nie.
+							Podobnie jak w invokestatic jest to wiązanie statyczne.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokevirtual</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+SmsDTO savedDto = smsService.save(smsDTO);
+
+Code:
+stack=2, locals=5, args_size=2
+45: aload_3
+46: invokevirtual #11  // Method dev/jgardo/jvmers/service/SmsService.save:(Ldev/jgardo/jvmers/service/dto/SmsDTO;)Ldev/jgardo/jvmers/service/dto/SmsDTO;
+49: astore  4
+</code></pre>
+					<aside class="notes">
+						<p>
+							Inaczej zachowuje się invokevirtual. W jego przypadku musimy sprawdzić typ obiektu, którego metodę wywołujemy
+							oraz, czy metoda jest nadpisana.
+							Krócej mówiąc w invokevirtual mamy do czynienia z wiązaniem dynamicznym,
+							w przeciwieństwie do dwóch poprzednich instrukcji.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokevirtual - vtable</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+class SomeClass {
+    public String name() {}
+}
+
+// vtable:
+// [0] -> hashCode()
+// [1] -> equals()
+// [2] -> toString()
+// (...)
+// [n] -> name()
+</code></pre>
+					<aside class="notes">
+						<p>
+							Invokevirtual w zamyśle korzysta ze struktury zwanej vtable.
+							Otóż każda sygnatura metody ma przypisany jeden slot w tej tabeli,
+							gdzie przechowywany jest swego rodzaju "wskaźnik" do metody.
+							Każda podklasa posiada wszystkie sygnatury w dokładnie takiej samej kolejności co nadklasa.
+							Jeśli w podklasie powstały dodatkowe metody o nieistniejących w nadklasie sygnaturach,
+							wówczas dodajemy takowe na końcu.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokevirtual - wywołanie</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+Object obj = new SomeClass();
+obj.toString();
+
+// 1.get class of obj and go to vtable at proper index
+// 2.launch method body
+</code></pre>
+					<aside class="notes">
+						<p>
+							Zatem aby wywołać wirtualnie metodę danej zmiennej musimy wykonać 3 kroki:
+						</p>
+						<p>1. Odczytać z heapa klasę obiektu, który jest przypisany do zmiennej.</p>
+						<p>2. Następnie odczytać z vtable wartość z odpowieniego slotu.</p>
+						<p>3. Ostatecznie należy załadować i uruchomić kod, na który dany slot wskazywał.</p>
+						<p>
+							Dzięki strukturze vtable wywołanie invokevirtual można wykonać w maksymalnie 3 odczytach z
+							pamięci.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokeinterface</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+log.info("Sms saved. [id=" + savedDto.getId() + "]");
+
+Code:
+stack=2, locals=5, args_size=2
+64: invokeinterface #15,  2  // InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V</code></pre>
+					<aside class="notes">
+						<p>
+							A wspominam o tym, aby móc porównać invokevirtual z ostatnią instrukcją do wywoływania metod,
+							którą jest invokeinterface.
+							W tym przypadku również stosowane jest dynamiczne wiązanie.
+							Istnieje jedna zasadnicza różnica między invokevirtual, a invokeinterface.
+							Otóż obiekt może mieć tylko jedną nadklasę, gdy interfejsów może implementować bardzo wiele.
+							Zatem w przypadku wywołania metody zdeklarowanej w interfejsie,
+							musimy wiedzieć, nie tylko o jaką metodę chodzi, ale i w którym jest interfejsie.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokeinterface - itable</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+class LinkedList&lt;E&gt; extends AbstractSequentialList&lt;E&gt;
+    implements List&lt;E&gt;, Deque&lt;E&gt; { }
+
+// itable[0] (List)    itable[1] (Deque)
+// [0] -> isEmpty()    [0] -> isEmpty()
+// [1] -> size()       [1] -> size()
+// [2] -> get()        [2] -> pop()
+// [3] -> set()        [3] -> peek()
+// [4] -> indexOf()    [4] -> offer()
+</code></pre>
+					<aside class="notes">
+						<p>
+							W przypadku interfejsów istnieje struktura analogiczna do vtable nazwana itable.
+							Trzeba pamiętać, że interfejsy mogą dziedziczyć jednokrotnie po innych interfejsach,
+							zatem struktura podinterfejsu jest identyczna ze strukturą nadinterfejsu plus dodatkowe metody.
+						</p>
+						<p>
+							Jak widać każdy obiekt może mieć wiele itable.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Invokeinterface - wywołanie</h2>
+					<pre><code class="hljs java" data-noescape data-trim>
+List list = new LinkedList();
+list.size();
+
+// 1.get class of obj
+// 2.try match first interface
+//     3.if match go to itable at proper index
+//     4.launch method body
+// if not match - try another (up to n interfaces)
+</code></pre>
+					<aside class="notes">
+						<p>
+							Przy wywołaniu musimy najpierw znaleźć odpowiedni interfejs, a nawet jeśli jest jeden, to musimy się upewnić,
+							że to jest ten, którego szukamy. Mamy zatem przynajmniej jeden odczyt więcej aniżeli w przypadku invokevirtual.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Metody prywatne</h2>
+					<ul>
+						<li class="fragment">
+							<span class="fragment strike">invokespecial</span>
+							<span class="fragment"> - do Javy 10</span></li>
+						<li class="fragment">invokevirtual - od Javy 11</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							Po omówieniu 4 opcode'ów odpowiadających za wywoływanie metody, możemy pokusić się o
+							odpowiedź jak wywoływać metody prywatne?
+						</p>
+						<p>
+							Teoretycznie ten case pasuje idealnie do invokespecial - mamy tutaj statyczne wiązanie,
+							nie ma czegoś takiego jak override'owanie metod prywatnych.
+						</p>
+						<p>
+							I tak też się działo do Javy 10 włącznie. Od Javy 11 do wywoływania metod prywatnych
+							korzystamy z... invokevirtual.
+							Dlaczego i po co taka zmiana?
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Nestmates</h2>
+					<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+public class Outer {        <span class="fragment" data-fragment-index="1">public class Outer {</span>
+   public void doSth() {    <span class="fragment" data-fragment-index="1">   public void doSth() {</span>
+      var ic = new Inner(); <span class="fragment" data-fragment-index="1">      var ic = new Inner();</span>
+      ic.doSth();           <span class="fragment" data-fragment-index="1">      Inner.access$000(ic);</span>
+   }                        <span class="fragment" data-fragment-index="1">   }</span>
+
+   public static class      <span class="fragment" data-fragment-index="1">public class Outer$Inner {</span>
+      Inner {               <span class="fragment" data-fragment-index="1">   // $FF: synthetic method</span>
+   private void doSth() {   <span class="fragment" data-fragment-index="1">   static void access$000(</span>
+   }                        <span class="fragment" data-fragment-index="1">         Outer$Inner x0) {</span>
+}                           <span class="fragment" data-fragment-index="1">      x0.doSth();</span>
+                            <span class="fragment" data-fragment-index="1">   }</span>
+                            <span class="fragment" data-fragment-index="1">   private void doSth() { }</span>
+                            <span class="fragment" data-fragment-index="1">}</span>
+</code></pre>
+					<aside class="notes">
+						<p>
+							Tak to się czasem dzieje, jak refaktoryzuje się 20 letnie legacy...
+						</p>
+						<p>
+							Otóż w Javie 1.1 do Javy dodano klasy wewnętrzne. Zgodnie z założeniami klasa zewnętrzna
+							musi mieć dostęp do wszystkich metod prywatnych klasy wewnętrznej i vice versa.
+						</p>
+						<p>
+							Jest tylko pewien problem. Klasa wewnętrzna i zewnętrzna kompilują się do osobnych plików.
+							A wywołania metod prywatnych z użyciem invokespecial są dostępne tylko w wewnątrz tej samej klasy.
+						</p>
+						<p>
+							Zatem twórcy Javy stwierdzili, że wygenerują jakąś metodkę pomocniczą o zasięgu
+							pakietu, która to będzie wywoływać tę metodę prywatną. Zaśmiga! I można iść na piwo.
+						</p>
+						<p>
+							I po 10 wersjach Javy stwierdzili, że to takie se rozwiązanie. Przede wszystkim dlatego,
+							że z zewnątrz taką metodę pomocniczą można refleksją wyciągnąć i uruchomić.
+							I w drugą stronę: jeśli z poziomu klasy zewnętrznej chcemy uruchomić refleksją metodę
+							prywatną klasy wewnętrznej, to musimy znaleźć i uruchomić metodę pośrednią. Uruchomienie
+							bezpośredniej metody prywatnej zaskutkuje błędem.
+							Dodatkowo na roadmapie pojawiły się sealed klasy i trzeba by to zrobić jakoś lepiej...
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Nestmates</h2>
+					<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+public class Outer {        <span class="fragment" data-fragment-index="1">public class Outer {</span>
+   public void doSth() {    <span class="fragment" data-fragment-index="1">   public void doSth() {</span>
+      var ic = new Inner(); <span class="fragment" data-fragment-index="1">      var ic = new Inner();</span>
+      ic.doSth();           <span class="fragment" data-fragment-index="1">      ic.doSth();</span>
+   }                        <span class="fragment" data-fragment-index="1">   }</span>
+                            <span class="fragment" data-fragment-index="1">}</span>
+                            <span class="fragment" data-fragment-index="1">// NestMembers: Inner</span>
+
+   public static class      <span class="fragment" data-fragment-index="1">public class Outer$Inner {</span>
+      Inner {               <span class="fragment" data-fragment-index="1">   private void doSth() { }</span>
+   private void doSth() {   <span class="fragment" data-fragment-index="1">}</span>
+   }
+}                           <span class="fragment" data-fragment-index="1">// NestHost: class Outer</span>
+</code></pre>
+					<span class="fragment more">Więcej <a href="https://www.baeldung.com/java-nest-based-access-control">o nestmates</a>;
+						<a href="https://stackoverflow.com/questions/67226178/why-does-the-java-compiler-11-use-invokevirtual-to-call-private-methods">SO o tym, dlaczego <code>invokevirtual</code> dla private </a></span>
+					<aside class="notes">
+						<p>
+							Zatem zrobili - dodali ładnie wpis w klasie, który informuje, kto udostępnia swoje
+							prywatne metody i komu. Tylko pojawiły się jakieś problemy implementacyjne. Okazało się,
+							że za dużo ifków trzeba by dodać do obsługi invokespecial. Zatem zrezygnowali z obsługi
+							private opcodem invokespecial i pozwolili na użycie invokevirtual, invokeinterface dla
+							prywatnych metod wewnętrznych interfejsów, invokestatic dla prywatnych metod statycznych, a
+							invokespecial zostawili tylko dla prywatnych konstruktorów. Mówię oczywiście wszystko o
+							nestmate'ach.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom-out">
+					<pre><code class="hljs java" data-noescape data-trim>
+@Service
+@Transactional
+public class SmsTemplateService {
+   private static final Logger log =
+       LoggerFactory.getLogger(SmsTemplateService.class);
+   private final SmsService smsService;
+
+   public SmsTemplateService(SmsService smsService) {
+       this.smsService = smsService;
+   }
+
+   public SmsDTO save(SmsTemplateDTO smsTemplateDTO) {
+	<span class="fragment unhighlight-current-background" data-fragment-index="2">Optional.ofNullable(smsTemplateDTO)</span>
+         .filter(Objects::nonNull)
+         .filter(dto -> Objects.nonNull(dto.getType()))
+         .orElseThrow(() ->
+         <span class="fragment unhighlight-current-background" data-fragment-index="2">new IllegalStateException("Something's wrong...")</span>);
+
+      var text = <span class="fragment unhighlight-current-background" data-fragment-index="2">createTextByTemplate(smsTemplateDTO)</span>;
+
+      var smsDTO = createSmsDTOByTemplate(text);
+      SmsDTO savedDto = smsService.save(smsDTO);
+      <span class="fragment unhighlight-current-background" data-fragment-index="2">log.info</span>("Sms saved. [id=" + savedDto.getId() + "]");
+      return savedDto;
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							To by było na tyle jeśli chodzi o ten krótki fragment kodu.
+							Jeśli starczy czasu, to chętnie omówię dalszą cześć klasy.
+						</p>
+					</aside>
+			  	</section>
+				<section data-transition="outzoom-in fade-out">
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+   String createTextByTemplate(SmsTemplateDTO dto) {
+      <span class="fragment highlight-current-background">switch</span> (dto.getType()) {
+         case I_WILL_BE_LATE:
+            return new StringBuilder("I will come back "
+               + "later today - about ")
+               .append(dto.getParams().get(0))
+               .append(".").toString();
+         case WHAT_SHOULD_I_BUY_IN_SHOP:
+            return "Please send me list of things " +
+               "I need to buy in Shop.";
+         default:
+            return "What's up?";
+      }
+   }
+
+   private SmsDTO createSmsDTOByTemplate(String text) {
+      return SmsDTO.builder()
+		  .name("By template")
+		  .created(Instant.now())
+		  .value(text)
+		  .build();
+ }
+}
+</code></pre>
+					<aside class="notes">
+						<p>
+					    	Oto ciąg dalszy tej samej klasy.
+							Chciałbym jeszcze poruszyć pewne aspekty dotyczące instrukcji switch.
+						</p>
+					  	<p>
+							Czy zastanawialiście się kiedyś, o co chodzi z tym switchem?
+							Cytując klasyka: a na co to komu? Czy nie wystarczył ciąg if-else'ów?
+							Czemu wartości w case muszą być stałymi, a najlepiej literałami?
+							Czy jedyną przewagą nad ciągiem if-else jest (względnie) ładniejszy wygląd?
+						</p>
+						<p>
+							Aby zrozumieć sens istnienia switcha, musimy cofnąć się do początków Javy?
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>switch</h2>
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+int option = &lt;read from input&gt;;
+
+switch (option) {
+   case 1:                  <span class="fragment" data-fragment-index="1">// "goto" table[option]</span>
+     return doSth1();
+   case 2:                  <span class="fragment" data-fragment-index="1">// 1 -> 4</span>
+     return doSth2();       <span class="fragment" data-fragment-index="1">// 2 -> 6</span>
+   case 3:                  <span class="fragment" data-fragment-index="1">// 3 -> 8</span>
+     return doSth3();       <span class="fragment" data-fragment-index="1">// 4 -> 10</span>
+   case 4:                  <span class="fragment" data-fragment-index="1">// 5 -> 12</span>
+     return doSth4();
+   case 5:
+     return doSth5();
+}
+</code></pre>
+						<p class="fragment" data-fragment-index="2">5 porównań, 4 skoki, 4 odczyty pamięci</p>
+						<p class="fragment" data-fragment-index="2">vs 0 porównań, 1 skok 2 odczyty pamięci</p>
+					<aside class="notes">
+						<p>
+							Były to czasy, kiedy odczyt z pamięci był porównywalnie kosztowny, co wykonanie instrukcji procesora.
+							Zatem jeśli można było zaoszczędzić porównań, skoków itd, to było to bardzo pożądane.
+						</p>
+						<p>
+							W przypadku switcha cały pomysł polegał na stworzeniu takiej tablicy,
+							która na podstawie wartości w case, pozwalałaby na skok pod wartość ukrytą
+							w odpowiednim slocie.
+						</p>
+						<p>
+							W efekcie zamiast pesymistycznie 5 porównań, 4 skoków warunkowych i 4 odczytów z pamięci,
+							mamy 0 porównań, 1 skok bezwarunkowy pod wyliczony adres i 2 odczyty z pamięci.
+							Na tamten moment - 25 lat temu była to super optymalizacja!
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Przeciwko switchom:</h2>
+					<ul>
+						<li class="fragment">Przyspieszenie procesorów</li>
+						<li class="fragment">Pipelining, branch prediction</li>
+						<li class="fragment">Słabe profilowanie switcha</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							Na nieszczęście switcha w międzyczasie pojawiły się nowe usprawnienia procesorów,
+							które dość mocno zmieniły rzeczywistość.
+							Po pierwsze procesory przez 25 lat przyspieszyły przynajmniej 10 krotnie i
+							aktualnie zamiast optymalizować ilość instrukcji procesora lepiej optymalizować odczyty z pamięci.
+						</p>
+						<p>
+							Po drugie pojawiły się dodatkowe optymalizacje takie jak pipelining, branch prediction,
+							które wspierają mocno skoki warunkowe, czyli ifki.
+							Wsparcie skoków bezwarunkowych pod adres wyliczony w rejestrze jest mocno ograniczone.
+						</p>
+						<p>
+							Na słabość switcha również wpływa to, że dość ubogo jest profilowany.
+							Tak przynajmniej napisali twórcy OpenJDK na wiki, choć ten wpis jest sprzed 9 lat.
+							Może się coś zmieniło przez ten czas...
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>switch vs if-else</h2>
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+int option = &lt;read from input&gt;;
+
+switch (option) {
+   case 1:                  if (option == 1) {
+     return 8;                 return 8;
+   case 2:                  } else if (option == 2) {
+     return 16;                return 16;
+   case 3:                  } else if (option == 3) {
+     return 24;                return 24;
+   case 4:                  } else if (option == 4) {
+     return 32;                return 32;
+   case 5:                  } else if (option == 5) {
+     return 40;                return 40;
+   case 6:                  } else if (option == 6) {
+     return 48;                return 48;
+   default:                 } else {
+     return 56;                return 56;
+}                           }
+</code></pre>
+					<aside class="notes">
+						<p>
+							To wszystko sprawia, że niegłupie jest zrobienie benchmarku, co jest szybsze.
+						</p>
+						<p>
+							Osobiście trafiłem na sytuację, gdzie benchmark if-elsów dawał lepsze rezultaty niż switch,
+							zatem traktowanie switcha jako optymalizacji jest błędnym założeniem.
+						</p>
+						<p>
+							Jednak jeśli by spojrzeć na kod maszynowy wyprodukowany przez C2 to można zauważyć,
+							że czasem switche zamieniane są właśnie na ciąg if-elsów. Jest to jednak kwestia wewnętrzna implementacyjna JVMa.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>switch na Enumie</h2>
+					<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+   String doSth(SomeEnum e) {
+      switch (e) {                 <span class="fragment" data-fragment-index="1">switch (e.ordinal()) {</span>
+         case E_1:                 <span class="fragment" data-fragment-index="1">   case 1:</span>
+            return 1;              <span class="fragment" data-fragment-index="1">      return 1;</span>
+         case E_2:                 <span class="fragment" data-fragment-index="1">   case 2:</span>
+            return 2;              <span class="fragment" data-fragment-index="1">      return 2;</span>
+         default:                  <span class="fragment" data-fragment-index="1">   default:</span>
+            return 0;              <span class="fragment" data-fragment-index="1">      return 0;</span>
+      }                            <span class="fragment" data-fragment-index="1">}</span>
+   }
+</code></pre>
+					<aside class="notes">
+						<p>
+							Skoro już tak opowiadam o switchach, warto wspomnieć również o switchu na enumie.
+							Najpierw niech każdy zapyta w swoim sumieniu, co się stanie jak enum będzie nullem?
+							Trafi do default?
+						</p>
+						<p>
+							Otóż nie, poleci null pointer exception. A to za sprawą tego, switch na enumie to tak na
+							prawdę switch na wartości ordinal() enuma.
+
+							Oprócz NPE jest jeszcze kwestia zamiany kolejości wartości enuma i czy taka implementacja
+							switcha jest bezpieczna.
+							Teoretycznie dało by wymyślić jakiś przykład, w którym ten mechanizm nie zadziała
+							poprawnie - przykładowo kompilujemy projekt z jednymi źródłami, a uruchamiamy z drugimi ze
+							zmienioną kolejnością. Jednak nie jest tak prosto stworzyć taki błąd, raczej
+							to mało prawdopodobny edge case.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>switch na Stringu</h2>
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+switch (string) {             <span class="fragment" data-fragment-index="1">byte var = -1;</span>
+   case "I_WILL_BE_LATE":     <span class="fragment" data-fragment-index="1">switch(string.hashCode()) {</span>
+      return 8;               <span class="fragment" data-fragment-index="1">   case -780638849:</span>
+   case "WHAT_SHOULD_I_BUY":  <span class="fragment" data-fragment-index="1">      if (string.equals("WHAT_SHOULD_I_BUY")) {</span>
+      return 16;              <span class="fragment" data-fragment-index="1">         var = 1;</span>
+   default:                   <span class="fragment" data-fragment-index="1">      } break;</span>
+      return 56;              <span class="fragment" data-fragment-index="1">   case 848966123:</span>
+}                             <span class="fragment" data-fragment-index="1">      if (string.equals("I_WILL_BE_LATE")) {</span>
+                              <span class="fragment" data-fragment-index="1">         var = 0;</span>
+                              <span class="fragment" data-fragment-index="1">      } break;</span>
+                              <span class="fragment" data-fragment-index="1">} switch(var) {</span>
+                              <span class="fragment" data-fragment-index="1">   case 0:</span>
+                              <span class="fragment" data-fragment-index="1">      return 8;</span>
+                              <span class="fragment" data-fragment-index="1">   case 1:</span>
+                              <span class="fragment" data-fragment-index="1">      return 16;</span>
+                              <span class="fragment" data-fragment-index="1">   default:</span>
+                              <span class="fragment" data-fragment-index="1">      return 56;</span>
+                              <span class="fragment" data-fragment-index="1">}</span>
+</code></pre>
+					<aside class="notes">
+						<p>
+							Było o switchu na enumie, to nie sposób nie wspomnieć o killer featurze Javy 7,
+							czyli switch na Stringu. Zatem, jeśli zastanawiało was, jak ten switch działa, to
+							odpowiedź jest następująca:
+						</p>
+						<p>
+							Najpierw wykonywany jest switch na wartości hashCode danego stringa.
+							Kompilator potrafi wyliczyć hashCode w czasie kompilacji i wrzucić go do bytecode'u.
+							Jeśli dany hashCode został znaleziony w switchu, to musi być również wykonany equals,
+							aby potwierdzić, czy to na pewno ten string.
+							Jeśli tak jest, to przypisujemy do zmiennej pomocniczej wartość odpowiadającą temu wariantowi.
+							I w ostatnim kroku na zmiennej pomocniczej wykonujemy już pożądane operacje.
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Pattern matching</h2>
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+switch (iterator) {       <span class="fragment" data-fragment-index="1">Object var10000 = this.iterator;</span>
+   case Boolean b         <span class="fragment" data-fragment-index="1">Objects.requireNonNull(var10000);</span>
+      when b -> {}        <span class="fragment" data-fragment-index="1">Object var2 = var10000;</span>
+   case Boolean b -> {}   <span class="fragment" data-fragment-index="1">byte var3 = 0;</span>
+   default -> throw       <span class="fragment" data-fragment-index="1">while(true) {</span>
+}                         <span class="fragment" data-fragment-index="1">switch (((Class)var2)</span>
+                          <span class="fragment" data-fragment-index="1">    .typeSwitch&lt;invokedynamic&gt;(var2, var3)) {</span>
+                          <span class="fragment" data-fragment-index="1">      case 0:</span>
+                          <span class="fragment" data-fragment-index="1">         Boolean b = (Boolean)var2;</span>
+                          <span class="fragment" data-fragment-index="1">         if (!b) { var3 = 1; continue; }</span>
+                          <span class="fragment" data-fragment-index="1">         break;</span>
+                          <span class="fragment" data-fragment-index="1">      case 1:</span>
+                          <span class="fragment" data-fragment-index="1">         Boolean b = (Boolean)var2; break;</span>
+                          <span class="fragment" data-fragment-index="1">      default: throw new:</span>
+                          <span class="fragment" data-fragment-index="1">      return;</span>
+                          <span class="fragment" data-fragment-index="1">}</span>
+</code></pre>
+					<span class="fragment more">
+						Więcej <a href="https://blog.jgardo.dev/2023/11/20/pattern-matching-w-javie-niskopoziomowo/">tu</a>
+					</span>
+					<aside class="notes">
+						<p>
+							A jak wygląda pattern matching pod spodem? Otóż jest on kompilowany do pętli,
+							w której w switchu mamy wynik dopasowania klasy - oczywiści zrobiony z użyciem invokedynamic.
+							Switch bazuje na obiekcie dopasowywanym oraz poprzedniej próbie dopasowania.
+						</p>
+						<p>
+							Więcej na ten temat na moim blogu.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom">
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+   String createTextByTemplate(SmsTemplateDTO dto) {
+      <span class="fragment unhighlight-current-background" data-fragment-index="1">switch</span> (dto.getType()) {
+         case I_WILL_BE_LATE:
+            return <span class="fragment highlight-current-background" data-fragment-index="2">new StringBuilder("I will come back"</span>
+<span class="fragment highlight-current-background" data-fragment-index="2">               + "later today - about ")</span>
+               .append(dto.getParams().get(0))
+               .append(".").toString();
+         case WHAT_SHOULD_I_BUY_IN_SHOP:
+            return "Please send me list of things " +
+               "I need to buy in Shop.";
+         default:
+            return "What's up?";
+      }
+   }
+
+   private SmsDTO createSmsDTOByTemplate(String text) {
+      return SmsDTO.builder()
+            .name("By template")
+            .created(Instant.now())
+            .value(text)
+            .build();
+   }
+}
+				</code></pre>
+					<aside class="notes">
+						<p>
+							W kolejnej linijce widzimy wywołanie konstruktora StringBuilder. Czy i tutaj nieco magii
+							się nie ukryło?
+						</p>
+				  </aside>
+				</section>
+				<section>
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+    @IntrinsicCandidate
+    public StringBuilder(String str) {
+        super(str);
+    }
+				</code></pre>
+					<aside class="notes">
+						<p>
+							Oto co można znaleźć spoglądając w kody OpenJDK. W oczy rzuca się adnotacja
+							@IntrinsicCandidate.
+							Intrinsic to tak prosto mówiąc pewien snippet metody lub kawałek kodu maszynowego mocno
+							optymalizowany, który jest gotowy do podmianki w czasie kompilacji C1 lub C2.
+						</p>
+						<p>
+							Czyli znów nas okłamują i to co widzimy w kodzie, to jest uruchamiane tylko dla trybu
+							interpretowanego.
+						</p>
+				  </aside>
+				</section>
+				<section>
+					<h2>Intrinsics:</h2>
+					<ul>
+						<li class="fragment"><code class="hljs">Integer</code>, <code class="hljs">Long</code>, <code class="hljs">Byte</code>, <code class="hljs">Boolean</code>...</li>
+						<li class="fragment"><code class="hljs">java.lang.Math</code>,</li>
+						<li class="fragment"><code class="hljs">java.lang.String</code>,</li>
+						<li class="fragment"><code class="hljs">java.util.Arrays</code>,</li>
+						<li class="fragment"><code class="hljs">SHA256</code>, <code class="hljs">MD5</code>...</li>
+						<li class="fragment">łącznie prawie 450 metod.<br/>
+							<span class="fragment more">Więcej <a href="https://alidg.me/blog/2020/12/10/hotspot-intrinsics">tu</a>
+							i <a href="https://www.baeldung.com/jvm-intrinsics">tu</a></span>
+						</li>
+					</ul>
+					<aside class="notes">
+						<p>
+							Takie metody Intrinsic są stworzone tylko dla najbardziej krytycznych metod. Możemy je
+							znaleźć między innymi we
+						</p>
+						<p>
+							Wrapperach wartości prymitywnych, operacjach matematycznych, operacjach na Stringach,
+							tablicach, w funkcjach haszujących.
+							Łącznie jest ich prawie 450 - mówię o OpenJDK w wersji 21.
+						</p>
+						<p>
+							Jak to wpływa na wydajność?
+							Przykładowo Math.log() korzystający z metod Intrinsic, jest dwukrotnie szybsze niż
+							standardowa implementacja skompilowana C2'ką. Acz już Math.sqrt() jest szybsze o 1/3.
+						</p>
+					</aside>
+				</section>
+				<section data-transition="outzoom-out fade-in">
+						<pre><code class="hljs java" data-line-numbers="" data-noescape data-trim>
+   String createTextByTemplate(SmsTemplateDTO dto) {
+      switch (dto.getType()) {
+         case I_WILL_BE_LATE:
+            return <span class="fragment unhighlight-current-background" data-fragment-index="1">new StringBuilder("I will come back"</span>
+<span class="fragment unhighlight-current-background" data-fragment-index="1">               + "later today - about ")</span>
+               .append(dto.getParams().get(0))
+               .append(".").toString();
+         case WHAT_SHOULD_I_BUY_IN_SHOP:
+            return "Please send me list of things " +
+               "I need to buy in Shop.";
+         default:
+            return "What's up?";
+      }
+   }
+
+   private SmsDTO createSmsDTOByTemplate(String text) {
+      return <span class="fragment highlight-current-background" data-fragment-index="2">SmsDTO.builder()</span>
+            <span class="fragment highlight-current-background" data-fragment-index="2">.name("By template")</span>
+            <span class="fragment highlight-current-background" data-fragment-index="2">.created(Instant.now())</span>
+            <span class="fragment highlight-current-background" data-fragment-index="2">.value(text)</span>
+            <span class="fragment highlight-current-background" data-fragment-index="2">.build();</span>
+   }
+}
+				</code></pre>
+					<span class="fragment more" data-fragment-index="3">Więcej o Esacape Analysis <a href="https://docs.oracle.com/en/java/javase/21/vm/java-hotspot-virtual-machine-performance-enhancements.html#GUID-6BD8FCB5-995B-4AE9-BFAA-B2C7DE2BA5CD">tu</a>
+					<aside class="notes">
+						<p>Chciałbym jeszcze krótko wspomnieć o tymczasowych obiektach w ramach jednego wątku.</p>
+						<p>
+							Przykładem takich obiektów mogą być tzw. Buildery ułatwiające tworzenie obiektów.
+
+							Można mieć wątpliwości, czy takie tymczasowe obiekty nie będą psuć jakoś znacząco wydajności apki,
+							jeśli takich obiektów będzie dostatecznie dużo.
+
+							I tutaj muszę pocieszyć - tymczasowe obiekty w ramach jednego wątku nie psują zbytnio
+							wydajności.
+					  	</p>
+					  	<p>
+							Po pierwsze tworzenie nowego obiektu to jest kilka instrukcji procesora.
+							Taki obiekt za długo nie żyje zatem będzie usunięty przy pierwszym GCku młodej generacji.
+							Długość GCka zależy od ilości żywych obiektów, nie martwych.
+						</p>
+						<p>
+							I to wszystko w negatywnym scenariuszu. <br/>
+							W pozytywnym tzn. jeśli metoda zostanie skompilowana C2-ką, zostanie wykonane tzn Escape Analysis.
+							Pozwala ona na to, aby obiekty tworzone i żyjące wyłącznie w obrębie jednego wątku zostały alokowane na stosie, zamiast na współdzielonym heapie.
+							Dzięki czemu nie rezerwujemy miejsca a korzystamy z istniejącego i tak zaalokowanego stosu wątku.
+							Jak nie tworzymy obiektu na heapie, to też nie musimy tego usuwać, czyli GCek również odpoczywa.
+						</p>
+						<p>
+							I tym optymistycznym akcentem czas zakończyć to proste omówienie kodu z nieco niższego poziomu.
+						</p>
+				  </aside>
+				</section>
+				<section>
+					<h2>Key takeaways:</h2>
+					<ul>
+						<li class="fragment">Java jako język do realizacji wymagań biznesowych</li>
+						<li class="fragment">Java się wciąż rozwija</li>
+						<li class="fragment">Implementacja Jvma jest nietrywialnym zadaniem</li>
+						<li class="fragment">Piszcie czytelny kod</li>
+					</ul>
+					<aside class="notes">
+						<p>Kilka rzeczy, o których chciałbym byście po tej prelekcji zapamiętali. </p>
+						<p>Pierwsza, jest dość oczywista - nie trzeba o tych szczegółach wiedzieć, aby programować w Javie.
+							Kumpel z pracy kiedyś powiedział, że dla niego Java to język do realizacji wymagań biznesowych.
+							Przemyślałem sprawę i generalnie to jest pewna mądrość.
+							Nie trzeba do końca rozumieć jaka jest implementacja, aby z niej korzystać.</p>
+						<p>Drugie, że Java wciąż się rozwija. To nie jest tak, że w Javie doklepują tylko nowe ficzki.
+							Cały czas pracują nad stabilnością, optymalizują i generalnie starają się by JVM działał coraz lepiej. Java is not dead i raczej się na to nie zanosi.</p>
+						<p>Trzecie, że implementacja JVMa jest nietrywialna. To 25 letnie legacy, z wieloma językami pod spodem. Zatem jeśli znów nie dowiozą Valhalli, to miejcie wyrozumiałość.</p>
+						<p>Ostatnie - piszcie czytelny kod. Jest to myśl przewijająca się w wielu prezentacji przeróżnych prelegentów.
+							Taki kod przeważnie działa najlepiej. Krótkie metody, oddzielanie odczytów od zapisów, mało zależności i będzie dobrze!</p>
+					</aside>
+				</section>
+				<section>
+					<h1>Questions?</h1>
+					<table style="width: 100%;">
+						<tr>
+							<th style="width: 50%;">
+								<img src="images/feedback.svg"/>
+								<span>Feedback</span>
+							</th>
+							<th style="width: 50%;">
+								<img style="width: 82%;" src="images/qr-code-prezentacji.svg"/>
+								<span>Prezentacja</span>
+							</th>
+						</tr>
+					</table>
+					<aside class="notes">
+						<p>
+							Z mojej perspektywy to wszystko, czym chciałem się podzielić.
+						</p>
+						<p>
+							Dzięki bardzo za uwagę. Jeśli macie chwilkę, to proszę o feedback o prezentacji.
+							QR kod do ankiety feedbackowej po lewej stronie, a po prawej stronie link do prezentacji ze źródłami, odnośnikami.
+						</p>
+						<p>
+							Jeżeli są jakieś pytania, to zachęcam do ich zadawania, choć nie obiecuję odpowiedzi ;)
+						</p>
+					</aside>
+				</section>
 			</div>
 		</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
+		<script src="js/reveal.js"></script>
 		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
 			Reveal.initialize({
-				hash: true,
+				history: true,
+				transition: 'fade',
+				showNotes: (window.location.search.match( /hideNotes/gi ) ? false : true),
+				center: (window.location.search.match( /top/gi ) ? false : true),
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'socket.io/socket.io.js', async: true },
+					{ src: 'plugin/notes-server/client.js', async: true }
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+					// { src: 'js/highlightjsfragment.js', async: true }
+				]
 			});
 		</script>
 	</body>

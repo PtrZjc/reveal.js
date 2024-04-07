@@ -1,0 +1,91 @@
+pre code.hljs {
+    display: block;
+}
+
+code.hljs {
+    display: inline;
+    padding: 0;
+}
+
+.reveal section img {
+    background: none;
+    border: 0px solid #fff;
+}
+
+.reveal ul .bullet-off {
+    list-style-type:none;
+}
+
+.left-alligned ul {
+    width: 100%
+}
+
+.reveal pre {
+    margin-top: -10px;
+}
+
+.reveal pre code {
+    max-height: max-content;
+    overflow-x: hidden;
+}
+
+.reveal .slides section .fragment.highlight-current-background.visible {
+    opacity: 1;
+    background-color: #265500;
+    visibility: visible;
+}
+
+.reveal .slides section .fragment.highlight-current-background {
+    opacity: 1;
+    visibility: inherit;
+    background-color: unset;
+}
+
+.reveal .slides section .fragment.unhighlight-current-background.visible {
+    opacity: 1;
+    visibility: inherit;
+    background-color: unset;
+}
+
+.reveal .slides section .fragment.unhighlight-current-background {
+    opacity: 1;
+    visibility: visible;
+    background-color: #265500;
+}
+
+.reveal section .programs-in-java li img{
+    height: 2.5em;
+    margin-bottom: -1em;
+    margin-top: 1em;
+}
+
+
+.reveal .slides section[data-transition=outzoom],
+.reveal.outzoom .slides section:not([data-transition]) {
+  transition-timing-function: ease; }
+
+.reveal .slides > section[data-transition=outzoom].future,
+.reveal .slides > section[data-transition~=outzoom-out].future,
+.reveal.outzoom .slides > section:not([data-transition]).future {
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal .slides > section[data-transition=outzoom].past,
+.reveal .slides > section[data-transition~=outzoom-in].past,
+.reveal.outzoom .slides > section:not([data-transition]).past {
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal .slides > section > section[data-transition=outzoom].future,
+.reveal .slides > section > section[data-transition~=outzoom-out].future,
+.reveal.outzoom .slides > section > section:not([data-transition]).future {
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal .slides > section > section[data-transition=outzoom].past,
+.reveal .slides > section > section[data-transition~=outzoom-in].past,
+.reveal.outzoom .slides > section > section:not([data-transition]).past {
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
