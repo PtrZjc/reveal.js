@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Chat Coding</title>
+
+	<!-- system required: -->
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<!-- actual stylesheet -->
+	<link rel="stylesheet" href="dist/theme/blood.css">
+
+	<!-- my custom styles  -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
+	<link rel="stylesheet" href="global.css">
+</head>
+<!-- https://www.mentimeter.com/app/presentation/alas16u23bckes4rbopdzgawmvvjjqso/r7os8h5sxnp9/edit -->
+
+<!-- <div><span class="bg-gray-700 bg-opacity-80 p-0">&nbsp;or optimizing everyday</span></div> -->
+<!-- <div><span class="bg-gray-700 bg-opacity-80 p-0">&nbsp;work with AI tools</span></div> -->
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-background="media/chisel1.png">
+				<div class="flex flex-col -mt-8 z-0">
+					<div class="text-5xl font-bold text-white shadow-outline"><span class="p-1"
+							style="background-color: #5d8f987a;">&nbspA programmer's chisel&nbsp</span></div>
+					<div class="mt-96"></div>
+					<div class="mt-56 text-5xl items-center font-bold text-white shadow-outline space-y-2">
+						<div><span class="p-1 bg-opacity-50" style="background-color: #464f447a;">&nbspor optimizing
+								everyday&nbsp</span></div>
+						<div><span class="p-1" style="background-color: #464f447a;">&nbsp coding work with Chat-GPT&nbsp</span>
+						</div>
+					</div>
+					<div class="absolute bottom-4 -left-40">
+						<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
+							<div> <span style="background-color: #464f447a; bg-opacity:0.5;">&nbspPiotr Zajac&nbsp</span></div>
+							<div> <span style="background-color: #464f447a; --bg-opacity:0.5;">&nbspSportradar&nbsp</span></div>
+						</div>
+					</div>
+					<!-- <div class="absolute -bottom-8 -right-48">
+						<div class="text-4xl italic font-bold text-yellow-200 shadow-outline text-left">
+							<img src="./media/boiling_frogs_logo.png" class="" />
+						</div>
+					</div> -->
+
+
+					<!-- Agenda:
+						Setup + few tricks
+						To those of you who attended my talk on boiling frogs
+						Series of use cases with real examples where we compare both models-->
+				</div>
+			</section>
+
+			<section>
+				<h3>Why chisel?</h3>
+				<div class="flex justify-center">
+					<img src="media/chisel.png" class="w-1/3" />
+				</div>
+
+				<div class="flex justify-center">
+					<div class="text-3xl text-left space-y-4 mt-8 pr-24">
+						<div data-fragment-index="1" class="fragment fade-in">
+							1. It's a tool
+						</div>
+						<div data-fragment-index="2" class="fragment fade-in">
+							2. It's not just any tool
+							<!-- it demands precision and know-how. -->
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- <section>
+				<div class="text-2xl">
+					<h2>Quick show of hands</h2>
+				</div>
+				<div class="text-left text-3xl pl-36 space-y-3 mt-4">
+					<div data-fragment-index="1" class="fragment fade-in">
+						<div data-fragment-index="2" class="fragment semi-fade-out">
+							1. Who uses any AI chat assistant into their daily workflow?
+						</div>
+					</div>
+					<div data-fragment-index="2" class="fragment fade-in">
+						2. Who has activated Chat-GPT Plus subscription?
+					</div>
+				</div>
+			</section> -->
+
+			<section data-background="media/tool_sharpening.png">
+				<div class="text-3xl mb-36">
+					<h2 class="r-fit-text"> Sharpen your tool</h2>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl font-bold">
+					Customize your GPT
+				</div>
+				<div class="text-center text-3xl space-y-3 mt-8">
+					<div class="">
+						1. Assign specific roles through tailored instructions.
+					</div>
+					<div class="text-2xl">( <kbd>Settings -> Customize Chat-GPT</kbd> )</div>
+					<div class="text-2xl italic">or</div>
+					<div class="">
+						2. Develop a custom GPT <span class="italic"><a href="https://chat.openai.com/g/g-pxo5LMJm7-java-buddy"
+								target="_blank">(example)</a></span>
+					</div>
+				</div>
+			</section>
+
+			<!-- 
+			<section>
+				<div class="text-4xl font-bold">Define key commands to tailor responses</div>
+				<div class="mt-6">
+					<div class="text-2xl text-left italic space-y-3">
+						<div>
+							"When the message starts with <span class="mt-8 fragment highlight-green"
+								data-fragment-index="2">NEW</span>, forgot about your current role and
+							start as a brand clean instance."
+						</div>
+						<div>
+							"When the message starts with <span class="fragment highlight-green" data-fragment-index="2">SHORT</span>,
+							give the most concise answer answering directly to the question and skip the commentary."
+						</div>
+						<div>
+							"When the message starts with <span class="fragment highlight-green" data-fragment-index="2">CODE</span>,
+							provide only code without any commentary and context."
+						</div>
+						<div>
+							"When the message starts with <span class="fragment highlight-green" data-fragment-index="2">WAIT</span>
+							just acknowledge you got the message by "waiting", as
+							there will be more context. When there is no more context, message will start with <span
+								class="fragment highlight-green" data-fragment-index="2">READY</span> command."
+						</div>
+					</div>
+			</section> -->
+
+			<section>
+				<div class="text-center text-5xl mb-6">Be aware of the context window!</div>
+				<div class="text-center font-bold text-7xl">128k tokens</div>
+				<a href="https://platform.openai.com/tokenizer" target="_blank"
+					class="text-2xl">platform.openai.com/tokenizer</a>
+				<div class="fragment fade-in">
+					<div class="text-center text-3xl mt-6 mb-4">Maximum single input to chat window:</div>
+					<ul class="text-4xl">
+						<li>~120 kB</li>
+						<li>30k-40k tokens</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-center space-y-6">
+					<div class="text-4xl font-bold">When providing a code, give instructions first</div>
+					<div class="italic">or divide a message into separate messages, writing at the end: <span
+							class="font-semibold">WAIT THERE'S MORE</span></div>
+					<div> It reduces the risk of instructions being misinterpreted as part of the main content.</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Use pseudo-language to give accurate instructions</div>
+					<div class="text-2xl text-center mb-6">Chat-GPT is very good in understanding any arbitrary notation system
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Switch between the models when needed</div>
+					<div class="text-2xl text-center mb-6">The model can be changed after generating an unsatisfactory response
+					</div>
+			</section>
+
+			<section>
+				<div class="text-4xl font-bold">Consider data privacy</div>
+				<div class="text-2xl mt-3 space-y-3">
+					<div>By default, input data is used to train OpenAI models. Disable model training in:</div>
+					<div><kbd class="bg-slate-200">Settings -> Data Controls -> Improve the model for everyone</kbd></div>
+					<div>Also, the chat can be marked for automatic deletion after 30 days by enabling the "Temporary Chat"
+						toggle.</div>
+					<div><a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank">Data Controls
+							FAQ</a></div>
+				</div>
+			</section>
+
+			<section data-background="media/chisel_work.png">
+				<div class="text-3xl mt-40">
+					<h2>Concrete use cases</h2>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl font-bold mb-6">Generate templates</div>
+					<ul class="space-y-2">
+						<li>AWS CloudFormation/SAM</li>
+						<li>AWS policies</li>
+						<li>OpenApi definitions</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Script generation</div>
+					<ul class="space-y-2">
+						<li>bash / python / unix tools</li>
+						<li>Following notation is useful: <div class="italic">Input: XXX, Output: XXX</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-6">Regex creation</div>
+					<ul class="space-y-2">
+						<li>Always paste text fragment to be matched against</li>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl">
+					<div class="text-3xl text-center font-bold mb-4">Markdown tables</div>
+					<ul class="space-y-2">
+						<li>Precisely modify table content (e.g. "swap the columns")</li>
+						<li>Create tables using arbitrary notation</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="flex flex-col items-center space-y-2">
+					<div class="text-2xl text-center font-bold">Example prompt</div>
+					<div class="text-xl text-left italic w-2/3">
+						Generate markdown table. I use
+						<span class="fragment highlight-green" data-fragment-index="1">
+							"RXCX: content"</span> notation to indicate a cell, where R is row, C is column and
+						X is number.<br>
+						Absent cells should be empty.<br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R1C3: Alice</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R2C4: Bob</span><br>
+						<span class="fragment highlight-green" data-fragment-index="1">
+							R5C1: fooBar</span><br>
+					</div>
+					<div class="text-2xl text-center font-bold">Result</div>
+					<div class="w-1/2">
+						<pre>
+						<code data-trim>
+							|       |     |       |       |
+							|-------|-----|-------|-------|
+							|       |     | Alice |       |
+							|       |     |       | Bob   |
+							|       |     |       |       |
+							|       |     |       |       |
+							| fooBar|     |       |       |
+						</code>
+					</pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-2xl text-left">
+					<div class="text-3xl text-center font-bold mb-6">Format conversions</div>
+					<ul class="space-y-2 text-2xl">
+						<li>Simple conversions (yml ↔ csv ↔ json) are possible, but CLI tools are more efficient</li>
+						<li>The strength is in complex conversions (e.g., arbitrary text to code, templates)</li>
+						<li>Converting between programming languages, including from pseudo-code</li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-3xl text-center font-bold mb-6">Example of arbitrary modelled input</div>
+				<pre data-id="code"><code class="language-yml" data-trim data-line-numbers="">
+					matchId: UUID
+					teams: 
+						- teamType: HOME_TEAM/AWAY_TEAM
+							name: String
+							players:
+								- name: String
+									position: String
+									jerseyNumber: Int
+					stadium: String
+					kickOffTime: Instant
+					matchType: LEAGUE/CUP/FRIENDLY/INTERNATIONAL # nullable
+					score:
+						homeTeamScore: Int
+						awayTeamScore: Int
+					extraTime: # nullable
+						firstHalfExtraTime: Int 
+						secondHalfExtraTime: Int
+					events:
+						- minute: Int
+							team: HOME_TEAM/AWAY_TEAM
+							type: String
+							player: String
+							description: String					
+					</code></pre>
+			</section>
+
+			<section>
+				<div class="text-3xl text-center font-bold mb-6">Result of <span class="italic text-green-300">Make Kotlin
+						classes</span>:</div>
+				<pre>
+					<code class="language-kotlin" data-id="id" data-trim data-line-numbers >
+						<script type="text/template">
+								import java.time.Instant
+								import java.util.UUID
+
+								enum class TeamType {
+										HOME_TEAM, AWAY_TEAM
+								}
+
+								enum class MatchType {
+										LEAGUE, CUP, FRIENDLY, INTERNATIONAL
+								}
+
+								data class FootballMatch(
+									val matchId: UUID,
+									val teams: List<Team>,
+									val stadium: String,
+									val kickOffTime: Instant,
+									val matchType: MatchType?,
+									val score: Score,
+									val extraTime: ExtraTime?,
+									val events: List<Event>
+								)
+
+								data class Team(
+									val teamType: TeamType,
+									val name: String,
+									val players: List<Player>
+							)
+
+								data class Player(
+										val name: String,
+										val position: String,
+										val jerseyNumber: Int
+								)
+
+								data class Score(
+										val homeTeamScore: Int,
+										val awayTeamScore: Int
+								)
+
+								data class ExtraTime(
+										val firstHalfExtraTime: Int,
+										val secondHalfExtraTime: Int
+								)
+
+								data class Event(
+										val minute: Int,
+										val team: TeamType,
+										val type: String,
+										val player: String,
+										val description: String
+								)
+						</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-background="media/code_work.png">
+				<div class="text-3xl mb-40">
+					<h2>Dealing with the Code</h2>
+				</div>
+			</section>
+
+			<section class="space-y-6">
+				<div class="text-5xl text-center font-bold">Load bulk files to single chat window</div>
+				<div class="text-4xl space-y-3">
+					<div>Keep the location of each file in context.</div>
+					<div class="pt-3 text-3xl">Handy one-liner using <kbd>fd</kbd> tool:</div>
+					<pre>
+					<code data-trim>
+						fd "java|md" -t f -x sh -c "echo \"\n\n###### FILE ##### {}\n\";cat {}"
+					</code>
+				</pre>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Explain the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Document the code</div>
+				<div class="text-3xl text-center mt-6">Readme.md / Javadoc</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Review the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Refactor the code</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Find the bugs</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Create the tests</div>
+			</section>
+
+			<section>
+				<div class="text-5xl text-center font-bold">Mock the data</div>
+			</section>
+
+			<section data-background="media/gpt_summary.png">
+				<div class="flex flex-col">
+					<div class="mt-60"></div>
+					<div class="mt-72"></div>
+					<div class="text-4xl">
+						<h2>Comparison <br> summary</h2>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-left space-y-2">
+					<div class="text-5xl text-center font-bold mb-8">My Observations of GPT-4o</div>
+					<ul class="text-3xl space-y-2">
+						<li>Shares the same context and limitations as GPT-4</li>
+						<li>Significantly faster</li>
+						<li>Often generates more content than requested, even when asked to limit output</li>
+						<li>Focuses less on details compared to GPT-4</li>
+						<li>Produces decent code quality, but sometimes makes stupid mistakes</li>
+						<li><a href="https://www.vellum.ai/blog/analysis-gpt-4o-vs-gpt-4-turbo">Solid comparison benchmark</a></li>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<div class="relative">
+					<div class="flex text-3xl">
+						<div class="w-1/2">
+							<div class="text-5xl text-center font-bold mb-8">🔧 &nbsp GPT-4</div>
+							<ul class="space-y-3">
+								<li>Reviews</li>
+								<li>Documentation</li>
+								<li>Whenever understanding whole context is needed</li>
+								<li>Complex refactoring</li>
+							</ul>
+						</div>
+						<div class="w-1/2 fragment fade-in">
+							<div class="text-5xl text-center font-bold mb-8">🔨 &nbsp GPT-4o</div>
+							<ul class="space-y-3">
+								<li>Most of the coding tasks switching back to 🔧 when needed</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section data-background="media/chisel2.png">
+				<div class="mt-80"></div>
+				<div class="text-4xl absolute -left-20">
+					<h2>Takeaways</h2>
+				</div>
+			</section>
+
+			<section>
+				<div class="text-left space-y-3">
+					<div>🔍 &nbspIterative process: from broad to detailed</div>
+					<div>💡 &nbspThe fewer the details, the greater the variance</div>
+					<div>🔧 &nbspCustomization reduces required details</div>
+					<div>📏 &nbspKeep the context size in mind</div>
+				</div>
+			</section>
+
+
+
+			<section data-background="./media/questions2.png">
+				<div class="fragment fade-in">
+					<div class="absolute -left-48 top-12"><img src="./media/qr_slides.png" /></div>
+					<!-- <div class="absolute -right-48 top-12"><img src="./media/qr_rate.png" /></div> -->
+					<div class="h-96"></div>
+					<div class="h-52"></div>
+					<div class="inline-block bg-white text-black text-left text-3xl space-y-2 mt-auto p-1">
+						<div>Contact:</div>
+						<div><a href="mailto:ptr.zjc@gmail.com">ptr.zjc@gmail.com</a></div>
+						<div><a href="https://linkedin.com/in/ptrzjc/">https://linkedin.com/in/ptrzjc/</a></div>
+					</div>
+				</div>
+			</section>
+
+			<script src="dist/reveal.js"></script>
+			<script src="plugin/notes/notes.js"></script>
+			<script src="plugin/markdown/markdown.js"></script>
+			<script src="plugin/highlight/highlight.js"></script>
+			<script>
+				// More info about initialization & config:
+				// - https://revealjs.com/initialization/
+				// - https://revealjs.com/config/
+				Reveal.initialize({
+					hash: true,
+					// Learn about plugins: https://revealjs.com/plugins/
+					plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+					// center: false,
+					margin: 0.15,
+					minScale: 0.2,
+					maxScale: 2.0,
+					autoAnimateUnmatched: false,
+				});
+			</script>
+</body>
+
+</html>
