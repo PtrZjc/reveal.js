@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Reveal.js Template Library</title>
+
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		// Disable Tailwind Preflight to prevent overriding Reveal.js core styles and themes
+		tailwind.config = {
+			corePlugins: {
+				preflight: false
+			}
+		}
+	</script>
+
+	<link rel="stylesheet" href="dist/reset.css" />
+	<link rel="stylesheet" href="dist/reveal.css" />
+	<link rel="stylesheet" href="dist/theme/blood.css" id="theme">
+
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		/* :root {
+			--r-background-color: #222;
+		} */
+
+		/* .reveal pre {
+			width: 100%;
+			margin: 0;
+			box-shadow: none;
+		} */
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- 1. TITLE SLIDE PATTERN -->
+			<section
+				data-background-image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1280&auto=format&fit=crop">
+				<div class="flex flex-col h-full justify-between">
+					<div class="text-2xl italic text-yellow-200">Optional Subtitle / Tagline Area</div>
+					<h1 class="r-fit-text font-bold uppercase">Title Slide Template</h1>
+					<div class="text-right mt-10">
+						<p class="text-3xl font-semibold">Author Name Placement</p>
+						<p class="text-xl opacity-70">Company or Role Placement</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- 2. SECTION DIVIDER PATTERN -->
+			<section>
+				<div class="flex items-center justify-center h-full">
+					<h2 class="r-fit-text uppercase font-black text-red-500">Section Divider Template</h2>
+				</div>
+			</section>
+
+			<!-- 3. TWO-COLUMN COMPARISON PATTERN -->
+			<section>
+				<div class="mb-8 text-4xl italic border-b border-red-500 pb-2">Two-Column Comparison Template</div>
+				<div class="flex gap-10 text-2xl">
+					<div class="w-1/2 space-y-4">
+						<div class="text-3xl font-bold text-green-400">Left Column Header</div>
+						<ul class="space-y-3">
+							<li>First bullet point in the left column</li>
+							<li>Second bullet point in the left column</li>
+							<li>Third bullet point in the left column</li>
+							<li>Fourth bullet point in the left column</li>
+						</ul>
+					</div>
+					<div class="w-1/2 fragment fade-in space-y-4 border-l border-gray-600 pl-10">
+						<div class="text-3xl font-bold text-red-400">Right Column Header (Revealed via Fragment)</div>
+						<ul class="space-y-3">
+							<li>First bullet point in the right column</li>
+							<li>Second bullet point in the right column</li>
+							<li>Third bullet point in the right column</li>
+							<li>Fourth bullet point in the right column</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- 4. CODE EVOLUTION -->
+			<section>
+				<div class="text-3xl mb-6 font-bold">Code Presentation Template:</div>
+				<div class="w-full">
+					<pre class="w-full m-0"><code class="language-java" data-trim data-line-numbers="1-6|3-5">
+            public class CodeTemplate {
+                public void firstStep() {
+                    // Highlighting specific lines using data-line-numbers steps
+                    // Step 1 shows all code, Step 2 focuses on lines 3-5
+                    System.out.println("Step execution...");
+                }
+            }
+        </code></pre>
+				</div>
+			</section>
+
+			<!-- 5. BIG TITLE + BULLET POINTS PATTERN -->
+			<section>
+				<h3 class="text-5xl font-bold mb-10 text-center text-red-500">Centered Title & Bullet Points Template
+				</h3>
+				<ul class="text-3xl space-y-6 max-w-4xl mx-auto">
+					<li class="fragment">🎯 First bullet point (revealed via fragment)</li>
+					<li class="fragment">⚡ Second bullet point (revealed via fragment)</li>
+					<li class="fragment">📋 Third bullet point (revealed via fragment)</li>
+					<li class="fragment">🔄 Fourth bullet point (revealed via fragment)</li>
+				</ul>
+			</section>
+
+			<!-- 6. IMAGE + DESCRIPTION (R-STRETCH) PATTERN -->
+			<section>
+				<div class="text-4xl font-bold mb-4">Image Template (Using r-stretch)</div>
+				<img src="https://picsum.photos/1000/600" class="r-stretch rounded-lg shadow-2xl"
+					alt="Placeholder Template Image" />
+				<div class="mt-4 text-2xl italic text-center opacity-80">
+					Bottom description text explaining the image above.
+				</div>
+			</section>
+
+			<!-- 7. DATA TABLE PATTERN -->
+			<section>
+				<div class="text-3xl font-bold mb-6 text-center">Data Table Template</div>
+				<table class="text-2xl w-full border-collapse">
+					<thead class="bg-red-900">
+						<tr>
+							<th class="p-4 border border-gray-600">Column 1 Header</th>
+							<th class="p-4 border border-gray-600">Column 2 Header</th>
+							<th class="p-4 border border-gray-600">Column 3 Header</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="p-4 border border-gray-600 font-bold">Row 1, Column 1</td>
+							<td class="p-4 border border-gray-600">Row 1, Column 2</td>
+							<td class="p-4 border border-gray-600">Row 1, Column 3</td>
+						</tr>
+						<tr class="fragment highlight-red">
+							<td class="p-4 border border-gray-600 font-bold">Row 2 (Fragment Highlight)</td>
+							<td class="p-4 border border-gray-600">Row 2, Column 2</td>
+							<td class="p-4 border border-gray-600">Row 2, Column 3</td>
+						</tr>
+						<tr>
+							<td class="p-4 border border-gray-600 font-bold">Row 3, Column 1</td>
+							<td class="p-4 border border-gray-600">Row 3, Column 2</td>
+							<td class="p-4 border border-gray-600">Row 3, Column 3</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<!-- 8. TASK / EXERCISE PATTERN -->
+			<section>
+				<div class="text-3xl italic text-yellow-200 mb-4">Task / Exercise Subtitle Placeholder</div>
+				<div class="text-5xl font-bold mb-8 underline decoration-red-500">Main Task Title Template</div>
+				<ul class="text-2xl space-y-4">
+					<li>First task requirement or instruction goes here.</li>
+					<li>Second task requirement or instruction goes here.</li>
+					<li>Third task requirement or instruction goes here.</li>
+					<li class="opacity-60 italic text-xl pt-4 border-t border-gray-700">Optional task, bonus
+						instruction, or extra hint placement.</li>
+				</ul>
+			</section>
+
+			<!-- 9. GRID GALLERY PATTERN -->
+			<section>
+				<h3 class="text-3xl font-bold mb-4 text-center">Image Grid Template (2x2 Layout)</h3>
+				<div class="grid grid-cols-2 grid-rows-2 gap-4 r-stretch">
+					<div class="overflow-hidden rounded-lg shadow-lg relative">
+						<div
+							class="absolute inset-0 flex items-center justify-center bg-black/40 text-white font-bold text-3xl drop-shadow-lg z-10 pointer-events-none">
+							Top-Left Image Cell
+						</div>
+						<img src="https://picsum.photos/800/600?random=1" class="w-full h-full object-cover">
+					</div>
+					<div class="overflow-hidden rounded-lg shadow-lg relative">
+						<div
+							class="absolute inset-0 flex items-center justify-center bg-black/40 text-white font-bold text-3xl drop-shadow-lg z-10 pointer-events-none">
+							Top-Right Image Cell
+						</div>
+						<img src="https://picsum.photos/800/600?random=2" class="w-full h-full object-cover">
+					</div>
+					<div class="overflow-hidden rounded-lg shadow-lg relative">
+						<div
+							class="absolute inset-0 flex items-center justify-center bg-black/40 text-white font-bold text-3xl drop-shadow-lg z-10 pointer-events-none">
+							Bottom-Left Image Cell
+						</div>
+						<img src="https://picsum.photos/800/600?random=3" class="w-full h-full object-cover">
+					</div>
+					<div class="overflow-hidden rounded-lg shadow-lg relative">
+						<div
+							class="absolute inset-0 flex items-center justify-center bg-black/40 text-white font-bold text-3xl drop-shadow-lg z-10 pointer-events-none">
+							Bottom-Right Image Cell
+						</div>
+						<img src="https://picsum.photos/800/600?random=4" class="w-full h-full object-cover">
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="dist/plugin/zoom.js"></script>
+	<script src="dist/plugin/notes.js"></script>
+	<script src="dist/plugin/search.js"></script>
+	<script src="dist/plugin/markdown.js"></script>
+	<script src="dist/plugin/highlight.js"></script>
+	<script>
+		// Also available as an ES module, see: https://revealjs.com/initialization/
+		// import Reveal from 'reveal.js';
+		// import RevealZoom from 'reveal.js/plugin/zoom';
+		// import RevealNotes from 'reveal.js/plugin/notes';
+		// import RevealSearch from 'reveal.js/plugin/search';
+		// import RevealMarkdown from 'reveal.js/plugin/markdown';
+		// import RevealHighlight from 'reveal.js/plugin/highlight';
+
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			center: true,
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight],
+		});
+	</script>
+</body>
+
+</html>
