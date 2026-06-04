@@ -27,21 +27,20 @@
 
 	<style>
 		/* :root {
-			--r-background-color: #222;
-		} */
+            --r-background-color: #222;
+        } */
 
 		/* .reveal pre {
-			width: 100%;
-			margin: 0;
-			box-shadow: none;
-		} */
+            width: 100%;
+            margin: 0;
+            box-shadow: none;
+        } */
 	</style>
 </head>
 
 <body>
 	<div class="reveal">
 		<div class="slides">
-			<!-- 1. TITLE SLIDE PATTERN -->
 			<section
 				data-background-image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1280&auto=format&fit=crop">
 				<div class="flex flex-col h-full justify-between">
@@ -54,14 +53,12 @@
 				</div>
 			</section>
 
-			<!-- 2. SECTION DIVIDER PATTERN -->
 			<section>
 				<div class="flex items-center justify-center h-full">
 					<h2 class="r-fit-text uppercase font-black text-red-500">Section Divider Template</h2>
 				</div>
 			</section>
 
-			<!-- 3. TWO-COLUMN COMPARISON PATTERN -->
 			<section>
 				<div class="mb-8 text-4xl italic border-b border-red-500 pb-2">Two-Column Comparison Template</div>
 				<div class="flex gap-10 text-2xl">
@@ -86,7 +83,6 @@
 				</div>
 			</section>
 
-			<!-- 4. CODE EVOLUTION -->
 			<section>
 				<div class="text-3xl mb-6 font-bold">Code Presentation Template:</div>
 				<div class="w-full">
@@ -102,9 +98,8 @@
 				</div>
 			</section>
 
-			<!-- 5. BIG TITLE + BULLET POINTS PATTERN -->
 			<section>
-				<h3 class="text-5xl font-bold mb-10 text-center text-red-500">Centered Title & Bullet Points Template
+				<h3 class="r-fit-text font-bold mb-10 text-center text-red-500">Centered Title & Bullet Points Template
 				</h3>
 				<ul class="text-3xl space-y-6 max-w-4xl mx-auto">
 					<li class="fragment">🎯 First bullet point (revealed via fragment)</li>
@@ -114,7 +109,6 @@
 				</ul>
 			</section>
 
-			<!-- 6. IMAGE + DESCRIPTION (R-STRETCH) PATTERN -->
 			<section>
 				<div class="text-4xl font-bold mb-4">Image Template (Using r-stretch)</div>
 				<img src="https://picsum.photos/1000/600" class="r-stretch rounded-lg shadow-2xl"
@@ -124,7 +118,6 @@
 				</div>
 			</section>
 
-			<!-- 7. DATA TABLE PATTERN -->
 			<section>
 				<div class="text-3xl font-bold mb-6 text-center">Data Table Template</div>
 				<table class="text-2xl w-full border-collapse">
@@ -155,7 +148,6 @@
 				</table>
 			</section>
 
-			<!-- 8. TASK / EXERCISE PATTERN -->
 			<section>
 				<div class="text-3xl italic text-yellow-200 mb-4">Task / Exercise Subtitle Placeholder</div>
 				<div class="text-5xl font-bold mb-8 underline decoration-red-500">Main Task Title Template</div>
@@ -168,9 +160,8 @@
 				</ul>
 			</section>
 
-			<!-- 9. GRID GALLERY PATTERN -->
 			<section>
-				<h3 class="text-3xl font-bold mb-4 text-center">Image Grid Template (2x2 Layout)</h3>
+				<h3 class="r-fit-text font-bold mb-4 text-center">Image Grid Template (2x2 Layout)</h3>
 				<div class="grid grid-cols-2 grid-rows-2 gap-4 r-stretch">
 					<div class="overflow-hidden rounded-lg shadow-lg relative">
 						<div
@@ -212,21 +203,11 @@
 	<script src="dist/plugin/markdown.js"></script>
 	<script src="dist/plugin/highlight.js"></script>
 	<script>
-		// Also available as an ES module, see: https://revealjs.com/initialization/
-		// import Reveal from 'reveal.js';
-		// import RevealZoom from 'reveal.js/plugin/zoom';
-		// import RevealNotes from 'reveal.js/plugin/notes';
-		// import RevealSearch from 'reveal.js/plugin/search';
-		// import RevealMarkdown from 'reveal.js/plugin/markdown';
-		// import RevealHighlight from 'reveal.js/plugin/highlight';
-
 		Reveal.initialize({
 			controls: true,
 			progress: true,
 			center: true,
 			hash: true,
-
-			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight],
 		});
 	</script>
