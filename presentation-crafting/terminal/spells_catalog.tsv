@@ -1,0 +1,81 @@
+name	school	type	tier	mana_cost	damage	cast_time	status	description
+Fireball	Evocation	Fire	3	45	180	1.5	Active	Launches a blazing sphere that explodes upon impact
+Pyroblast	Evocation	Fire	5	90	320	3.5	Standard	Casts a massive flaming boulder dealing heavy damage
+Flame Strike	Evocation	Fire	4	60	210	2.0	Active	Calls down a vertical column of fire
+Combustion	Evocation	Fire	4	70	150	Instant	Experimental	Ignites the target causing periodic fire burst
+Scorching Ray	Evocation	Fire	2	30	110	1.0	Standard	Fires three simultaneous rays of concentrated fire
+Meteor Swarm	Evocation	Fire	9	150	500	4.0	Ancient	Rains cataclysmic burning meteors across the battlefield
+Incinerate	Evocation	Fire	1	15	65	1.2	Standard	Blasts a target with low-temperature flame
+Frostbolt	Evocation	Frost	1	20	75	1.8	Standard	Fires a bolt of frost chilling the enemy
+Blizzard	Evocation	Frost	4	65	190	Channel	Active	Summons a persistent freezing hail storm
+Ice Nova	Evocation	Frost	2	35	90	Instant	Active	Unleashes a radial ring of ice freezing nearby foes
+Cone of Cold	Evocation	Frost	5	80	260	1.5	Standard	Blasts extreme cold in a forward cone
+Glacial Spike	Evocation	Frost	6	95	340	3.0	Ancient	Conjures a massive icicle that impales target
+Frozen Orb	Evocation	Frost	4	55	175	Instant	Experimental	Launches a spinning orb that shoots frost shards
+Chain Lightning	Evocation	Lightning	4	60	230	1.8	Active	Discharges lightning that jumps across multiple targets
+Lightning Bolt	Evocation	Lightning	3	40	160	1.5	Standard	Hurls a linear strike of high-voltage lightning
+Thunderstorm	Evocation	Lightning	5	85	290	2.5	Active	Envelops the arena in an electrical maelstrom
+Shocking Grasp	Evocation	Lightning	1	10	45	Instant	Standard	Delivers lightning shock on physical touch
+Static Field	Evocation	Lightning	3	45	120	Instant	Active	Electrifies surrounding air shocking encroaching units
+Arcane Missiles	Evocation	Arcane	1	15	60	Channel	Standard	Fires five swift bolts of concentrated arcane energy
+Arcane Blast	Evocation	Arcane	3	50	190	1.5	Active	Blasts the target with raw unrefined arcane power
+Arcane Barrage	Evocation	Arcane	2	30	115	Instant	Active	Launches multiple magical shards at high velocity
+Disintegration Ray	Evocation	Arcane	7	120	420	2.5	Forbidden	Emits a continuous beam that vaporizes matter
+Prismatic Spray	Evocation	Chaos	7	110	380	Instant	Experimental	Emits seven multicolored beams of random elemental power
+Chaos Bolt	Evocation	Chaos	2	35	130	1.6	Active	Hurls an erratic sphere of shifting magical energy
+Raise Dead	Necromancy	Shadow	3	40	0	2.5	Active	Reanimates a fallen corpse as a skeletal servant
+Drain Soul	Necromancy	Shadow	2	25	80	Channel	Standard	Siphons life essence from enemy to replenish caster
+Shadow Bolt	Necromancy	Shadow	1	20	70	1.7	Standard	Strikes the target with dark entropic energy
+Death Coil	Necromancy	Shadow	3	45	140	Instant	Active	Unleashes unholy energy to harm enemy or heal undead
+Curse of Agony	Necromancy	Shadow	2	30	95	Instant	Active	Afflicts target with progressive agonizing dark pain
+Corpse Explosion	Necromancy	Shadow	4	50	250	Instant	Forbidden	Detonates a targeted corpse dealing wide area damage
+Vampiric Touch	Necromancy	Shadow	3	40	110	1.5	Standard	Drains enemy blood to restore caster health
+Blight	Necromancy	Nature	4	60	180	Instant	Forbidden	Corrupts organic matter with rapid decaying rot
+Soul Harvest	Necromancy	Shadow	6	85	0	Channel	Ancient	Collects soul fragments to amplify dark rituals
+Finger of Death	Necromancy	Shadow	7	130	460	Instant	Forbidden	Channels negative energy to instantly execute targets
+Bone Armor	Necromancy	Shadow	2	30	0	Instant	Active	Envelops caster in a protective barrier of spinning bones
+Grave Chill	Necromancy	Frost	2	25	85	1.2	Standard	Summons frigid tomb air to freeze and slow target
+Mage Armor	Abjuration	Arcane	1	20	0	Instant	Standard	Surrounds target in magical barrier increasing defense
+Shield	Abjuration	Arcane	1	15	0	Instant	Standard	Creates an invisible barrier blocking incoming attacks
+Counterspell	Abjuration	Arcane	3	40	0	Instant	Active	Negates and interrupts enemy spellcasting instantly
+Dispel Magic	Abjuration	Arcane	3	35	0	Instant	Active	Removes active magical buffs or debuffs from target
+Anti Magic Shell	Abjuration	Arcane	4	60	0	Instant	Active	Absorbs incoming magical damage for short duration
+Banishment	Abjuration	Holy	4	70	0	1.5	Active	Temporarily banishes extraplanar entity to pocket dimension
+Divine Aegis	Abjuration	Holy	5	75	0	Instant	Active	Shields ally with divine barrier absorbing incoming damage
+Sanctuary	Abjuration	Holy	1	15	0	Instant	Standard	Wards creature making enemies hesitate before attacking
+Iron Skin	Abjuration	Nature	2	30	0	1.0	Active	Hardens outer skin to match toughness of forged iron
+Spell Reflection	Abjuration	Arcane	3	45	0	Instant	Active	Reflects the next single targeted offensive spell
+Summon Elemental	Conjuration	Fire	5	80	0	3.0	Active	Calls forth a living flame elemental to fight
+Summon Familiar	Conjuration	Arcane	1	10	0	10.0	Standard	Conjures a small magical beast bound to caster
+Teleport	Conjuration	Arcane	7	100	0	Instant	Active	Transports caster instantly to a known location
+Blink	Conjuration	Arcane	2	25	0	Instant	Standard	Short-range directional teleportation to evade attacks
+Dimension Door	Conjuration	Arcane	4	55	0	Instant	Active	Opens doorway across space transporting caster and ally
+Cloudkill	Conjuration	Poison	5	75	220	1.5	Forbidden	Creates poisonous fog that suffocates everything inside
+Stinking Cloud	Conjuration	Poison	3	35	0	1.2	Standard	Summons nauseating vapours incapacitating nearby foes
+Hydra Spit	Conjuration	Poison	3	40	135	1.4	Active	Sprays toxic venom projectiles at up to three enemies
+Gale Force	Conjuration	Wind	2	25	60	Instant	Standard	Unleashes gust of wind knocking enemies backward
+Tornado	Conjuration	Wind	6	90	280	2.5	Ancient	Conjures a destructive twister picking up debris
+Polymorph	Transmutation	Arcane	4	50	0	1.5	Active	Transforms enemy temporarily into a harmless sheep
+Time Warp	Transmutation	Arcane	9	150	0	Instant	Ancient	Distorts time flow granting massive casting haste
+Haste	Transmutation	Arcane	3	40	0	Instant	Active	Increases movement and attack speed of targeted ally
+Slow	Transmutation	Arcane	3	35	0	Instant	Standard	Warps temporal flow around targets reducing their speed
+Flesh to Stone	Transmutation	Nature	6	90	0	2.0	Ancient	Gradually petrifies target turning flesh into granite
+Barkskin	Transmutation	Nature	2	20	0	Instant	Standard	Turns target skin into thick tough defensive tree bark
+Entangling Roots	Transmutation	Nature	1	15	40	1.5	Standard	Summons thorny roots to immobilize and pierce enemies
+Lightning Infusion	Transmutation	Lightning	3	45	0	Instant	Active	Enchants weapon with crackling electrical elemental charge
+Holy Light	Divination	Holy	2	30	0	2.0	Standard	Channels radiant energy to heal a wounded ally
+Divine Smite	Divination	Holy	3	45	170	Instant	Active	Infuses weapon attack with blazing holy wrath
+Lay on Hands	Divination	Holy	1	0	0	Instant	Ancient	Drains caster mana reserve to completely restore ally
+Mind Vision	Divination	Arcane	1	15	0	Channel	Standard	Allows caster to see through targeted entity perspective
+True Seeing	Divination	Arcane	6	80	0	Instant	Ancient	Confers ability to see things as they actually are
+Clairvoyance	Divination	Arcane	3	35	0	2.0	Standard	Places an invisible sensor to scry distant locations
+Mind Blast	Enchantment	Shadow	2	30	125	1.5	Active	Blasts enemy mind with disruptive psychic energy
+Psychic Scream	Enchantment	Shadow	4	50	0	Instant	Active	Emits psychic shriek causing nearby enemies to flee
+Dominate Mind	Enchantment	Shadow	5	80	0	Channel	Forbidden	Takes total mental control of enemy humanoid target
+Charm Person	Enchantment	Arcane	1	20	0	1.0	Standard	Influences target to regard caster as a friendly ally
+Sleep	Enchantment	Arcane	1	20	0	Instant	Standard	Puts weak creatures into a deep magical slumber
+Confusion	Enchantment	Chaos	4	60	0	1.5	Active	Disorients targets making them act completely erratically
+Mirror Image	Illusion	Arcane	2	25	0	Instant	Active	Creates three illusory duplicates to distract attackers
+Invisibility	Illusion	Arcane	2	35	0	Instant	Standard	Renders target completely invisible until action taken
+Shadow Clone	Illusion	Shadow	3	45	50	Instant	Active	Creates dark clone that mimics caster attacks briefly
+Phantasmal Killer	Illusion	Shadow	4	65	210	2.0	Forbidden	Summons phantasm of target deepest subconscious fear

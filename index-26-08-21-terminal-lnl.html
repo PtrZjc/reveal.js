@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Effective Terminal</title>
+
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			corePlugins: {
+				preflight: false
+			}
+		}
+	</script>
+
+	<link rel="stylesheet" href="dist/reset.css" />
+	<link rel="stylesheet" href="dist/reveal.css" />
+	<link rel="stylesheet" href="dist/theme/blood.css" id="theme">
+
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<style>
+		.reveal {
+			background-color: #0b0f19 !important;
+		}
+
+		.reveal .image-slide-title {
+			margin: 0;
+			font-size: 0.4em;
+			font-weight: 600;
+			letter-spacing: 0.28em;
+			text-transform: uppercase;
+			font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+			color: rgba(209, 213, 219, 0.72);
+			text-shadow: 0 1px 10px rgba(0, 0, 0, 0.92), 0 0 16px rgba(0, 0, 0, 0.7);
+			pointer-events: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section data-background-image="media/terminal/intro.jpeg" data-background-size="contain">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center">
+
+					<div class="w-full max-w-5xl space-y-4 px-4">
+
+						<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+							Lunch and Learn Session
+						</div>
+
+						<h3
+							class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							Effective Terminal
+						</h3>
+
+						<div
+							class="h-[2px] w-full bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-75 my-2">
+						</div>
+
+						<div
+							class="text-base md:text-lg font-medium tracking-wide text-yellow-200/80 italic font-serif m-0">
+							Mastering Modern CLI Workflows & Automation
+						</div>
+
+						<div class="pt-6">
+							<div class="text-xs font-mono tracking-[0.2em] text-gray-400 uppercase m-0">
+								Speaker: Piotr Zając
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+
+
+			<!-- Slide 4: Agenda / Matrix -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div
+						class="absolute w-[550px] h-[550px] bg-orange-600/10 rounded-full blur-[140px] pointer-events-none z-0">
+					</div>
+					<div
+						class="absolute w-[350px] h-[350px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none z-0">
+					</div>
+
+					<div class="w-full max-w-5xl z-10 space-y-6 px-4">
+
+						<div>
+							<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+								What's on the radar
+							</div>
+							<h3
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+								Session Overview
+							</h3>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-3 opacity-75">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 text-left items-stretch">
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-800">
+								</div>
+								<h5 class="text-xl font-bold text-gray-200 m-0 mb-3">For Beginners</h5>
+								<ul class="text-sm text-gray-400 space-y-3 p-0 list-none font-medium flex-grow m-0">
+									<li class="flex items-start gap-2.5">
+										<span class="text-orange-500 shrink-0">⚡</span>
+										<span>Core navigation</span>
+									</li>
+									<li class="flex items-start gap-2.5">
+										<span class="text-orange-500 shrink-0">⚡</span>
+										<span>Standard I/O and piping fundamentals</span>
+									</li>
+									<li class="flex items-start gap-2.5">
+										<span class="text-orange-500 shrink-0">⚡</span>
+										<span>Make first automations</span>
+									</li>
+									<li class="flex items-start gap-2.5">
+										<span class="text-orange-500 shrink-0">⚡</span>
+										<span>Fast command lookups</span>
+									</li>
+								</ul>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-800">
+								</div>
+								<h5 class="text-xl font-bold text-gray-200 m-0 mb-3">For Advanced Users</h5>
+								<ul class="text-sm text-gray-400 space-y-3 p-0 list-none font-medium flex-grow m-0">
+									<li class="flex items-start gap-2.5">
+										<span class="text-red-500 shrink-0">🔥</span>
+										<span>Modern Rust/Go alternatives</span>
+									</li>
+									<li class="flex items-start gap-2.5">
+										<span class="text-red-500 shrink-0">🔥</span>
+										<span>Complex data pipelines</span>
+									</li>
+									<li class="flex items-start gap-2.5">
+										<span class="text-red-500 shrink-0">🔥</span>
+										<span>Fast data transformation</span>
+									</li>
+									<li class="flex items-start gap-2.5">
+										<span class="text-red-500 shrink-0">🔥</span>
+										<span>Structuring dotfiles</span>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 2: Section Divider -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center">
+
+					<div class="w-full max-w-5xl px-4">
+
+						<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+							Part I
+						</div>
+
+
+						<div
+							class="h-[2px] w-full bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-75 my-2">
+						</div>
+
+						<h2
+							class="text uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							Introduction
+						</h2>
+
+
+					</div>
+
+				</div>
+			</section>
+
+			<!-- Slide 3: Why the Terminal? -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div
+						class="absolute w-[550px] h-[550px] bg-orange-600/10 rounded-full blur-[140px] pointer-events-none z-0">
+					</div>
+					<div
+						class="absolute w-[350px] h-[350px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none z-0">
+					</div>
+
+					<div class="w-full max-w-5xl z-10 space-y-6 px-4">
+
+						<div>
+							<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+								Motivation
+							</div>
+							<h2
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+								Why the Terminal?
+							</h2>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-3 opacity-75">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 text-left items-stretch">
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="text-xs font-mono tracking-widest text-orange-400 uppercase font-bold mb-3">
+									Personal story</div>
+								<p class="text-sm text-gray-400 m-0 leading-relaxed">
+									Started using terminal in 2019 inspired by live terminal workflow presentation (by
+									Dawid Pokusa)
+								</p>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="text-xs font-mono tracking-widest text-red-400 uppercase font-bold mb-3">
+									Frictionless</div>
+								<p class="text-sm text-gray-400 m-0 leading-relaxed">
+									Moving from heavy GUI tools to terminal-first development.
+								</p>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="text-xs font-mono tracking-widest text-yellow-400 uppercase font-bold mb-3">
+									Valuable skill</div>
+								<p class="text-sm text-gray-400 m-0 leading-relaxed">
+									High ROI skill for engineers — command-line literacy for developers and QA.
+								</p>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<!-- Slide 6: Conceptual image, no text. Split ancient forge: glowing tome on an altar (Knowledge) and blacksmith striking an anvil with sparks (Operational Skill). -->
+			<section data-background-image="media/terminal/1_intro_forge.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Knowledge &amp; Operational Skill</div>
+				</div>
+			</section>
+
+			<!-- Slide 5: Section Divider -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center">
+
+					<div class="w-full max-w-5xl px-4">
+
+						<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+							Part II
+						</div>
+
+						<div
+							class="h-[2px] w-full bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-75 my-2">
+						</div>
+						<h2
+							class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							Foundations
+						</h2>
+
+					</div>
+
+				</div>
+			</section>
+
+
+			<!-- Slide 7: Architecture image, no extra HTML. Subterranean shrine: central scrying mirror labeled Terminal Emulator, floating book labeled Framework, glowing engine collar labeled Shell Interpreter. Title baked into art: The Three Layers of the Terminal. -->
+			<section data-background-image="media/terminal/terminal_layers.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">The Three Layers of the Terminal</div>
+				</div>
+			</section>
+
+			<!-- Slide 8: Reference Table -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div class="w-full max-w-5xl z-10 space-y-4 px-4">
+
+						<div>
+							<h3
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+								Example Default Stack
+							</h3>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-3 opacity-75">
+							</div>
+						</div>
+
+						<div
+							class="overflow-x-auto bg-black/40 border border-gray-800 rounded-xl p-4 backdrop-blur-sm shadow-xl text-left">
+							<table class="w-full text-sm text-gray-300 border-collapse">
+								<thead>
+									<tr class="border-b border-gray-800 text-orange-400 font-mono">
+										<th class="p-3 text-left">Layer</th>
+										<th class="p-3 text-left">Linux</th>
+										<th class="p-3 text-left">macOS</th>
+										<th class="p-3 text-left">Windows</th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-gray-800/50">
+									<tr>
+										<td class="p-3 font-bold text-gray-200">Terminal Emulator</td>
+										<td class="p-3">GNOME Terminal / Konsole</td>
+										<td class="p-3">iTerm2</td>
+										<td class="p-3">Windows Terminal</td>
+									</tr>
+									<tr>
+										<td class="p-3 font-bold text-gray-200">Shell Interpreter</td>
+										<td class="p-3 font-mono">bash</td><td class="p-3 font-mono">zsh</td>
+										<td class="p-3"><span class="font-bold text-red-400">WSL2 (Ubuntu)</span> /
+											PowerShell 7+</td>
+									</tr>
+									<tr>
+										<td class="p-3 font-bold text-gray-200">Framework</td>
+										<td class="p-3">Oh My Zsh / Prezto / zimfw</td>
+										<td class="p-3">Oh My Zsh / Prezto / zimfw</td>
+										<td class="p-3">Oh My Zsh / Prezto / zimfw</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono text-left pt-2">
+							<div class="bg-yellow-950/30 border border-yellow-900/50 text-yellow-300 p-3 rounded-lg">
+								<strong>Recommendation:</strong> Use GPU accelerated Terminal Emulators.
+							</div>
+							<div class="bg-red-950/30 border border-red-900/50 text-red-300 p-3 rounded-lg">
+								<strong>Recommendation:</strong> Use <strong>zsh</strong> superior interactive
+								productivity features, while keeping almost whole bash compatibility
+							</div>
+							<div class="bg-orange-950/30 border border-orange-900/50 text-orange-300 p-3 rounded-lg">
+								<strong>Recommendation:</strong> For Windows use <strong>WSL2</strong> for POSIX
+								standard compliance. Avoid legacy pseudo-consoles (ConEmu, Git Bash)
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 9: Section Divider -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center">
+
+					<div class="w-full max-w-5xl px-4">
+
+						<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+							Part III
+						</div>
+
+						<div
+							class="h-[2px] w-full bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-75 my-2">
+						</div>
+						<h1
+							class="r-fit-text uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							Text Processing & Piping
+						</h1>
+
+					</div>
+
+				</div>
+			</section>
+
+			<!-- Slide 10: Image, no text. Stone armory rack of fantasy artifacts labeled echo, cat, nl, wc, head, tail, grep, sed. Core File & Text Processing Tools. File on disk: unit_tools.jpeg -->
+			<section data-background-image="media/terminal/unit_tools.jpeg" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Core File &amp; Text Processing Tools</div>
+				</div>
+			</section>
+
+			<!-- Slide 11: Conceptual image, no text. Obsidian / alchemical workshop: molten data flowing through valves labeled rg, cut, xargs into flasks labeled files / pbcopy. Unix pipeline metaphor. -->
+			<section data-background-image="media/terminal/pipes.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Unix Pipelines</div>
+				</div>
+			</section>
+
+			<!-- Slide 12: Infographic, no extra HTML. UNIX TOOLS diagram: toolbox, cat | grep | sort pipeline, stdout switch, ports 0/1/2 (stdin, stdout, stderr), composability notes. -->
+			<section data-background-image="media/terminal/pipes_infographic.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Standard Streams</div>
+				</div>
+			</section>
+
+			<!-- Slide 13: Comparison image, no extra HTML. RPG inventory: rusty grep / find / sed vs glowing rg / fd / sd. Modern Replacements for Classic Tools. -->
+			<section data-background-image="media/terminal/modern_alternatives.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Modern Replacements for Classic Tools</div>
+				</div>
+			</section>
+
+			<!-- Slide 14: Image, no text. Dusty book "LEGACY COREUTILS" vs holographic scroll showing tldr, fd, rg, fzf. -->
+			<section data-background-image="media/terminal/documentation.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Fast Command Lookups</div>
+				</div>
+			</section>
+
+			<!-- Slide 15: Image, no text. High-altitude misty valley with glowing portals (z / fzf), castles, cloaked figure. Navigation & Interactive Fuzzy Finding. -->
+			<section data-background-image="media/terminal/navigation.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Navigation &amp; Interactive Fuzzy Finding</div>
+				</div>
+			</section>
+
+			<!-- Slide 16: Image, no text. Scholar desk: glowing DOTFILES book, CONFIG.ZSH quill, AWESOME-CLI scrolls. -->
+			<section data-background-image="media/terminal/dotfiles.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Dotfile Architecture &amp; Custom Helpers</div>
+				</div>
+			</section>
+
+			<!-- Slide 17: Image, no text. Purple xargs crystal in a metal cage firing beams at training dummies; parchment stream as input. -->
+			<section data-background-image="media/terminal/xargs.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">Batch Execution with xargs</div>
+				</div>
+			</section>
+
+			<!-- Slide 18: Section Divider -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center">
+
+					<div class="w-full max-w-5xl px-4">
+
+						<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+							Part IV
+						</div>
+
+						<div
+							class="h-[2px] w-full bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-75 my-2">
+						</div>
+						<h3
+							class=" uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							Data Processing
+						</h3>
+
+					</div>
+
+				</div>
+			</section>
+
+			<!-- Slide 19: Concept Slide -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div
+						class="absolute w-[550px] h-[550px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none z-0">
+					</div>
+
+					<div class="w-full max-w-5xl z-10 space-y-6 px-4">
+
+						<div>
+							<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+								Data pipelines
+							</div>
+							<h4
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+								Structured Data Processing
+							</h4>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-3 opacity-75">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 text-left items-stretch">
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<h5 class="text-lg font-bold text-gray-200 m-0 mb-2">different Formats</h5>
+								<p class="text-sm text-gray-400 m-0 leading-relaxed">
+									The workloads interact heavily with structured formats: <strong>JSON, YAML, CSV,
+										XML</strong>.
+								</p>
+							</div>
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<h5 class="text-lg font-bold text-gray-200 m-0 mb-2">GUI Limitations</h5>
+								<p class="text-sm text-gray-400 m-0 leading-relaxed">
+									GUI applications and web viewers often struggle with raw large scale data exports
+									and API responses.
+								</p>
+							</div>
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-5 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<h5 class="text-lg font-bold text-gray-200 m-0 mb-2">CLI Processors</h5>
+								<p class="text-sm text-gray-400 m-0 leading-relaxed">
+									Dedicated CLI processors enable filtering, restructuring, and aggregating
+									large-scale data efficiently.
+								</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 21: Toolset Reference -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div class="w-full max-w-5xl z-10 space-y-4 px-4">
+
+						<div>
+							<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+								Tooling ecosystem
+							</div>
+							<h4
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+								CLI Data Transformation Utilities
+							</h4>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-3 opacity-75">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left pt-2">
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex items-start gap-3 backdrop-blur-sm shadow-xl">
+								<span
+									class="text-xs bg-red-950 text-red-400 border border-red-800 px-2.5 py-1 rounded font-mono font-bold shrink-0 mt-1">jq</span>
+								<div>
+									<h5 class="text-base font-bold text-gray-200 m-0">JSON Processor</h5>
+									<p class="text-xs text-gray-400 m-0 mt-1">Query, filter, and transform JSON data
+										structures.</p>
+								</div>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex items-start gap-3 backdrop-blur-sm shadow-xl">
+								<span
+									class="text-xs bg-orange-950 text-orange-400 border border-orange-800 px-2.5 py-1 rounded font-mono font-bold shrink-0 mt-1">yq</span>
+								<div>
+									<h5 class="text-base font-bold text-gray-200 m-0">YAML & XML Processor</h5>
+									<p class="text-xs text-gray-400 m-0 mt-1">YAML and XML processor with
+										jq-compatible syntax.</p>
+								</div>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex items-start gap-3 backdrop-blur-sm shadow-xl">
+								<span
+									class="text-xs bg-green-950 text-green-400 border border-green-800 px-2.5 py-1 rounded font-mono font-bold shrink-0 mt-1">yj</span>
+								<div>
+									<h5 class="text-base font-bold text-gray-200 m-0">Format Converter</h5>
+									<p class="text-xs text-gray-400 m-0 mt-1">Ultra-fast format converter between YAML ↔
+										JSON ↔ TOML.</p>
+								</div>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex items-start gap-3 backdrop-blur-sm shadow-xl">
+								<span
+									class="text-xs bg-purple-950 text-purple-400 border border-purple-800 px-2.5 py-1 rounded font-mono font-bold shrink-0 mt-1">miller
+									(mlr)</span>
+								<div>
+									<h5 class="text-base font-bold text-gray-200 m-0">Multi-Format Tabular Processor
+									</h5>
+									<p class="text-xs text-gray-400 m-0 mt-1">Multi-format processor for CSV, TSV, and
+										JSON tables (SQL-like operations in CLI).</p>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 22: Live transformation image, no text. Alchemical transmuter: raw stone in, mlr / jq machine, cut gemstones out. -->
+			<section data-background-image="media/terminal/data_transformation.png" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">CLI Data Transformation</div>
+				</div>
+			</section>
+
+			<!-- Slide 18: Section Divider -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center">
+
+					<div class="w-full max-w-5xl px-4">
+
+						<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+							Part V
+						</div>
+
+						<div
+							class="h-[2px] w-full bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-75 my-2">
+						</div>
+						<h3
+							class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							Extras
+						</h3>
+
+					</div>
+
+				</div>
+			</section>
+
+			<!-- Slide 23: Cool tools image, no text. Open briefcase of artifacts labeled qrcp, pngpaste, translate-shell, cal. -->
+			<section data-background-image="media/terminal/tools_cool.jpg" data-background-size="contain"
+				data-background-position="center" class="h-full">
+				<div class="flex flex-col items-center justify-start h-full w-full text-center">
+					<div class="image-slide-title">unobvious Terminal tricks</div>
+				</div>
+			</section>
+
+			<!-- Bonus: Java on the Command Line -->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div
+						class="absolute w-[550px] h-[550px] bg-orange-600/10 rounded-full blur-[140px] pointer-events-none z-0">
+					</div>
+					<div
+						class="absolute w-[350px] h-[350px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none z-0">
+					</div>
+
+					<div class="w-full max-w-5xl z-10 space-y-5 px-4">
+
+						<div>
+							<div class="text-xs font-mono tracking-[0.4em] text-orange-400 uppercase font-bold m-0">
+								Bonus Topic
+							</div>
+							<h3
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+								Java on the Command Line
+							</h3>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-2 opacity-75">
+							</div>
+						</div>
+
+						<!-- Core Hero Takeaway -->
+						<div
+							class="bg-gradient-to-r from-red-950/50 via-orange-950/40 to-black/50 border border-orange-500/40 rounded-xl p-4 text-center backdrop-blur-sm shadow-xl">
+							<div class="text-xs font-mono tracking-widest text-orange-400 uppercase font-bold mb-1">
+								⚡ Zero-Boilerplate Execution
+							</div>
+							<p class="text-base md:text-lg text-gray-200 font-medium m-0">
+								Run <code
+									class="text-yellow-300 font-mono font-bold bg-black/60 px-2 py-0.5 rounded border border-gray-800">.java</code>
+								files directly as scripts without manual compilation or Maven/Gradle build files.
+							</p>
+						</div>
+
+						<!-- JBang Feature Grid -->
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="flex items-center gap-2 mb-1.5">
+									<span class="text-base">📦</span>
+									<h5 class="text-base font-bold text-orange-400 font-mono m-0">//DEPS Declarations
+									</h5>
+								</div>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="flex items-center gap-2 mb-1.5">
+									<span class="text-base">📜</span>
+									<h5 class="text-base font-bold text-yellow-400 font-mono m-0">Shebang Scripting</h5>
+								</div>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="flex items-center gap-2 mb-1.5">
+									<span class="text-base">☕</span>
+									<h5 class="text-base font-bold text-red-400 font-mono m-0">Zero Setup & Caching</h5>
+								</div>
+							</div>
+
+							<div
+								class="bg-black/40 border border-gray-800 rounded-xl p-4 flex flex-col justify-start backdrop-blur-sm shadow-xl">
+								<div class="flex items-center gap-2 mb-1.5">
+									<span class="text-base">🔀</span>
+									<h5 class="text-base font-bold text-green-400 font-mono m-0">Unix Stream Pipelines
+									</h5>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+
+			<!-- Slide 24: Summmary-->
+			<section data-background-color="#0b0f19" class="p-6 b-box h-full overflow-hidden">
+				<div class="flex flex-col items-center justify-center h-full w-full text-center relative">
+
+					<div
+						class="absolute w-[550px] h-[550px] bg-orange-600/10 rounded-full blur-[140px] pointer-events-none z-0">
+					</div>
+
+					<div class="w-full max-w-4xl z-10 space-y-8 px-4">
+
+						<div>
+							<div class="text-xs font-mono tracking-[0.4em] text-gray-500 uppercase m-0">
+								Summary
+							</div>
+							<h3
+								class="uppercase font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 m-0 drop-shadow-[0_0_35px_rgba(239,68,68,0.4)]">
+							 Takeaways
+							</h3>
+							<div
+								class="h-[2px] w-40 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-3 opacity-75">
+							</div>
+						</div>
+
+						<div class="bg-black/40 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm shadow-xl">
+							<ul
+								class="space-y-6 text-left p-0 m-0 list-none text-xl md:text-2xl font-bold text-gray-200">
+								<li class="flex items-center gap-4">
+									<span class="text-2xl shrink-0">📦</span>
+									<span>Create a Dotfiles repository and make initial symlinks</span>
+								</li>
+								<li class="flex items-center gap-4">
+									<span class="text-2xl shrink-0">🚀</span>
+									<span>Adopt modern replacements</span>
+								</li>
+								<li class="flex items-center gap-4">
+									<span class="text-2xl shrink-0">⌨️</span>
+									<span>Learn core Vim keybindings</span>
+								</li>
+								<li class="flex items-center gap-4">
+									<span class="text-2xl shrink-0">⚡</span>
+									<span>Automate common sequences</span>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+			<!-- Slide 22: Live transformation image, no text. Alchemical transmuter: raw stone in, mlr / jq machine, cut gemstones out. -->
+			<section data-background-image="media/terminal/outro.jpeg" data-background-size="contain"
+				data-background-position="center" class="h-full">
+		</div>
+		</section>
+
+	</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="dist/plugin/zoom.js"></script>
+	<script src="dist/plugin/notes.js"></script>
+	<script src="dist/plugin/search.js"></script>
+	<script src="dist/plugin/markdown.js"></script>
+	<script src="dist/plugin/highlight.js"></script>
+	<script>
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			center: true,
+			hash: true,
+			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight],
+		});
+	</script>
+</body>
+
+</html>
